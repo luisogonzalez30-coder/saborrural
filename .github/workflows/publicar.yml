@@ -33,6 +33,7 @@ jobs:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_PAGE_TOKEN: ${{ secrets.IG_PAGE_TOKEN }}
           MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
+          GRAPH_BASE: ${{ vars.GRAPH_BASE }}
           DRY_RUN: ${{ (github.event_name == 'workflow_dispatch' && inputs.ensayo) && '1' || '' }}
       - name: Guardar estado
         if: always()
