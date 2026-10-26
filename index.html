@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sabor Rural · Licantén</title>
+<meta name="description" content="Cafetería y pastelería artesanal en Licantén, Región del Maule. Tortas por encargo y de novios. Abierto todo el año.">
+<meta property="og:title" content="Sabor Rural · Licantén">
+<meta property="og:description" content="Café de especialidad, pastelería y tortas por encargo. Abierto todo el año.">
+<meta property="og:image" content="enlaces-assets/terraza.jpg">
+<link rel="icon" href="enlaces-assets/logo.png">
+<style>
+@font-face{font-family:Bricolage;src:url(enlaces-assets/bricolage800.ttf);font-weight:800;font-display:swap}
+@font-face{font-family:Hanken;src:url(enlaces-assets/hanken600.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:Hanken;src:url(enlaces-assets/hanken700.ttf);font-weight:700;font-display:swap}
+@font-face{font-family:Caveat;src:url(enlaces-assets/caveat700.ttf);font-weight:700;font-display:swap}
+:root{--bg:#000;--rosa:#F07C95;--rosa2:#e65b7c;--txt:#fff;--sub:#d9c9cd;--ln:rgba(240,124,149,.45)}
+*{box-sizing:border-box;margin:0}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--txt);font-family:Hanken,system-ui,sans-serif;font-weight:600;min-height:100svh;display:flex;justify-content:center}
+.wrap{width:100%;max-width:480px;padding:0 16px 40px;position:relative}
+.hero{position:absolute;left:0;right:0;top:0;height:380px;background:url(enlaces-assets/terraza.jpg) center/cover;opacity:.55;
+-webkit-mask-image:linear-gradient(180deg,#000 0,#000 45%,transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 45%,transparent 100%);z-index:0}
+main{position:relative;z-index:1;text-align:center;padding-top:48px}
+.logo{width:96px;height:96px;border-radius:50%;border:1.5px solid var(--ln);padding:6px;background:rgba(0,0,0,.55)}
+h1{font-family:Bricolage,sans-serif;font-weight:800;font-size:2rem;line-height:1.05;margin-top:14px}
+h1 em{font-family:Caveat,cursive;font-style:normal;color:var(--rosa);font-size:2.3rem;font-weight:700}
+.sub{color:var(--sub);font-size:.95rem;margin-top:8px}
+.badge{display:inline-block;margin-top:12px;border:1px solid var(--ln);border-radius:99px;padding:5px 14px;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rosa);background:rgba(0,0,0,.5)}
+.links{display:grid;gap:12px;margin-top:26px}
+a.b{display:flex;align-items:center;justify-content:space-between;gap:12px;text-decoration:none;color:var(--txt);
+border:1px solid var(--ln);border-radius:16px;padding:16px 18px;background:rgba(10,10,10,.82);backdrop-filter:blur(6px);font-size:1.02rem;text-align:left;transition:transform .15s,border-color .15s}
+a.b small{display:block;color:var(--sub);font-weight:600;font-size:.8rem;margin-top:2px}
+a.b:active{transform:scale(.98)}
+a.b:hover{border-color:var(--rosa)}
+a.b .ar{color:var(--rosa);font-size:1.3rem;flex:none}
+a.main{background:linear-gradient(135deg,var(--rosa),var(--rosa2));border-color:transparent;color:#1a0a0e;font-weight:700}
+a.main small{color:#3a1a22}
+a.main .ar{color:#1a0a0e}
+footer{margin-top:28px;color:var(--sub);font-size:.82rem;line-height:1.5}
+footer b{color:var(--rosa)}
+a:focus-visible{outline:2px solid var(--rosa);outline-offset:3px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero" aria-hidden="true"></div>
+<main>
+<img class="logo" src="enlaces-assets/logo.png" alt="Sabor Rural" width="96" height="96">
+<h1>Sabor <em>Rural</em></h1>
+<p class="sub">Cafetería y pastelería artesanal · Licantén, Región del Maule</p>
+<span class="badge">Abierto todo el año</span>
+<nav class="links" aria-label="Enlaces">
+<a class="b main" href="https://wa.me/56992101764?text=Hola%2C%20vi%20su%20Instagram%20y%20quiero%20encargar%20una%20torta" target="_blank" rel="noopener">
+<span>Escríbenos por WhatsApp<small>Te respondemos con propuesta y valor</small></span><span class="ar">→</span></a>
+<a class="b" href="https://rq96ev-nk.myshopify.com/#encargos" target="_blank" rel="noopener">
+<span>Encarga tu torta<small>Cumpleaños, bautizos, aniversarios</small></span><span class="ar">→</span></a>
+<a class="b" href="https://rq96ev-nk.myshopify.com/#novios" target="_blank" rel="noopener">
+<span>Torta de novios<small>Hecha a mano, a tu estilo</small></span><span class="ar">→</span></a>
+<a class="b" href="https://rq96ev-nk.myshopify.com/#pedido" target="_blank" rel="noopener">
+<span>Ver la carta<small>Café, cookies y pastelería</small></span><span class="ar">→</span></a>
+<a class="b" href="https://www.google.com/maps/dir/?api=1&amp;destination=Sabor+Rural+Licant%C3%A9n" target="_blank" rel="noopener">
+<span>Cómo llegar<small>Abrir en Google Maps</small></span><span class="ar">→</span></a>
+</nav>
+<footer><b>WhatsApp</b> +56 9 9210 1764<br>Retiro en Licantén · consulta por despacho a Curicó y Talca</footer>
+</main>
+</div>
+</body>
+</html>
