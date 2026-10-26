@@ -1,5 +1,11 @@
 [
  {
+  "id": "prueba-historia-llegar",
+  "fecha": "2026-10-26T16:50:00-03:00",
+  "tipo": "story",
+  "media": "media/08-sab-historia-llegar.jpg"
+ },
+ {
   "id": "2026-10-27-feed-03_cafe_feed",
   "fecha": "2026-10-27T19:30:00-03:00",
   "tipo": "feed",
