@@ -1,0 +1,43 @@
+name: Publicar en Instagram
+
+on:
+  schedule:
+    # Cada 30 min entre las 09:00 y las 23:30 de Chile (cubre horario de verano UTC-3 y de invierno UTC-4)
+    - cron: '*/30 12-23,0-2 * * *'
+  workflow_dispatch:
+    inputs:
+      ensayo:
+        description: 'Ensayo: muestra qué se publicaría, sin publicar'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Publicar lo que ya venció
+        run: node publicar.mjs
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_PAGE_TOKEN: ${{ secrets.IG_PAGE_TOKEN }}
+          MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
+          DRY_RUN: ${{ (github.event_name == 'workflow_dispatch' && inputs.ensayo) && '1' || '' }}
+      - name: Guardar estado
+        if: always()
+        run: |
+          git config user.name "publicador-instagram"
+          git config user.email "publicador@users.noreply.github.com"
+          git add estado.json
+          git diff --cached --quiet || (git commit -m "estado: publicaciones" && git pull --rebase -q && git push)

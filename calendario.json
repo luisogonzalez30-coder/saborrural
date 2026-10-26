@@ -1,0 +1,72 @@
+[
+  {
+    "id": "2026-10-27-feed-03_cafe_feed",
+    "fecha": "2026-10-27T19:30:00-03:00",
+    "tipo": "feed",
+    "media": "media/03_cafe_feed.jpg",
+    "caption": "Café de especialidad de origen, cultivado en altura en Matagalpa, Nicaragua. Viaja hasta Santiago y de ahí a Licantén, donde lo preparamos para ti. ☕\n#CaféDeEspecialidad #Matagalpa #Licantén"
+  },
+  {
+    "id": "2026-10-28-reel-reel_torta_nov",
+    "fecha": "2026-10-28T12:30:00-03:00",
+    "tipo": "reel",
+    "media": "media/reel_torta_novios_9x16.mp4",
+    "caption": "¿Alcanzaste a ver al perrito? 🐶\nLos detalles son lo que hace única una torta de novios. Encarga la tuya con fecha, tamaño y diseño: te respondemos por WhatsApp con las opciones. 💬\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764\n#TortaDeNovios #Pasteleria #Maule #Licantén"
+  },
+  {
+    "id": "2026-10-29-feed-04_encargo_fee",
+    "fecha": "2026-10-29T19:00:00-03:00",
+    "tipo": "feed",
+    "media": "media/04_encargo_feed.jpg",
+    "caption": "Cumpleaños, bautizos, aniversarios. Cuéntanos tu idea y la hacemos tuya. 🎂 Retiro en Licantén, consulta por despacho a Curicó y Talca.\nWhatsApp +56 9 9210 1764"
+  },
+  {
+    "id": "2026-10-30-feed-01_novios_feed",
+    "fecha": "2026-10-30T12:30:00-03:00",
+    "tipo": "feed",
+    "media": "media/01_novios_feed.jpg",
+    "caption": "Hay tortas que se comen y otras que se recuerdan. 💍 Cuéntanos la fecha y el estilo de tu matrimonio y te respondemos con propuesta y valor.\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764\n#TortaDeNovios #Licantén #Maule"
+  },
+  {
+    "id": "2026-10-31-story-09_story_manos",
+    "fecha": "2026-10-31T11:00:00-03:00",
+    "tipo": "story",
+    "media": "media/09_story_manos.jpg",
+    "caption": ""
+  },
+  {
+    "id": "2026-11-01-story-07_story_novio",
+    "fecha": "2026-11-01T18:00:00-03:00",
+    "tipo": "story",
+    "media": "media/07_story_novios.jpg",
+    "caption": ""
+  },
+  {
+    "id": "2026-11-03-feed-02_cookies_fee",
+    "fecha": "2026-11-03T19:30:00-03:00",
+    "tipo": "feed",
+    "media": "media/02_cookies_feed.jpg",
+    "caption": "Gruesas y con relleno. 🍪 Limón, pistacho, marshmallow y Oreo. Escríbenos y te contamos qué hay hoy.\n📍 Licantén · +56 9 9210 1764\n#CookiesNuevaYork #Licantén"
+  },
+  {
+    "id": "2026-11-04-feed-05_eventos_fee",
+    "fecha": "2026-11-04T12:30:00-03:00",
+    "tipo": "feed",
+    "media": "media/05_eventos_feed.jpg",
+    "caption": "Desayunos y box sorpresa para regalar, coffee break para tu equipo y celebraciones en nuestra terraza. Agenda con anticipación. 💌\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764"
+  },
+  {
+    "id": "2026-11-05-story-08_story_encar",
+    "fecha": "2026-11-05T19:00:00-03:00",
+    "tipo": "story",
+    "media": "media/08_story_encargos.jpg",
+    "caption": ""
+  },
+  {
+    "id": "2026-11-06-feed-06_abierto_fee",
+    "fecha": "2026-11-06T12:30:00-03:00",
+    "tipo": "feed",
+    "media": "media/06_abierto_feed.jpg",
+    "caption": "Café, pastelería y tortas por encargo en la Región del Maule. Te esperamos en Licantén. 📍"
+  }
+]
