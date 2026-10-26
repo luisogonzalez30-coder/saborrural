@@ -55,14 +55,25 @@ function parametros(p) {
   if (p.tipo === 'feed') Object.assign(base, { image_url: urlMedia(p.media), caption: p.caption || '' });
   else if (p.tipo === 'story') Object.assign(base, { media_type: 'STORIES', image_url: urlMedia(p.media) });
   else if (p.tipo === 'reel') Object.assign(base, { media_type: 'REELS', video_url: urlMedia(p.media), caption: p.caption || '', share_to_feed: 'true' });
-  else throw new Error(`Tipo desconocido: ${p.tipo}`);
+  else if (p.tipo !== 'carrusel') throw new Error(`Tipo desconocido: ${p.tipo}`);
   return base;
+}
+
+async function crearContenedor(p) {
+  if (p.tipo !== 'carrusel') return graph('POST', `${IG_USER_ID}/media`, parametros(p), 2);
+  const hijos = [];                                                              // carrusel: un contenedor por foto y uno padre
+  for (const m of p.media) {
+    const h = await graph('POST', `${IG_USER_ID}/media`, { image_url: urlMedia(m), is_carousel_item: 'true' }, 2);
+    await esperarContenedor(h.id);
+    hijos.push(h.id);
+  }
+  return graph('POST', `${IG_USER_ID}/media`, { media_type: 'CAROUSEL', children: hijos.join(','), caption: p.caption || '' }, 2);
 }
 
 async function publicar(p) {
   let contenedor;
   try {
-    contenedor = await graph('POST', `${IG_USER_ID}/media`, parametros(p), 2);   // crear contenedor: se puede reintentar
+    contenedor = await crearContenedor(p);                                       // crear contenedor: se puede reintentar
     await esperarContenedor(contenedor.id);
   } catch (err) { err.reintentable = true; throw err; }                          // aún no se publicó nada: se puede volver a intentar
   const pub = await graph('POST', `${IG_USER_ID}/media_publish`, { creation_id: contenedor.id }, 0); // publicar: NO se reintenta (evita duplicados)
@@ -82,7 +93,8 @@ async function main() {
     if (!p.id || ids.has(p.id)) throw new Error(`Cada pieza necesita un id único (repetido o vacío: "${p.id}")`);
     ids.add(p.id);
     if (Number.isNaN(new Date(p.fecha).getTime())) throw new Error(`Fecha inválida en ${p.id}: ${p.fecha}`);
-    if (p.tipo === 'feed' || p.tipo === 'reel') if ((p.caption || '').length > 2200) throw new Error(`Caption de ${p.id} supera 2200 caracteres`);
+    if (p.tipo === 'carrusel' && (!Array.isArray(p.media) || p.media.length < 2 || p.media.length > 10)) throw new Error(`El carrusel ${p.id} necesita entre 2 y 10 fotos en "media" (lista)`);
+    if (p.tipo === 'feed' || p.tipo === 'reel' || p.tipo === 'carrusel') if ((p.caption || '').length > 2200) throw new Error(`Caption de ${p.id} supera 2200 caracteres`);
   }
 
   const pendientes = calendario
@@ -98,7 +110,7 @@ async function main() {
       if (!DRY) estado[p.id] = { omitido: AHORA.toISOString(), motivo: `vencido hace ${atrasoH.toFixed(1)} h` };
       continue;
     }
-    if (DRY) { console.log(`- ${p.id} (${p.tipo}): se publicaría ${urlMedia(p.media)}`); continue; }
+    if (DRY) { console.log(`- ${p.id} (${p.tipo}): se publicaría ${[].concat(p.media).map(urlMedia).join(' + ')}`); continue; }
     try {
       const r = await publicar(p);
       estado[p.id] = { publicado: new Date().toISOString(), ...r };
