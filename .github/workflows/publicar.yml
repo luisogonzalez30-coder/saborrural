@@ -3,7 +3,7 @@ name: Publicar en Instagram
 on:
   schedule:
     # Cada 30 min entre las 09:00 y las 23:30 de Chile (cubre horario de verano UTC-3 y de invierno UTC-4)
-    - cron: '*/30 12-23,0-2 * * *'
+    - cron: '*/30 10-23,0-2 * * *'
   workflow_dispatch:
     inputs:
       ensayo:
