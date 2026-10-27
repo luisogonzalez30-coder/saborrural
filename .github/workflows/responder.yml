@@ -1,0 +1,46 @@
+name: Responder en Instagram
+
+on:
+  schedule:
+    # Cada 15 min entre las 08:00 y las 23:45 de Chile (cubre horario de verano UTC-3 y de invierno UTC-4)
+    - cron: '*/15 11-23,0-2 * * *'
+  workflow_dispatch:
+    inputs:
+      ensayo:
+        description: 'Ensayo: muestra qué respondería, sin enviar nada'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: responder
+  cancel-in-progress: false
+
+jobs:
+  responder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-audit --no-fund
+      - name: Responder comentarios y mensajes
+        run: node responder.mjs
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_PAGE_TOKEN: ${{ secrets.IG_PAGE_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GRAPH_BASE: ${{ vars.GRAPH_BASE }}
+          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
+          DRY_RUN: ${{ (github.event_name == 'workflow_dispatch' && inputs.ensayo) && '1' || '' }}
+      - name: Guardar estado
+        if: always()
+        run: |
+          git config user.name "asistente-instagram"
+          git config user.email "asistente@users.noreply.github.com"
+          git add estado-respuestas.json
+          git diff --cached --quiet || (git commit -m "estado: respuestas" && git pull --rebase -q && git push)

@@ -99,3 +99,24 @@ Cada pieza de `calendario.json` tiene:
 - **Reel:** si Instagram rechaza el video con un error de tipo de archivo, es porque `raw.githubusercontent.com` no sirve bien el MP4. Activa **GitHub Pages** (Settings → Pages → rama `main`) y crea la variable `MEDIA_BASE_URL` (Settings → Secrets and variables → Actions → Variables) con `https://TU-USUARIO.github.io/sabor-rural-instagram/`.
 - **Límite de Meta:** hasta 100 publicaciones por API cada 24 horas. Estás muy por debajo.
 - **Probado:** la lógica del script se probó contra un servidor simulado de Meta (publicación de foto, historia y reel, no duplicar, reintentos, token inválido). **No se ha probado contra Instagram real**: el ensayo y la prueba real de los pasos 7 y 8 son para eso.
+
+
+---
+
+# Asistente de respuestas (comentarios y mensajes directos)
+
+`responder.mjs` revisa cada 15 minutos (08:00 a 23:45 de Chile) los comentarios nuevos y los DMs de `@sabor_rural`, y responde con Claude usando solo lo escrito en `conocimiento.md`.
+
+| Situación | Qué hace |
+|---|---|
+| Pregunta o saludo | Responde breve y, si no está en `conocimiento.md` (precios, horarios, stock), deriva al WhatsApp |
+| Elogio simple, emojis | Agradece o no responde |
+| Spam, ofensas, estafas | Lo ignora |
+| Reclamo, alergia, tema delicado | Responde con un mensaje empático y lo marca `escalar` en `estado-respuestas.json` para que lo atienda una persona |
+
+- Empieza **desde la primera corrida real**: no contesta comentarios anteriores.
+- Máximo 12 respuestas por corrida. Nunca responde dos veces lo mismo.
+- DMs: solo dentro de las 24 h desde el último mensaje del cliente (regla de Instagram).
+- Modelo por defecto `claude-opus-5-5`; se puede cambiar con la variable del repositorio `CLAUDE_MODEL` (por ejemplo `claude-haiku-5-5`, más barato).
+- Hace falta el secreto `ANTHROPIC_API_KEY` y un `IG_PAGE_TOKEN` con los permisos `instagram_manage_comments` e `instagram_manage_messages` (más `pages_messaging`).
+- Primero se prueba con **Run workflow → Ensayo marcado**: muestra qué respondería sin enviar nada.
