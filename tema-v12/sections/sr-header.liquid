@@ -1,4 +1,6 @@
-<style>.sr{overflow-x:clip}</style>
+<style>.sr{overflow-x:clip}
+/* celulares: menos efectos pesados al desplazarse */
+@media (max-width:900px){.sr .chile-svg,.sr .chile-lg .shp,.sr .cf-ball{filter:drop-shadow(0 6px 10px rgba(0,0,0,.55))!important}.sr .evento .form,.sr .cf-stat{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}}</style>
 {{ 'sr.css' | asset_url | stylesheet_tag }}
 {{ 'sr-3d.css' | asset_url | stylesheet_tag }}
 {{ 'sr-dark.css' | asset_url | stylesheet_tag }}
