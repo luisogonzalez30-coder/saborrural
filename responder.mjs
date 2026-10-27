@@ -139,7 +139,12 @@ async function comentarios(yo) {
 async function mensajes(yo) {
   const pagina = await graph('GET', 'me', { fields: 'id' });
   // primero solo la lista (liviana); los mensajes se piden conversación por conversación para no pasarse del límite de datos de Meta
-  const lista = (await graph('GET', `${pagina.id}/conversations`, { platform: 'instagram', fields: 'id,updated_time', limit: '10' })).data || [];
+  let lista = null, ultimoError;
+  for (const limite of ['10', '5', '2', '1']) {                                 // si Meta dice "demasiados datos", se reintenta con menos
+    try { lista = (await graph('GET', `${pagina.id}/conversations`, { platform: 'instagram', fields: 'id,updated_time', limit: limite })).data || []; break; }
+    catch (e) { ultimoError = e; if (e.codigo !== 1) throw e; }
+  }
+  if (!lista) throw ultimoError;
   for (const cv of lista) {
     const act = new Date(cv.updated_time).getTime();
     if (act < desde || AHORA - act > HORAS_DM * 36e5) continue;                 // sin actividad reciente: nada que responder
