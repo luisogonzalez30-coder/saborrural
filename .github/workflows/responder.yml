@@ -22,13 +22,17 @@ jobs:
   responder:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      LISTO: ${{ secrets.ANTHROPIC_API_KEY != '' && secrets.IG_PAGE_TOKEN != '' }}   # sin las claves, no hace nada (ni falla)
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install --no-audit --no-fund
+      - if: env.LISTO == 'true'
+        run: npm install --no-audit --no-fund
       - name: Responder comentarios y mensajes
+        if: env.LISTO == 'true'
         run: node responder.mjs
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
@@ -38,7 +42,7 @@ jobs:
           CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
           DRY_RUN: ${{ (github.event_name == 'workflow_dispatch' && inputs.ensayo) && '1' || '' }}
       - name: Guardar estado
-        if: always()
+        if: always() && env.LISTO == 'true'
         run: |
           git config user.name "asistente-instagram"
           git config user.email "asistente@users.noreply.github.com"
