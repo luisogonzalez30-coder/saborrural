@@ -133,7 +133,7 @@ async function main() {
     } catch (err) {
       if (err.codigo === 190 || err.codigo === 102) {            // token vencido o inválido: no es culpa de la pieza
         console.error(`ERROR de acceso: ${err.message}\nRenueva IG_PAGE_TOKEN (ver LEEME.md, paso 6). No se tocó estado.json.`);
-        process.exit(1);
+        process.exit(3);                                           // 3 = token: el vigía se detiene y avisa
       }
       fallos++;
       const previos = estado[p.id]?.intentos || 0;

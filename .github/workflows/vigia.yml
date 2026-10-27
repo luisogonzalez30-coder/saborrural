@@ -1,0 +1,50 @@
+name: Vigía de publicación
+
+# GitHub casi no ejecuta los "cron" de repos con poca actividad (ayer: 2 corridas en 17 h), así que
+# no se depende de ellos. Este trabajo se queda despierto ~5 h 40 min, revisa el calendario cada 4 min
+# y publica lo que ya venció; al terminar se vuelve a lanzar solo. El cron de cada 3 h solo lo reinicia
+# si la cadena se cortó. Si el token falla, el trabajo termina en rojo (llega correo) y no se relanza.
+on:
+  schedule:
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: vigia
+  cancel-in-progress: false
+
+jobs:
+  vigia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Publicar cada 4 minutos lo que ya venció
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_PAGE_TOKEN: ${{ secrets.IG_PAGE_TOKEN }}
+          MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
+          GRAPH_BASE: ${{ vars.GRAPH_BASE }}
+        run: |
+          git config user.name "publicador-instagram"
+          git config user.email "publicador@users.noreply.github.com"
+          while [ "$SECONDS" -lt 20400 ]; do
+            git pull --rebase -q || true
+            rc=0; node publicar.mjs || rc=$?
+            if [ "$rc" -eq 3 ]; then echo "::error::El token de Instagram falló: renuévalo (LEEME.md, paso 6)"; exit 1; fi
+            git add estado.json
+            git diff --cached --quiet || { git commit -q -m "estado: publicaciones" && git pull --rebase -q && git push -q || true; }
+            sleep 240
+          done
+      - name: Relanzar el vigía
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run vigia.yml --ref "${{ github.ref_name }}"
