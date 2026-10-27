@@ -2,6 +2,7 @@
 // Lee calendario.json, publica lo que ya venció y anota el resultado en estado.json.
 // Requiere Node 20+ (usa fetch nativo). Sin dependencias.
 import { readFile, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 
 const GRAPH = process.env.GRAPH_BASE || 'https://graph.facebook.com/v21.0';
 const IG_USER_ID = process.env.IG_USER_ID;
@@ -82,9 +83,23 @@ async function publicar(p) {
   return { media_id: pub.id, permalink };
 }
 
+// Cada historia sale también como post (misma pieza en formato 4:5) para que no se pierda a las 24 h.
+// Archivo del post: "media_post" o, por defecto, "<historia>-post.jpg". Para no duplicar: "copia_post": false.
+function conCopiaPost(lista) {
+  const copias = [];
+  for (const p of lista) {
+    if (p.tipo !== 'story' || p.copia_post === false) continue;
+    const media = p.media_post || p.media.replace(/\.(jpe?g|png)$/i, '-post.$1');
+    if (!/^https?:/.test(media) && !existsSync(media)) { console.warn(`- ${p.id}: falta ${media}, la historia sale sin copia como post`); continue; }
+    copias.push({ id: `${p.id}-post`, fecha: p.fecha, tipo: 'feed', media, caption: p.caption || '' });
+  }
+  return [...lista, ...copias];
+}
+
 async function main() {
-  const calendario = await leer('calendario.json', null);
-  if (!Array.isArray(calendario)) throw new Error('calendario.json no existe o no es una lista');
+  const base = await leer('calendario.json', null);
+  if (!Array.isArray(base)) throw new Error('calendario.json no existe o no es una lista');
+  const calendario = conCopiaPost(base);
   const estado = await leer('estado.json', {});
   if (!DRY && (!IG_USER_ID || !TOKEN)) throw new Error('Faltan los secretos IG_USER_ID e IG_PAGE_TOKEN');
 

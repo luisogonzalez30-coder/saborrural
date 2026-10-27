@@ -3,7 +3,8 @@
   "id": "2026-10-27-story-s-mar-am",
   "fecha": "2026-10-27T07:30:00-03:00",
   "tipo": "story",
-  "media": "media/s-mar-am.jpg"
+  "media": "media/s-mar-am.jpg",
+  "caption": "Buenos días desde Licantén. ☕\nCafé de especialidad de origen Nicaragua, preparado al momento en nuestra barra. Te esperamos.\n🔗 Mira la carta y pide en nuestra web: link en la bio\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764\n#CaféDeEspecialidad #Nicaragua #Licantén #Maule"
  },
  {
   "id": "2026-10-27-feed-f-cafe-origen",
@@ -23,7 +24,8 @@
   "id": "2026-10-28-story-s-mie-am",
   "fecha": "2026-10-28T07:30:00-03:00",
   "tipo": "story",
-  "media": "media/s-mie-am.jpg"
+  "media": "media/s-mie-am.jpg",
+  "caption": "Torta de chocolate, chantilly y guindas. 🍒\nLa hacemos por encargo: cuéntanos tu idea y te respondemos con propuesta y valor.\n🔗 Encarga en nuestra web: link en la bio\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764\n#TortasPorEncargo #PastelaríaArtesanal #Licantén #Maule"
  },
  {
   "id": "2026-10-28-carrusel-01-lun-carrusel-1",
@@ -50,7 +52,8 @@
   "id": "2026-10-29-story-s-jue-am",
   "fecha": "2026-10-29T07:30:00-03:00",
   "tipo": "story",
-  "media": "media/s-jue-am.jpg"
+  "media": "media/s-jue-am.jpg",
+  "caption": "Tortas infantiles a tu gusto. 🎈\nTú eliges el tema, los colores y el mensaje; nosotros la hacemos tuya.\n🔗 Encarga en nuestra web: link en la bio\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764\n#TortasInfantiles #Cumpleaños #Licantén #Maule"
  },
  {
   "id": "2026-10-29-feed-04-jue-tortas-infantiles",
@@ -70,7 +73,8 @@
   "id": "2026-10-30-story-s-vie-am",
   "fecha": "2026-10-30T07:30:00-03:00",
   "tipo": "story",
-  "media": "media/s-vie-am.jpg"
+  "media": "media/s-vie-am.jpg",
+  "caption": "Cookies estilo Nueva York. 🍪\nGruesas, rellenas, crujientes por fuera y suaves por dentro. Consulta cuáles hay hoy.\n🔗 Mira la carta y pide en nuestra web: link en la bio\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764\n#CookiesNuevaYork #Pastelería #Licantén #Maule"
  },
  {
   "id": "2026-10-30-feed-02_cookies_feed",
@@ -90,7 +94,8 @@
   "id": "2026-10-31-story-s-sab-am",
   "fecha": "2026-10-31T07:30:00-03:00",
   "tipo": "story",
-  "media": "media/s-sab-am.jpg"
+  "media": "media/s-sab-am.jpg",
+  "caption": "Pausa de sábado: café y brownie tibio con helado de vainilla y crema. ☕\nPasa por Licantén o mira la carta en la web.\n🔗 Mira la carta y pide en nuestra web: link en la bio\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764\n#CaféYPastelería #Brownie #Licantén #Maule"
  },
  {
   "id": "2026-10-31-feed-02-mar-tarta-pistacho",
@@ -110,7 +115,8 @@
   "id": "2026-11-01-story-s-dom-am",
   "fecha": "2026-11-01T07:30:00-03:00",
   "tipo": "story",
-  "media": "media/s-dom-am.jpg"
+  "media": "media/s-dom-am.jpg",
+  "caption": "Domingo dulce. 🥧\nPie de limón, tartas y kuchen para compartir.\n🔗 Mira la carta y pide en nuestra web: link en la bio\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764\n#PastelaríaArtesanal #Licantén #Maule #DomingoDulce"
  },
  {
   "id": "2026-11-01-feed-05_eventos_feed",
@@ -130,7 +136,8 @@
   "id": "2026-11-02-story-s-lun-am",
   "fecha": "2026-11-02T07:30:00-03:00",
   "tipo": "story",
-  "media": "media/s-lun-am.jpg"
+  "media": "media/s-lun-am.jpg",
+  "caption": "Una torta corazón para aniversarios y fechas especiales. 💗\nEncarga con anticipación y te respondemos con propuesta y valor.\n🔗 Encarga en nuestra web: link en la bio\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764\n#TortasPorEncargo #Aniversario #Licantén #Maule"
  },
  {
   "id": "2026-11-02-feed-04_encargo_feed",
@@ -151,7 +158,7 @@
   "fecha": "2026-11-05T19:00:00-03:00",
   "tipo": "story",
   "media": "media/08_story_encargos.jpg",
-  "caption": ""
+  "caption": "Encarga tu torta con anticipación. 🎂\nCuéntanos tu idea, recibe propuesta y valor, reserva la fecha con abono y retírala en Licantén.\n🔗 Encarga en nuestra web: link en la bio\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764\n#TortasPorEncargo #Licantén #Maule"
  },
  {
   "id": "2026-11-06-feed-f-abierto",
@@ -178,12 +185,14 @@
   "id": "2026-11-14-story-06-sab-historia-cookies",
   "fecha": "2026-11-14T11:00:00-03:00",
   "tipo": "story",
-  "media": "media/06-sab-historia-cookies.jpg"
+  "media": "media/06-sab-historia-cookies.jpg",
+  "caption": "Cookies estilo Nueva York. 🍪\nConsulta cuáles hay hoy.\n🔗 Mira la carta y pide en nuestra web: link en la bio\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764\n#CookiesNuevaYork #Licantén #Maule"
  },
  {
   "id": "2026-11-14-story-07-sab-historia-cafe",
   "fecha": "2026-11-14T15:00:00-03:00",
   "tipo": "story",
-  "media": "media/07-sab-historia-cafe.jpg"
+  "media": "media/07-sab-historia-cafe.jpg",
+  "caption": "Café de especialidad de origen Nicaragua. ☕\nPreparado al momento en nuestra barra de Licantén.\n🔗 Mira la carta y pide en nuestra web: link en la bio\n📍 Licantén, Región del Maule · WhatsApp +56 9 9210 1764\n#CaféDeEspecialidad #Licantén #Maule"
  }
 ]
