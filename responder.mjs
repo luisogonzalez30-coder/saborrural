@@ -142,7 +142,7 @@ async function mensajes(yo) {
   let lista = null, ultimoError;
   for (const limite of ['10', '5', '2', '1']) {                                 // si Meta dice "demasiados datos", se reintenta con menos
     try { lista = (await graph('GET', `${pagina.id}/conversations`, { platform: 'instagram', fields: 'id,updated_time', limit: limite })).data || []; break; }
-    catch (e) { ultimoError = e; if (e.codigo !== 1) throw e; }
+    catch (e) { ultimoError = e; console.error(`- conversaciones (límite ${limite}): ${e.message}`); await dormir(2000); }
   }
   if (!lista) throw ultimoError;
   for (const cv of lista) {
