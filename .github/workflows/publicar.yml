@@ -2,8 +2,8 @@ name: Publicar en Instagram
 
 on:
   schedule:
-    # Cada 30 min entre las 09:00 y las 23:30 de Chile (cubre horario de verano UTC-3 y de invierno UTC-4)
-    - cron: '*/30 10-23,0-2 * * *'
+    # Cada 15 min (en minutos sueltos, no en :00 ni :30, que es cuando GitHub se atrasa) entre las 09:00 y las 23:30 de Chile (cubre horario de verano UTC-3 y de invierno UTC-4)
+    - cron: '7,22,37,52 10-23,0-2 * * *'
   workflow_dispatch:
     inputs:
       ensayo:
