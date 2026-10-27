@@ -37,10 +37,18 @@ a.b .ar{color:var(--rosa);font-size:1.3rem;flex:none}
 a.main{background:linear-gradient(135deg,var(--rosa),var(--rosa2));border-color:transparent;color:#1a0a0e;font-weight:700}
 a.main small{color:#3a1a22}
 a.main .ar{color:#1a0a0e}
+.info{margin-top:22px;border:1px solid var(--ln);border-radius:16px;padding:16px 18px;background:rgba(10,10,10,.82);text-align:left}
+.info h2{font-family:Bricolage,sans-serif;font-weight:800;font-size:1rem;color:var(--rosa);letter-spacing:.04em;text-transform:uppercase}
+.info dl{margin-top:8px}
+.info dl div{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(240,124,149,.18);font-size:.95rem}
+.info dt{color:var(--sub)}
+.info dd{font-weight:700}
+.info p{color:var(--sub);font-size:.85rem;line-height:1.45;margin-top:10px}
 footer{margin-top:28px;color:var(--sub);font-size:.82rem;line-height:1.5}
 footer b{color:var(--rosa)}
 a:focus-visible{outline:2px solid var(--rosa);outline-offset:3px}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CafeOrCoffeeShop","name":"Sabor Rural","telephone":"+56992101764","address":{"@type":"PostalAddress","streetAddress":"Ruta J-60, km 95, Sector Lora","addressLocality":"Licantén","addressRegion":"Región del Maule","addressCountry":"CL"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"21:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday","Sunday"],"opens":"14:00","closes":"21:00"}],"paymentAccepted":"Todos los medios de pago","servesCuisine":"Café, pastelería"}</script>
 </head>
 <body>
 <div class="wrap">
@@ -59,9 +67,16 @@ a:focus-visible{outline:2px solid var(--rosa);outline-offset:3px}
 <span>Torta de novios<small>Hecha a mano, a tu estilo</small></span><span class="ar">→</span></a>
 <a class="b" href="https://rq96ev-nk.myshopify.com/#pedido" target="_blank" rel="noopener">
 <span>Ver la carta<small>Café, cookies y pastelería</small></span><span class="ar">→</span></a>
-<a class="b" href="https://www.google.com/maps/dir/?api=1&amp;destination=Sabor+Rural+Licant%C3%A9n" target="_blank" rel="noopener">
-<span>Cómo llegar<small>Abrir en Google Maps</small></span><span class="ar">→</span></a>
+<a class="b" href="https://www.google.com/maps/dir/?api=1&amp;destination=Ruta+J-60+km+95%2C+Sector+Lora%2C+Licant%C3%A9n%2C+Chile" target="_blank" rel="noopener">
+<span>Cómo llegar<small>Ruta J-60, km 95, Sector Lora · Google Maps</small></span><span class="ar">→</span></a>
 </nav>
+<section class="info" aria-label="Horario y dirección">
+<h2>Horario</h2>
+<dl><div><dt>Lunes a viernes</dt><dd>9:00 – 21:00</dd></div><div><dt>Sábado y domingo</dt><dd>14:00 – 21:00</dd></div></dl>
+<p>Abierto todos los días del año · Se aceptan todos los medios de pago</p>
+<h2 style="margin-top:16px">Dónde estamos</h2>
+<p style="margin-top:6px;color:var(--txt)">Ruta J-60, km 95, Sector Lora<br>Licantén, Región del Maule</p>
+</section>
 <footer><b>WhatsApp</b> +56 9 9210 1764<br>Retiro en Licantén · consulta por despacho a Curicó y Talca</footer>
 </main>
 </div>
