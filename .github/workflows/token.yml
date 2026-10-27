@@ -1,0 +1,20 @@
+name: Revisar token de Instagram
+
+on:
+  schedule:
+    - cron: '17 12 * * *'      # una vez al día (09:17 de Chile)
+  workflow_dispatch:
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node token.mjs
+        env:
+          IG_PAGE_TOKEN: ${{ secrets.IG_PAGE_TOKEN }}
+          GRAPH_BASE: ${{ vars.GRAPH_BASE }}

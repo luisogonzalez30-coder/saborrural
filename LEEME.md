@@ -120,3 +120,18 @@ Cada pieza de `calendario.json` tiene:
 - Modelo por defecto `claude-opus-5-5`; se puede cambiar con la variable del repositorio `CLAUDE_MODEL` (por ejemplo `claude-haiku-5-5`, más barato).
 - Hace falta el secreto `ANTHROPIC_API_KEY` y un `IG_PAGE_TOKEN` con los permisos `instagram_manage_comments` e `instagram_manage_messages` (más `pages_messaging`).
 - Primero se prueba con **Run workflow → Ensayo marcado**: muestra qué respondería sin enviar nada.
+
+
+---
+
+# Token de Instagram: cómo renovarlo para que no vuelva a vencer
+
+El token **debe ser de la página y salir de un token de usuario de larga duración**; si sale de uno corto, vence en 1 hora y el publicador se detiene.
+
+1. **Graph API Explorer** (developers.facebook.com/tools/explorer): app *sabor rural mensajes*, token de usuario, con los permisos `instagram_basic`, `instagram_content_publish`, `pages_show_list`, `pages_read_engagement`, `business_management`, `instagram_manage_comments`, `instagram_manage_messages`, `pages_messaging`, `pages_manage_posts`, `pages_manage_engagement`. *Generate Access Token* y marcar la página y la cuenta de Instagram.
+2. **Depurador de tokens** (developers.facebook.com/tools/debug/accesstoken): pegar ese token → *Extend Access Token* → copiar el token largo (60 días).
+3. En el Explorer, pegar el token largo y consultar `me/accounts`. Copiar el `access_token` de la página SABOR RURAL.
+4. GitHub → Settings → Secrets and variables → Actions → `IG_PAGE_TOKEN` → pegarlo.
+5. Comprobar en el Depurador: **Expires: Never**.
+
+`token.mjs` (workflow *Revisar token de Instagram*, una vez al día) falla y GitHub avisa por correo si el token venció, le faltan permisos o vence en menos de 7 días.
