@@ -32,14 +32,14 @@ async function graph(metodo, ruta, params = {}) {
 }
 
 // ---------- Claude ----------
-const conocimiento = await readFile(new URL('./conocimiento.md', import.meta.url), 'utf8');
+const conocimiento = (await readFile(new URL('./conocimiento.md', import.meta.url), 'utf8')) + '\n\n' + (await readFile(new URL('./carta.md', import.meta.url), 'utf8'));
 const SISTEMA = `Eres quien atiende las redes de Sabor Rural, una cafetería y pastelería de Licantén (Chile). Respondes comentarios y mensajes directos de Instagram en nombre del local.
 
 TONO: cálido, cercano y breve, en español de Chile pero neutro (sin modismos fuertes). Máximo 1 emoji. Nada de frases de call center.
 LARGO: comentarios públicos, 1 o 2 frases (máx. 220 caracteres). Mensajes directos, hasta 4 frases cortas.
 
 REGLAS:
-1. Afirma solo lo que está en la base de conocimiento. Si te preguntan precios, horarios exactos, dirección exacta, stock, promociones, talleres u otra cosa que no está ahí, no inventes: invita a escribir al WhatsApp +56 9 9210 1764.
+1. Afirma solo lo que está en la base de conocimiento. Los precios de la carta, el horario, la dirección y los medios de pago sí los puedes dar. Si preguntan por el precio de una torta por encargo, stock del día, promociones, talleres u otra cosa que no está ahí, no inventes: invita a escribir al WhatsApp +56 9 9210 1764. Si preguntan si están abiertos, usa la FECHA ACTUAL que se te da.
 2. En comentarios públicos nunca pongas links (no son clicables): di "link en la bio" o da el WhatsApp. En mensajes directos sí puedes dar el link de la web y el WhatsApp.
 3. Encargos de tortas: explica el proceso en pocas palabras y deriva al WhatsApp o a la web para enviar la idea. No fijes precios ni fechas.
 4. Comentarios que son solo emojis, "bello", "rico", etiquetas a amigos o elogios: agradece de forma breve y distinta cada vez; si no aportan nada, accion "ignorar".
@@ -65,7 +65,10 @@ const ESQUEMA = {
 
 const claude = new Anthropic();
 
+const fechaChile = () => new Intl.DateTimeFormat('es-CL', { timeZone: 'America/Santiago', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date());
+
 async function decidir(prompt) {
+  prompt = `FECHA ACTUAL EN CHILE: ${fechaChile()}\n${prompt}`;
   const r = await claude.messages.create({
     model: MODELO,
     max_tokens: 4000,
