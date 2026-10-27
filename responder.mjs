@@ -138,9 +138,15 @@ async function comentarios(yo) {
 // ---------- Mensajes directos ----------
 async function mensajes(yo) {
   const pagina = await graph('GET', 'me', { fields: 'id' });
-  const convs = (await graph('GET', `${pagina.id}/conversations`, { platform: 'instagram', fields: 'id,updated_time,messages.limit(8){id,message,from,created_time}', limit: '15' })).data || [];
-  for (const cv of convs) {
-    const msgs = (cv.messages?.data || []).slice().reverse();                   // de más viejo a más nuevo
+  // primero solo la lista (liviana); los mensajes se piden conversación por conversación para no pasarse del límite de datos de Meta
+  const lista = (await graph('GET', `${pagina.id}/conversations`, { platform: 'instagram', fields: 'id,updated_time', limit: '10' })).data || [];
+  for (const cv of lista) {
+    const act = new Date(cv.updated_time).getTime();
+    if (act < desde || AHORA - act > HORAS_DM * 36e5) continue;                 // sin actividad reciente: nada que responder
+    let det;
+    try { det = await graph('GET', cv.id, { fields: 'messages.limit(6){id,message,from,created_time}' }); }
+    catch (e) { console.error(`- conversación ${cv.id}: no pude leerla (${e.message})`); continue; }
+    const msgs = (det.messages?.data || []).slice().reverse();                  // de más viejo a más nuevo
     const ultimo = msgs[msgs.length - 1];
     if (!ultimo) continue;
     const mio = (x) => x.from?.id === IG_USER_ID || x.from?.username === yo;

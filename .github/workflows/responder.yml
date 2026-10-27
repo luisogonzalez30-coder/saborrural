@@ -46,5 +46,5 @@ jobs:
         run: |
           git config user.name "asistente-instagram"
           git config user.email "asistente@users.noreply.github.com"
-          git add estado-respuestas.json
+          [ -f estado-respuestas.json ] && git add estado-respuestas.json || true
           git diff --cached --quiet || (git commit -m "estado: respuestas" && git pull --rebase -q && git push)
