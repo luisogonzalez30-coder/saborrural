@@ -11,7 +11,8 @@
 - **Medios de pago:** se aceptan todos los medios de pago.
 - **Precios:** son los exactos de `carta.md`. Cítalos tal cual, sin dar rangos ni aproximaciones. Si un producto no está en la carta, no inventes precio.
 - WhatsApp: **+56 9 9210 1764** (pedidos, encargos, reservas y consultas de precio).
-- Carta, encargos y todos los enlaces: la página del link en la bio, https://luisogonzalez30-coder.github.io/saborrural/
+- Carta completa con precios (página de la web): https://rq96ev-nk.myshopify.com/pages/carta — en DMs puedes dar este link.
+- Encargos y todos los enlaces: la página del link en la bio, https://luisogonzalez30-coder.github.io/saborrural/
 
 - Todo se hace **desde cero, sin premezclas ni conservantes** (el dueño autoriza decirlo).
 
