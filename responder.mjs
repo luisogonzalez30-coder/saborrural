@@ -140,9 +140,12 @@ async function mensajes(yo) {
   const pagina = await graph('GET', 'me', { fields: 'id' });
   // primero solo la lista (liviana); los mensajes se piden conversación por conversación para no pasarse del límite de datos de Meta
   let lista = null, ultimoError;
-  for (const limite of ['10', '5', '2', '1']) {                                 // si Meta dice "demasiados datos", se reintenta con menos
-    try { lista = (await graph('GET', `${pagina.id}/conversations`, { platform: 'instagram', fields: 'id,updated_time', limit: limite })).data || []; break; }
-    catch (e) { ultimoError = e; console.error(`- conversaciones (límite ${limite}): ${e.message}`); await dormir(2000); }
+  for (const origen of [pagina.id, IG_USER_ID]) {                               // se prueba con el id de la página y con el de Instagram
+    for (const limite of ['5', '1']) {                                          // si Meta dice "demasiados datos" o se agota el tiempo, menos datos
+      try { lista = (await graph('GET', `${origen}/conversations`, { platform: 'instagram', fields: 'id,updated_time', limit: limite })).data || []; break; }
+      catch (e) { ultimoError = e; console.error(`- conversaciones de ${origen === IG_USER_ID ? 'Instagram' : 'la página'} (límite ${limite}): ${e.message}`); await dormir(1500); }
+    }
+    if (lista) break;
   }
   if (!lista) throw ultimoError;
   for (const cv of lista) {
