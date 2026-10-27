@@ -1,0 +1,155 @@
+{%- liquid
+  assign wa = section.settings.whatsapp
+  assign wa_txt = 'Hola Sabor Rural, quiero hacer un pedido.' | url_encode
+  assign url = section.settings.carta_url
+  assign grande = false
+  if section.settings.variante == 'grande'
+    assign grande = true
+  endif
+-%}
+<style>
+.sr .cc{padding:34px 0 18px;position:relative}
+.sr .cc-panel{position:relative;isolation:isolate;overflow:hidden;border:1px solid rgba(242,132,151,.4);border-radius:30px;padding:34px 20px 26px;text-align:center;background:radial-gradient(90% 70% at 85% 0%,rgba(194,48,72,.45),transparent 68%),radial-gradient(70% 60% at 0% 100%,rgba(240,124,149,.2),transparent 70%),linear-gradient(165deg,#2A1119,#120A0E 70%);box-shadow:0 40px 70px -40px rgba(194,48,72,.7)}
+.sr .cc-panel::before{content:"";position:absolute;inset:-40%;z-index:-1;background:conic-gradient(from 0deg,transparent 0 70%,rgba(245,154,172,.16) 80%,transparent 90%);animation:cc-spin 14s linear infinite}
+@keyframes cc-spin{to{transform:rotate(360deg)}}
+.sr .cc-eyebrow{display:inline-block;font:700 12.5px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:#1A0A0F;background:linear-gradient(135deg,#F59AAC,#E2587C);padding:8px 14px;border-radius:99px}
+.sr .cc h2{font:800 clamp(2.2rem,9.5vw,4.4rem)/.98 var(--font-display);letter-spacing:-.03em;color:#fff;margin:16px auto 0;max-width:12em}
+.sr .cc h2 em{font-family:var(--font-chalk);font-style:normal;font-weight:700;color:#F59AAC;font-size:1.2em;letter-spacing:0}
+.sr .cc-lead{max-width:36em;margin:14px auto 0;color:#E4D6DA;font-size:clamp(1rem,2.9vw,1.15rem);line-height:1.5}
+.sr .cc-tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:26px 0 0}
+.sr .cc-tiles .cc-tile:last-child:nth-child(odd){grid-column:1/-1}
+.sr .cc-tile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 10px 14px;border:1px solid rgba(242,132,151,.28);border-radius:20px;background:rgba(10,8,10,.55);backdrop-filter:blur(6px);text-decoration:none;color:#F3F1EA;transition:transform .2s,border-color .2s,background .2s}
+.sr .cc-tile:hover,.sr .cc-tile:focus-visible{transform:translateY(-4px);border-color:#F59AAC;background:rgba(58,22,32,.75)}
+.sr .cc-tile svg{width:34px;height:34px;color:#F59AAC}
+.sr .cc-tile b{font:800 1.02rem/1.15 var(--font-display);color:#fff}
+.sr .cc-tile small{font:700 .8rem/1 var(--font-body);color:#F59AAC;letter-spacing:.02em}
+@media (min-width:900px){.sr .cc-tiles{grid-template-columns:repeat(5,1fr);gap:14px}.sr .cc-tiles .cc-tile:last-child:nth-child(odd){grid-column:auto}.sr .cc-panel{padding:52px 48px 38px}}
+.sr .cc-go{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:520px;margin:28px auto 0;min-height:68px;border-radius:18px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 clamp(1.1rem,4.6vw,1.4rem)/1 var(--font-display);letter-spacing:-.01em;text-decoration:none;box-shadow:0 18px 36px -14px rgba(226,88,124,.9);animation:cc-pulse 2.4s ease-in-out infinite;transition:transform .15s,filter .15s}
+.sr .cc-go:hover{filter:brightness(1.07);transform:translateY(-2px)}
+.sr .cc-go:active{transform:scale(.98)}
+.sr .cc-go svg{width:26px;height:26px;transition:transform .2s}
+.sr .cc-go:hover svg{transform:translateX(6px)}
+@keyframes cc-pulse{0%,100%{box-shadow:0 18px 36px -14px rgba(226,88,124,.9),0 0 0 0 rgba(245,154,172,.55)}50%{box-shadow:0 18px 36px -14px rgba(226,88,124,.9),0 0 0 14px rgba(245,154,172,0)}}
+.sr .cc-wa{display:inline-block;margin-top:16px;color:#F3F1EA;font:700 .98rem/1.2 var(--font-body);text-decoration:underline;text-decoration-color:rgba(245,154,172,.6);text-underline-offset:4px}
+.sr .cc-wa:hover{color:#F59AAC}
+.sr .cc-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:20px}
+.sr .cc-trust span{padding:8px 13px;border:1px solid rgba(242,132,151,.25);border-radius:99px;background:rgba(10,8,10,.5);font:600 .82rem/1 var(--font-body);color:#E4D6DA}
+.sr .cc-tick{margin-top:22px;overflow:hidden;border-block:1px solid rgba(242,132,151,.2);background:rgba(10,8,10,.5);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.sr .cc-track{display:flex;width:max-content;animation:cc-run 60s linear infinite}
+.sr .cc-tick:hover .cc-track{animation-play-state:paused}
+.sr .cc-track span{flex:none;padding:13px 22px;font:600 .95rem/1 var(--font-body);color:#D9D7CE;white-space:nowrap}
+.sr .cc-track span b{color:#F59AAC;font-weight:800;margin-left:8px}
+.sr .cc-track span::after{content:"•";margin-left:44px;color:rgba(245,154,172,.5)}
+@keyframes cc-run{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.sr .cc-panel::before,.sr .cc-go,.sr .cc-track{animation:none}}
+/* variante compacta */
+.sr .cc-s{padding:26px 0}
+.sr .cc-bar{display:grid;gap:16px;align-items:center;border:1px solid rgba(242,132,151,.4);border-radius:24px;padding:22px 20px;background:radial-gradient(80% 140% at 100% 0%,rgba(194,48,72,.4),transparent 68%),linear-gradient(165deg,#2A1119,#120A0E 75%)}
+.sr .cc-bar h2{font:800 clamp(1.6rem,6.4vw,2.4rem)/1.04 var(--font-display);letter-spacing:-.02em;color:#fff;margin:10px 0 0}
+.sr .cc-bar h2 em{font-family:var(--font-chalk);font-style:normal;color:#F59AAC;font-size:1.15em}
+.sr .cc-bar p{margin:8px 0 0;color:#E4D6DA;line-height:1.45}
+.sr .cc-bar .cc-go{margin:0;max-width:none}
+@media (min-width:860px){.sr .cc-bar{grid-template-columns:1fr minmax(300px,380px);padding:28px 34px}}
+</style>
+<div class="sr">
+{%- if grande -%}
+  <section class="cc" id="carta-cta" aria-labelledby="cc-h-{{ section.id }}">
+    <div class="wrap">
+      <div class="cc-panel">
+        <span class="cc-eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2 id="cc-h-{{ section.id }}">{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h2>
+        <p class="cc-lead">{{ section.settings.bajada }}</p>
+        <div class="cc-tiles">
+          {%- assign n = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- assign n = n | plus: 1 -%}
+            {%- assign minp = 0 -%}
+            {%- for p in block.settings.coleccion.products -%}
+              {%- unless p.tags contains 'no-carta' -%}
+                {%- if p.price > 0 -%}
+                  {%- if minp == 0 or p.price < minp -%}{%- assign minp = p.price -%}{%- endif -%}
+                {%- endif -%}
+              {%- endunless -%}
+            {%- endfor -%}
+            <a class="cc-tile" href="{{ url }}#cat-{{ n }}">
+              {%- case block.settings.icono -%}
+              {%- when 'frio' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12l-1.4 15.2a2 2 0 0 1-2 1.8H9.4a2 2 0 0 1-2-1.8L6 4Z"/><path d="M7.2 10h9.6"/><path d="m14 2-1.5 5"/><path d="M10.5 13.5h.01M13.5 15.5h.01M11.5 17h.01"/></svg>
+              {%- when 'dulce' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M4 20v-5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5"/><path d="M4 15c1.5 1.4 2.5 1.4 4 0s2.5-1.4 4 0 2.5 1.4 4 0 2.5-1.4 4 0"/><path d="M12 13V8"/><path d="M12 8c-1.2-1-1.2-2.6 0-3.8 1.2 1.2 1.2 2.8 0 3.8Z"/></svg>
+              {%- when 'sandwich' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10a8 6 0 0 1 16 0Z"/><path d="M3 13.5c1.8 1.2 3 1.2 4.5 0s2.7-1.2 4.5 0 3-1.2 4.5 0 2.7 1.2 4.5 0"/><path d="M5 17h14"/><path d="M4 20.5h16"/></svg>
+              {%- when 'compartir' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="14" rx="9" ry="4.5"/><path d="M7 13c0-2 2-3.5 5-3.5S17 11 17 13"/><path d="M9 9.5 8 6M12 9 12 5M15 9.5 16 6"/></svg>
+              {%- else -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v3M11 3v3M14 3v3"/></svg>
+              {%- endcase -%}
+              <b>{{ block.settings.titulo }}</b>
+              {%- if minp > 0 -%}<small>desde {{ minp | money_without_trailing_zeros }}</small>{%- endif -%}
+            </a>
+          {%- endfor -%}
+        </div>
+        <a class="cc-go" href="{{ url }}">{{ section.settings.boton }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="cc-wa" href="https://wa.me/{{ wa }}?text={{ wa_txt }}" target="_blank" rel="noopener">o pide directo por WhatsApp</a>
+        <div class="cc-trust"><span>Hecho desde cero</span><span>Todos los medios de pago</span><span>Abierto todos los días</span></div>
+        {%- if section.settings.cinta -%}
+        <div class="cc-tick" aria-hidden="true">
+          <div class="cc-track">
+            {%- for pass in (1..2) -%}
+              {%- for block in section.blocks -%}
+                {%- for p in block.settings.coleccion.products limit: 6 -%}
+                  {%- unless p.tags contains 'no-carta' -%}<span>{{ p.title | truncate: 34 }}<b>{{ p.price | money_without_trailing_zeros }}</b></span>{%- endunless -%}
+                {%- endfor -%}
+              {%- endfor -%}
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- else -%}
+  <section class="cc-s" aria-label="Carta">
+    <div class="wrap">
+      <div class="cc-bar">
+        <div>
+          <span class="cc-eyebrow">{{ section.settings.eyebrow }}</span>
+          <h2>{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h2>
+          <p>{{ section.settings.bajada }}</p>
+        </div>
+        <div>
+          <a class="cc-go" href="{{ url }}">{{ section.settings.boton }}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <p style="text-align:center;margin-top:12px"><a class="cc-wa" style="margin:0" href="https://wa.me/{{ wa }}?text={{ wa_txt }}" target="_blank" rel="noopener">o pide por WhatsApp</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+</div>
+{% schema %}
+{
+  "name": "Sabor: botón de carta",
+  "settings": [
+    {"type":"select","id":"variante","label":"Tamaño","default":"grande","options":[{"value":"grande","label":"Grande (con categorías)"},{"value":"compacta","label":"Compacta (banner)"}]},
+    {"type":"text","id":"eyebrow","label":"Etiqueta","default":"La carta"},
+    {"type":"text","id":"titulo_a","label":"Título","default":"¿Qué se te antoja"},
+    {"type":"text","id":"titulo_b","label":"Título (palabra en rosado)","default":"hoy?"},
+    {"type":"textarea","id":"bajada","label":"Bajada","default":"Café de especialidad, pastelería hecha desde cero, sándwiches y tablas. Mira todos los precios en un solo lugar."},
+    {"type":"text","id":"boton","label":"Texto del botón","default":"Ver la carta completa"},
+    {"type":"text","id":"carta_url","label":"Dirección de la carta","default":"/pages/carta"},
+    {"type":"checkbox","id":"cinta","label":"Mostrar cinta de productos con precio","default":true},
+    {"type":"text","id":"whatsapp","label":"WhatsApp (con código de país, sin +)","default":"56992101764"}
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Categoría",
+      "settings": [
+        {"type":"text","id":"titulo","label":"Título","default":"Categoría"},
+        {"type":"select","id":"icono","label":"Icono","default":"cafe","options":[{"value":"cafe","label":"Taza"},{"value":"frio","label":"Vaso frío"},{"value":"dulce","label":"Pastelería"},{"value":"sandwich","label":"Sándwich"},{"value":"compartir","label":"Para compartir"}]},
+        {"type":"collection","id":"coleccion","label":"Colección (para el precio desde)"}
+      ]
+    }
+  ],
+  "presets": [{"name": "Sabor: botón de carta"}]
+}
+{% endschema %}

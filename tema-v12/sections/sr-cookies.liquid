@@ -1,0 +1,45 @@
+{{ 'sr-extra.css' | asset_url | stylesheet_tag }}
+<div class="sr">
+  <section id="cookies" class="cookies">
+    <div class="wrap">
+      <div class="n-head">
+        <p class="eyebrow">Cookies</p>
+        <h2>Cookies estilo <em>Nueva York</em></h2>
+        <p>Grandes, bien cargadas de relleno y toppings. Mira algunos de nuestros sabores y pide los tuyos por WhatsApp.</p>
+      </div>
+      <div class="nfan" id="cfan" data-fan="c" tabindex="0" role="group" aria-roledescription="carrusel" aria-label="Nuestras cookies. Desliza o usa las flechas del teclado.">
+        <figure class="ns" data-n="Cookie · 1 de 5" data-t="Limón" data-p="Crema de limón al centro y glaseado blanco por encima."><img src="{{ 'sr-cook-limon.jpg' | file_url }}" alt="Cookie con crema de limón y glaseado blanco frente al letrero de Sabor Rural" width="1000" height="1250" loading="lazy" draggable="false"></figure>
+        <figure class="ns" data-n="Cookie · 2 de 5" data-t="Pistacho y chocolate" data-p="Trozos de pistacho y chocolate, con chips verdes de pistacho."><img src="{{ 'sr-cook-pistacho.jpg' | file_url }}" alt="Cookie de pistacho y chocolate frente al letrero de Sabor Rural" width="1000" height="1250" loading="lazy" draggable="false"></figure>
+        <figure class="ns" data-n="Cookie · 3 de 5" data-t="Marshmallow y chocolate" data-p="Marshmallow tostado y chocolate derretido por encima."><img src="{{ 'sr-cook-marshmallow.jpg' | file_url }}" alt="Cookie con marshmallow tostado y chocolate derretido" width="1000" height="1250" loading="lazy" draggable="false"></figure>
+        <figure class="ns" data-n="Cookie · 4 de 5" data-t="Pistacho, de cerca" data-p="La misma de pistacho, vista de cerca: grande y llena de trozos."><img src="{{ 'sr-cook-pistacho2.jpg' | file_url }}" alt="Primer plano de una cookie de pistacho y chocolate" width="1000" height="1250" loading="lazy" draggable="false"></figure>
+        <figure class="ns" data-n="Cookie · 5 de 5" data-t="Oreo y chocolate blanco" data-p="Trozos de galleta Oreo, chocolate blanco y una Oreo encima."><img src="{{ 'sr-cook-oreo.jpg' | file_url }}" alt="Cookie con trozos de Oreo y chocolate blanco" width="1000" height="1250" loading="lazy" draggable="false"></figure>
+        <button type="button" class="nnav nprev" id="cPrev" aria-label="Anterior">‹</button>
+        <button type="button" class="nnav nnext" id="cNext" aria-label="Siguiente">›</button>
+      </div>
+      <div class="ninfo" aria-live="polite">
+        <p class="eyebrow" id="cKind"></p>
+        <h3 id="cTit"></h3>
+        <p class="ntxt" id="cTxt"></p>
+        <span class="npos" id="cPos"></span>
+      </div>
+      <div class="n-cta">
+        <div class="row">
+          <a class="btn btn-primary" data-wa="Hola, quiero pedir cookies. ¿Qué sabores tienen hoy?" href="#" target="_blank" rel="noopener">Pedir cookies por WhatsApp</a>
+          <a class="btn btn-ghost" href="/pages/carta">Ver la carta</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<script src="{{ 'sr-extra.js' | asset_url }}" defer></script>
+{% schema %}
+{
+ "name": "Sabor Rural: cookies",
+ "settings": [],
+ "presets": [
+  {
+   "name": "Sabor Rural: cookies"
+  }
+ ]
+}
+{% endschema %}

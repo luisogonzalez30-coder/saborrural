@@ -1,0 +1,69 @@
+<style>
+.sr .hero{position:relative;padding-block:52px 60px}
+.sr .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.sr .hero-bg img{display:block;width:100%;height:100%;object-fit:cover;object-position:45% 50%;opacity:.45}
+.sr .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,22,26,.72),rgba(20,22,26,.5))}
+.sr .hero .hero-grid{position:relative;z-index:1;grid-template-columns:minmax(0,1fr)}
+.sr .hero h1,.sr .hero .lead{text-shadow:0 2px 24px rgba(0,0,0,.45)}
+@media (min-width:760px){.sr .hero{padding-block:112px 104px}.sr .hero-bg::after{background:linear-gradient(90deg,rgba(20,22,26,.9) 0%,rgba(20,22,26,.6) 50%,rgba(20,22,26,.22) 100%)}.sr .hero .hero-grid{grid-template-columns:minmax(0,1fr)}}
+</style>
+<div class="sr">
+  <div class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <img src="{{ 'sr-terraza-banner.jpg' | file_url }}" alt="" width="1920" height="1080" fetchpriority="high">
+    </div>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="open-pill"><i></i>Abierto todo el año</p>
+        <p class="eyebrow" style="color: var(--cta)">Cafetería · Región del Maule</p>
+        <h1 style="margin-top:14px">Todos <em>bienvenidos.</em></h1>
+        <p class="lead">{{ section.settings.lead }}</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="/pages/carta">Ver la carta</a>
+          <a class="btn btn-ghost" href="#encargos">Encargar una torta</a>
+        </div>
+        <p class="alt">¿Celebración con tablas? <a href="#eventos">Reserva tu evento</a> · <a href="https://www.google.com/maps/search/?api=1&query=Sabor+Rural+Licant%C3%A9n" target="_blank" rel="noopener">Cómo llegar</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="trust">
+    <div class="wrap">
+      <ul>
+        <li><span class="star" aria-hidden="true">★★★★★</span> {{ section.settings.rating }}</li>
+        <li>9 años en familia</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 6.6C6 5.6 3.7 7.2 4 10.4c.1 2 1 3.2 2.6 3.4"/><path d="M15.4 6.6c2.6-1 4.9.6 4.6 3.8-.1 2-1 3.2-2.6 3.4"/><path d="M8.6 6.6C9.7 5.9 10.8 5.6 12 5.6s2.3.3 3.4 1c.5 3 .5 6.4-.5 9.2-.8 2.2-1.8 3.2-2.9 3.2s-2.1-1-2.9-3.2c-1-2.8-1-6.2-.5-9.2z"/><circle cx="10" cy="11" r=".6" fill="currentColor"/><circle cx="14" cy="11" r=".6" fill="currentColor"/><path d="M10.7 14.8h2.6l-1.3 1.5z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10.5 5.6 3.8 9.6 6.6c1.5-.5 3.3-.5 4.8 0l4-2.8.6 6.7c.5 1.6.5 3-.1 4.5C18 18.6 15.3 20 12 20s-6-1.4-6.9-5c-.6-1.5-.6-2.9-.1-4.5z"/><circle cx="9.3" cy="12" r=".6" fill="currentColor"/><circle cx="14.7" cy="12" r=".6" fill="currentColor"/><path d="M11 14.6h2l-1 1.2z"/><path d="M3.2 13.5 7 14M3.4 16.2 7 15.2M20.8 13.5 17 14M20.6 16.2 17 15.2"/></svg>Pet friendly</li>
+        {%- if section.settings.open_text != blank -%}<li>{{ section.settings.open_text }}</li>{%- endif -%}
+      </ul>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+ "name": "Sabor Rural: portada",
+ "settings": [
+  {
+   "type": "textarea",
+   "id": "lead",
+   "label": "Texto de apoyo",
+   "default": "Café de especialidad, pastelería artesanal y sándwiches, hechos en familia hace 9 años en Licantén."
+  },
+  {
+   "type": "text",
+   "id": "rating",
+   "label": "Reputación",
+   "default": "4,6 en Google · 85 reseñas"
+  },
+  {
+   "type": "text",
+   "id": "open_text",
+   "label": "Horario corto",
+   "default": "Desde las 8:30"
+  }
+ ],
+ "presets": [
+  {
+   "name": "Sabor Rural: portada"
+  }
+ ]
+}
+{% endschema %}

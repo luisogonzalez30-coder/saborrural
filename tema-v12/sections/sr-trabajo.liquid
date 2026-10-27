@@ -1,0 +1,117 @@
+{%- assign glist = '' -%}
+{%- for block in section.blocks -%}
+  {%- assign g = block.settings.group -%}
+  {%- if g != blank -%}{%- assign glist = glist | append: g | append: '|' -%}{%- endif -%}
+{%- endfor -%}
+{%- assign groups = glist | split: '|' | uniq -%}
+<div class="sr">
+  <section class="obra" id="trabajo">
+    <div class="wrap">
+      <div class="obra-head">
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2>Conoce nuestro <em>trabajo</em></h2>
+        <p>{{ section.settings.lead }}</p>
+      </div>
+      <div class="ring" id="ring" tabindex="0" role="group" aria-roledescription="carrusel" aria-label="Galería de nuestras creaciones. Usa las flechas del teclado o arrastra para girar.">
+        <div class="ring-rot" id="ringRot">
+          {%- assign k = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.settings.image != blank -%}
+              {%- assign src = block.settings.image | image_url: width: 520 -%}
+            {%- elsif block.settings.file != blank -%}
+              {%- assign u = block.settings.file | file_url -%}{%- if u contains '?' -%}{%- assign src = u | append: '&width=520' -%}{%- else -%}{%- assign src = u | append: '?width=520' -%}{%- endif -%}
+            {%- else -%}
+              {%- assign src = '' -%}
+            {%- endif -%}
+            {%- if src != blank -%}
+              <figure class="rc" style="--k: {{ k }}" data-group="{{ block.settings.group | escape }}" {{ block.shopify_attributes }}>
+                <img src="{{ src }}" alt="{{ block.settings.group | escape }}" width="420" height="525" loading="lazy" draggable="false">
+              </figure>
+              {%- assign k = k | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="ring-info" aria-live="polite">
+        <h3 id="riTit"></h3>
+        <p id="riTxt">{{ section.settings.generic }}</p>
+        <div class="ring-act">
+          <button type="button" class="btn btn-primary" id="riAll">Ver todos los diseños</button>
+          <a class="btn btn-ghost" href="#encargos">Encargar una torta</a>
+        </div>
+      </div>
+      <div class="ring-ctrl">
+        <button type="button" id="ringPrev" aria-label="Anterior">‹</button>
+        <span id="ringPos" aria-hidden="true"></span>
+        <button type="button" id="ringNext" aria-label="Siguiente">›</button>
+      </div>
+      {%- if section.settings.more != blank -%}<p class="ring-more">{{ section.settings.more }}</p>{%- endif -%}
+    </div>
+    <div class="dz" id="dz" hidden role="dialog" aria-modal="true" aria-labelledby="dzTit">
+      <div class="dz-bar"><div class="wrap"><h3 id="dzTit">Todos nuestros diseños</h3><button type="button" class="dz-close" id="dzClose">Cerrar ×</button></div></div>
+      <div class="wrap">
+        <div class="dz-chips" id="dzChips" role="group" aria-label="Filtrar por tipo">
+          <button class="chip" type="button" data-f="all" aria-pressed="true">Todos</button>
+          {%- for g in groups -%}{%- if g != blank -%}<button class="chip" type="button" data-f="{{ g | escape }}" aria-pressed="false">{{ g }}</button>{%- endif -%}{%- endfor -%}
+        </div>
+        <div class="dz-grid" id="dzGrid">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.image != blank -%}
+              {%- assign src2 = block.settings.image | image_url: width: 640 -%}
+            {%- elsif block.settings.file != blank -%}
+              {%- assign u2 = block.settings.file | file_url -%}{%- if u2 contains '?' -%}{%- assign src2 = u2 | append: '&width=640' -%}{%- else -%}{%- assign src2 = u2 | append: '?width=640' -%}{%- endif -%}
+            {%- else -%}
+              {%- assign src2 = '' -%}
+            {%- endif -%}
+            {%- if src2 != blank -%}
+              <article class="dz-card" data-group="{{ block.settings.group | escape }}">
+                <img src="{{ src2 }}" alt="{{ block.settings.title | escape }}" width="640" height="800" loading="lazy">
+                <div>
+                  <small>{{ block.settings.group }}</small>
+                  <h4>{{ block.settings.title }}</h4>
+                  {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+                  {%- if block.settings.pick != blank -%}
+                    <button type="button" class="btn btn-primary" data-pick="{{ block.settings.pick | escape }}" data-name="{{ block.settings.title | escape }}">Quiero una así</button>
+                  {%- else -%}
+                    <a class="btn btn-ghost" href="/pages/carta" data-close-dz>Ver en la carta</a>
+                  {%- endif -%}
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+ "name": "Sabor: nuestro trabajo",
+ "settings": [
+  { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Hecho a mano en Licantén" },
+  { "type": "textarea", "id": "lead", "label": "Texto de apoyo", "default": "Tortas, tartas y postres que salen de nuestra cocina. Gira la galería y encuentra la tuya." },
+  { "type": "text", "id": "generic", "label": "Frase bajo el carrusel", "default": "Toca “Ver todos los diseños” para conocer cada uno con su foto y detalle." },
+  { "type": "text", "id": "more", "label": "Nota al pie (opcional)", "default": "Estamos sumando más creaciones." }
+ ],
+ "blocks": [
+  {
+   "type": "obra",
+   "name": "Producto",
+   "settings": [
+    { "type": "image_picker", "id": "image", "label": "Foto (formato vertical 4:5 se ve mejor)" },
+    { "type": "text", "id": "file", "label": "o nombre de archivo en Archivos", "info": "Ej: sr-obra-oreo.jpg. Se usa solo si no eliges foto arriba." },
+    { "type": "text", "id": "group", "label": "Tipo (se muestra en el carrusel)", "info": "Ej: Tortas infantiles, Tortas de crema, Tartas y postres." },
+    { "type": "text", "id": "title", "label": "Nombre (solo en la ventana de diseños)" },
+    { "type": "textarea", "id": "text", "label": "Detalle (solo en la ventana de diseños)" },
+    { "type": "text", "id": "pick", "label": "Idea para el formulario de encargos", "info": "Si lo completas, aparece Quiero una así. Si lo dejas vacío, aparece Ver en la carta." }
+   ]
+  }
+ ],
+ "max_blocks": 50,
+ "presets": [
+  {
+   "name": "Sabor: nuestro trabajo"
+  }
+ ]
+}
+{% endschema %}

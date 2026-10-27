@@ -1,0 +1,407 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "sr-hero"
+    },
+    "trabajo": {
+      "type": "sr-trabajo",
+      "blocks": {
+        "b1": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-obra-oreo.jpg",
+            "group": "Tortas de crema",
+            "title": "Torta Oreo",
+            "text": "Ganache brillante, crema con trozos de galleta y Oreo fresca.",
+            "pick": "Quiero una torta Oreo con ganache."
+          }
+        },
+        "b2": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-moana.jpg",
+            "group": "Tortas infantiles",
+            "title": "Moana",
+            "text": "Diseño personalizado: tú eliges tema, colores y mensaje.",
+            "pick": "Quiero una torta de Moana."
+          }
+        },
+        "b3": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-obra-corazon-rojo.jpg",
+            "group": "Tortas corazón",
+            "title": "Corazón rojo con perlas",
+            "text": "Crema roja con perlas doradas y blancas. Para aniversarios y fechas especiales.",
+            "pick": "Quiero una torta corazón roja con perlas."
+          }
+        },
+        "b4": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-peppa.jpg",
+            "group": "Tortas infantiles",
+            "title": "Peppa Pig",
+            "text": "Diseño personalizado: tú eliges tema, colores y mensaje.",
+            "pick": "Quiero una torta de Peppa Pig."
+          }
+        },
+        "b5": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-obra-cafe-brownie.jpg",
+            "group": "Tartas y postres",
+            "title": "Café y brownie",
+            "text": "Café con leche y brownie tibio con helado de vainilla y crema.",
+            "pick": ""
+          }
+        },
+        "b6": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-obra-lucuma.jpg",
+            "group": "Tortas de crema",
+            "title": "Manjar y crocante",
+            "text": "Manjar, crema pastelera y crocante de almendras.",
+            "pick": "Quiero una torta de manjar con crema pastelera y crocante."
+          }
+        },
+        "b7": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-roblox.jpg",
+            "group": "Tortas infantiles",
+            "title": "Roblox",
+            "text": "Diseño personalizado: tú eliges tema, colores y mensaje.",
+            "pick": "Quiero una torta de Roblox."
+          }
+        },
+        "b8": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-obra-lazo.jpg",
+            "group": "Tortas de crema",
+            "title": "Chocolate con lazo",
+            "text": "Crema de chocolate en rosetas y lazo de cinta. Un regalo que se luce.",
+            "pick": "Quiero una torta de chocolate con lazo."
+          }
+        },
+        "b9": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-pajarito.jpg",
+            "group": "Bautizo y primer año",
+            "title": "Pajarito (1 año)",
+            "text": "Diseño personalizado: tú eliges tema, colores y mensaje.",
+            "pick": "Quiero una torta de pajarito para un primer año."
+          }
+        },
+        "b10": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-obra-pistacho.jpg",
+            "group": "Tartas y postres",
+            "title": "Tarta de pistacho",
+            "text": "Crema de pistacho y chocolate sobre masa quebrada.",
+            "pick": ""
+          }
+        },
+        "b11": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-arcoiris.jpg",
+            "group": "Tortas infantiles",
+            "title": "Arcoíris y nubes",
+            "text": "Diseño personalizado: tú eliges tema, colores y mensaje.",
+            "pick": "Quiero una torta de arcoíris y nubes."
+          }
+        },
+        "b12": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-obra-corazon-rosas.jpg",
+            "group": "Tortas corazón",
+            "title": "Corazón con rosas",
+            "text": "Crema de chocolate con rosas y perlas. Hecha a mano.",
+            "pick": "Quiero una torta corazón de chocolate con rosas."
+          }
+        },
+        "b13": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-globo.jpg",
+            "group": "Bautizo y primer año",
+            "title": "Globo aerostático",
+            "text": "Diseño personalizado: tú eliges tema, colores y mensaje.",
+            "pick": "Quiero una torta de globo aerostático."
+          }
+        },
+        "b14": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-obra-frambuesa.jpg",
+            "group": "Tortas de crema",
+            "title": "Frambuesa y manjar",
+            "text": "Capas con frambuesa, crema y manjar, de acabado rústico.",
+            "pick": "Quiero una torta de frambuesa y manjar."
+          }
+        },
+        "b15": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-gatitos.jpg",
+            "group": "Tortas infantiles",
+            "title": "Gatitos",
+            "text": "Diseño personalizado: tú eliges tema, colores y mensaje.",
+            "pick": "Quiero una torta de gatitos."
+          }
+        },
+        "b16": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-obra-cumple.jpg",
+            "group": "Tortas de crema",
+            "title": "Cumpleaños de chocolate",
+            "text": "Cobertura de chocolate y rosetas de manjar. Con tu mensaje.",
+            "pick": "Quiero una torta de cumpleaños de chocolate con manjar."
+          }
+        },
+        "b17": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-babyshower.jpg",
+            "group": "Bautizo y primer año",
+            "title": "Baby shower",
+            "text": "Diseño personalizado: tú eliges tema, colores y mensaje.",
+            "pick": "Quiero una torta para un baby shower."
+          }
+        },
+        "b18": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-obra-brownie-lateral.jpg",
+            "group": "Tartas y postres",
+            "title": "Brownie con helado",
+            "text": "Brownie con nueces, helado de vainilla y crema.",
+            "pick": ""
+          }
+        },
+        "b19": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-batman.jpg",
+            "group": "Tortas infantiles",
+            "title": "Batman",
+            "text": "Diseño personalizado: tú eliges tema, colores y mensaje.",
+            "pick": "Quiero una torta de Batman."
+          }
+        },
+        "b20": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-obra-guindas.jpg",
+            "group": "Tortas de crema",
+            "title": "Chocolate y guindas",
+            "text": "Bizcocho de chocolate, chantilly y guindas.",
+            "pick": "Quiero una torta de chocolate con chantilly y guindas."
+          }
+        },
+        "b21": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-crema.jpg",
+            "group": "Tortas de crema",
+            "title": "Crema y chocolate",
+            "text": "Torta de crema decorada a mano.",
+            "pick": "Quiero una torta de crema y chocolate."
+          }
+        },
+        "b22": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-chocolate.jpg",
+            "group": "Tortas de crema",
+            "title": "Chocolate",
+            "text": "Torta de chocolate decorada a mano.",
+            "pick": "Quiero una torta de chocolate."
+          }
+        },
+        "b23": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-oreo.jpg",
+            "group": "Tortas de crema",
+            "title": "Oreo",
+            "text": "Torta de crema con Oreo.",
+            "pick": "Quiero una torta Oreo."
+          }
+        },
+        "b24": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-frambuesa.jpg",
+            "group": "Tortas de crema",
+            "title": "Frambuesas",
+            "text": "Torta de crema con frambuesas.",
+            "pick": "Quiero una torta con frambuesas."
+          }
+        },
+        "b25": {
+          "type": "obra",
+          "settings": {
+            "file": "sr-g-cerezas.jpg",
+            "group": "Tortas de crema",
+            "title": "Cerezas y chocolate",
+            "text": "Torta de chocolate con cerezas.",
+            "pick": "Quiero una torta de cerezas y chocolate."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12",
+        "b13",
+        "b14",
+        "b15",
+        "b16",
+        "b17",
+        "b18",
+        "b19",
+        "b20",
+        "b21",
+        "b22",
+        "b23",
+        "b24",
+        "b25"
+      ]
+    },
+    "encargo": {
+      "type": "sr-encargo"
+    },
+    "llegar": {
+      "type": "sr-llegar"
+    },
+    "novios": {
+      "type": "sr-novios"
+    },
+    "eventos": {
+      "type": "sr-eventos"
+    },
+    "talleres": {
+      "type": "sr-talleres"
+    },
+    "regala": {
+      "type": "sr-regala"
+    },
+    "faq": {
+      "type": "sr-faq"
+    },
+    "cookies": {
+      "type": "sr-cookies"
+    },
+    "cafe": {
+      "type": "sr-cafe"
+    },
+    "carta_top": {
+      "type": "sr-carta-cta",
+      "blocks": {
+        "t_cafe": {
+          "type": "tile",
+          "settings": {
+            "titulo": "Café y calientes",
+            "icono": "cafe",
+            "coleccion": "cafes-calientes"
+          }
+        },
+        "t_frio": {
+          "type": "tile",
+          "settings": {
+            "titulo": "Bebidas frías",
+            "icono": "frio",
+            "coleccion": "bebidas-frias"
+          }
+        },
+        "t_dulce": {
+          "type": "tile",
+          "settings": {
+            "titulo": "Pastelería",
+            "icono": "dulce",
+            "coleccion": "dulces"
+          }
+        },
+        "t_sand": {
+          "type": "tile",
+          "settings": {
+            "titulo": "Sándwiches",
+            "icono": "sandwich",
+            "coleccion": "sandwiches"
+          }
+        },
+        "t_comp": {
+          "type": "tile",
+          "settings": {
+            "titulo": "Para compartir",
+            "icono": "compartir",
+            "coleccion": "para-compartir"
+          }
+        }
+      },
+      "block_order": [
+        "t_cafe",
+        "t_frio",
+        "t_dulce",
+        "t_sand",
+        "t_comp"
+      ],
+      "settings": {
+        "variante": "grande",
+        "cinta": true
+      }
+    },
+    "carta_mid": {
+      "type": "sr-carta-cta",
+      "settings": {
+        "variante": "compacta",
+        "eyebrow": "Antes de irte",
+        "titulo_a": "¿Ya sabes qué",
+        "titulo_b": "quieres?",
+        "bajada": "Mira la carta completa con todos los precios y elige tu antojo.",
+        "cinta": false
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "carta_top",
+    "trabajo",
+    "encargo",
+    "novios",
+    "talleres",
+    "cookies",
+    "carta_mid",
+    "cafe",
+    "eventos",
+    "regala",
+    "faq",
+    "llegar"
+  ]
+}

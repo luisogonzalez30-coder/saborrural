@@ -113,7 +113,7 @@
     </div>
     <div class="mn-act">
       <a class="mn-btn p" href="https://wa.me/{{ wa }}?text={{ wa_pedir }}" target="_blank" rel="noopener">Pedir por WhatsApp</a>
-      <a class="mn-btn" href="{{ routes.root_url }}#pedido">Armar pedido en la web</a>
+      <a class="mn-btn" href="{{ section.settings.maps_url }}" target="_blank" rel="noopener">Cómo llegar</a>
     </div>
   </div>
 </header>
@@ -226,7 +226,7 @@
             <div><dt>{{ dn | slice: 0 | upcase }}{{ dn | slice: 1, 60 }}</dt><dd>{{ p.price | money_without_trailing_zeros }}</dd></div>
           {%- endfor -%}
         </dl>
-        <p style="margin-top:12px"><a href="{{ routes.root_url }}#pedido">Agrégalo al armar tu pedido →</a></p>
+        <p style="margin-top:12px"><a href="https://wa.me/{{ wa }}?text={{ wa_pedir }}" target="_blank" rel="noopener">Pide con delivery por WhatsApp →</a></p>
       </div>
       {%- endif -%}{%- endfor -%}
     </div>
