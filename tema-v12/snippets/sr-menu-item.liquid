@@ -1,0 +1,10 @@
+{%- comment -%} Una línea de la carta. Parámetro: p (producto) {%- endcomment -%}
+<li class="mn-item">
+  <div class="mn-line">
+    <span class="mn-nm">{{ p.title }}</span>
+    <i class="mn-dots" aria-hidden="true"></i>
+    <span class="mn-pr">{%- if p.price_varies -%}<small>desde</small>{%- endif -%}{{ p.price | money_without_trailing_zeros }}</span>
+  </div>
+  {%- if p.description != blank -%}<span class="mn-ds">{{ p.description | strip_html | truncate: 300 }}</span>{%- endif -%}
+  {%- unless p.has_only_default_variant -%}<span class="mn-opt"><b>Opciones:</b> {{ p.variants | map: 'title' | join: ' · ' }}</span>{%- endunless -%}
+</li>

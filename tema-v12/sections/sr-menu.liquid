@@ -1,0 +1,325 @@
+{%- liquid
+  assign wa = section.settings.whatsapp
+  assign wa_pedir = 'Hola Sabor Rural, quiero hacer un pedido.' | url_encode
+  assign wa_cel = 'Hola Sabor Rural, quiero cotizar una torta o una caja box de regalo.' | url_encode
+  assign cat_n = 0
+-%}
+<div class="sr mn">
+<style>
+.mn{--pk:#F07C95;--pk2:#E2587C;--pk-soft:rgba(240,124,149,.14);--ln:rgba(242,132,151,.22);background:#0C0D0F;color:#F3F1EA;overflow-x:clip}
+.mn *{box-sizing:border-box}
+.mn .mn-wrap{max-width:1120px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.mn h1,.mn h2,.mn h3{font-family:var(--font-display);margin:0;color:#fff}
+.mn em{font-family:var(--font-chalk);font-style:normal;color:var(--pk);font-weight:700}
+/* portada */
+.mn-hero{position:relative;isolation:isolate;min-height:min(78svh,560px);display:flex;align-items:flex-end;padding:96px 0 40px;border-bottom:1px solid var(--ln)}
+.mn-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:.55}
+.mn-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(12,13,15,.55) 0%,rgba(12,13,15,.2) 35%,#0C0D0F 100%),radial-gradient(60% 70% at 90% 0%,rgba(194,48,72,.35),transparent 70%)}
+.mn-eyebrow{font:700 12.5px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--pk)}
+.mn-hero .mn-wrap{width:100%}
+.mn-hero h1{font-size:clamp(3.2rem,15vw,7.2rem);font-weight:800;letter-spacing:-.035em;line-height:.9;margin-top:14px}
+.mn-hero h1 em{font-size:1.18em;letter-spacing:0;margin-left:.04em}
+.mn-hero p{max-width:34em;margin:18px 0 0;color:#D9D7CE;font-size:clamp(1rem,2.9vw,1.2rem);line-height:1.5}
+.mn-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.mn-badge{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--ln);border-radius:99px;background:rgba(10,10,10,.6);backdrop-filter:blur(6px);font:600 13.5px/1 var(--font-body);color:#EDEBE2}
+.mn-badge i{width:8px;height:8px;border-radius:50%;background:var(--pk);box-shadow:0 0 0 4px rgba(240,124,149,.2)}
+.mn-act{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.mn-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 22px;border-radius:10px;border:1.5px solid rgba(243,241,234,.4);color:#F3F1EA;font:700 15.5px/1 var(--font-body);text-decoration:none;transition:transform .15s,border-color .15s,color .15s}
+.mn-btn:hover{border-color:var(--pk);color:var(--pk)}
+.mn-btn:active{transform:scale(.98)}
+.mn-btn.p{background:linear-gradient(135deg,#F59AAC,#E2587C);border-color:transparent;color:#1A0A0F}
+.mn-btn.p:hover{filter:brightness(1.07);color:#1A0A0F}
+/* barra de categorías */
+.mn-nav{position:sticky;top:var(--mn-top,72px);z-index:30;background:rgba(12,13,15,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
+.mn-nav .mn-wrap{display:flex;gap:10px;align-items:center;padding-top:10px;padding-bottom:10px}
+.mn-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;flex:1;padding:2px 0}
+.mn-chips::-webkit-scrollbar{display:none}
+.mn-chip{flex:none;padding:10px 15px;border:1px solid rgba(243,241,234,.22);border-radius:99px;color:#D9D7CE;font:600 14px/1 var(--font-body);text-decoration:none;white-space:nowrap;transition:all .18s}
+.mn-chip:hover{border-color:var(--pk);color:#fff}
+.mn-chip.on{background:linear-gradient(135deg,#F59AAC,#E2587C);border-color:transparent;color:#1A0A0F}
+.mn-find{flex:none;position:relative;width:min(220px,38vw)}
+.mn-find input{width:100%;height:42px;border-radius:99px;border:1px solid rgba(243,241,234,.22);background:#15171B;color:#F3F1EA;padding:0 14px 0 38px;font:500 14.5px/1 var(--font-body)}
+.mn-find input:focus{outline:2px solid var(--pk);outline-offset:2px;border-color:transparent}
+.mn-find svg{position:absolute;left:13px;top:50%;width:16px;height:16px;transform:translateY(-50%);color:var(--pk);pointer-events:none}
+@media (max-width:640px){.mn-nav .mn-wrap{flex-wrap:wrap}.mn-find{width:100%;order:2}.mn-chips{flex-basis:100%}}
+/* categorías */
+.mn-body{padding:22px 0 10px}
+.mn-cat{scroll-margin-top:150px;margin-bottom:46px}
+.mn-cat[hidden]{display:none}
+.mn-ch{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.mn-ico{flex:none;display:grid;place-items:center;width:54px;height:54px;border-radius:16px;border:1px solid var(--ln);background:linear-gradient(160deg,#3A1620,#15111A);color:var(--pk)}
+.mn-ico svg{width:28px;height:28px}
+.mn-ch h2{font-size:clamp(1.7rem,6vw,2.6rem);font-weight:800;letter-spacing:-.02em;line-height:1}
+.mn-ch p{margin:6px 0 0;color:#A9ABA3;font-size:.98rem;line-height:1.35}
+.mn-panel{border:1px solid #2A2D33;border-radius:20px;background:linear-gradient(165deg,#17191E,#111216);padding:6px 20px 14px;box-shadow:0 24px 40px -30px rgba(0,0,0,.9)}
+.mn-grp[hidden]{display:none}
+.mn-sub{margin:22px 0 4px;font:700 12.5px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--pk);display:flex;align-items:center;gap:12px}
+.mn-sub::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--ln),transparent)}
+.mn-list{list-style:none;margin:0;padding:0;display:grid}
+.mn-item{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.mn-item:last-child{border-bottom:0}
+.mn-item[hidden]{display:none}
+.mn-line{display:flex;align-items:baseline;gap:10px}
+.mn-nm{font:700 1.06rem/1.25 var(--font-body);color:#F3F1EA}
+.mn-dots{flex:1;min-width:16px;border-bottom:1.5px dotted rgba(243,241,234,.28);transform:translateY(-4px)}
+.mn-pr{font:800 1.12rem/1 var(--font-display);color:var(--pk);white-space:nowrap}
+.mn-pr small{font:600 .72rem/1 var(--font-body);color:#A9ABA3;margin-right:4px;text-transform:uppercase;letter-spacing:.06em}
+.mn-ds{display:block;margin-top:5px;max-width:46em;color:#A9ABA3;font-size:.94rem;line-height:1.42}
+.mn-opt{display:block;margin-top:5px;color:#C9C7BE;font-size:.88rem}
+.mn-opt b{color:var(--pk);font-weight:700}
+.mn-empty{display:none;text-align:center;color:#A9ABA3;padding:30px 0 50px}
+.mn-empty.on{display:block}
+@media (min-width:900px){
+ .mn-panel{padding:8px 30px 18px}
+ .mn-list{grid-template-columns:1fr 1fr;column-gap:48px}
+ .mn-item:nth-last-child(2):nth-child(odd){border-bottom:0}
+}
+/* información */
+.mn-info{padding:12px 0 30px}
+.mn-cards{display:grid;gap:14px}
+@media (min-width:860px){.mn-cards{grid-template-columns:repeat(3,1fr)}}
+.mn-card{border:1px solid #2A2D33;border-radius:18px;background:#15171B;padding:20px 20px 18px}
+.mn-card h3{font-size:1.15rem;font-weight:800;margin-bottom:12px}
+.mn-card h3 span{display:block;font:700 11.5px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--pk);margin-bottom:8px}
+.mn-card dl{margin:0}
+.mn-card dl div{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:.96rem}
+.mn-card dl div:last-child{border-bottom:0}
+.mn-card dt{color:#A9ABA3}
+.mn-card dd{margin:0;font-weight:700}
+.mn-card p{margin:0 0 8px;color:#D9D7CE;line-height:1.45}
+.mn-card a{color:var(--pk);font-weight:700;text-decoration:none}
+.mn-card a:hover{text-decoration:underline}
+/* encargos */
+.mn-cta{margin:8px 0 80px;border:1px solid rgba(242,132,151,.4);border-radius:24px;padding:30px 24px;background:radial-gradient(90% 120% at 100% 0%,rgba(194,48,72,.35),transparent 65%),linear-gradient(160deg,#3A1620,#150B0F 75%);display:grid;gap:16px}
+.mn-cta h2{font-size:clamp(1.8rem,6.6vw,2.8rem);font-weight:800;letter-spacing:-.02em;line-height:1.02}
+.mn-cta p{margin:0;color:#E6D9DC;max-width:36em;line-height:1.5}
+.mn-note{margin:0 0 40px;color:#8F918A;font-size:.86rem;line-height:1.45;text-align:center}
+/* entrada */
+@media (prefers-reduced-motion:no-preference){
+ .mn-rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+ .mn-rv.in{opacity:1;transform:none}
+}
+</style>
+
+<header class="mn-hero">
+  <img src="{{ 'sr-terraza-banner.jpg' | file_url }}" alt="" width="1920" height="800" fetchpriority="high">
+  <div class="mn-wrap">
+    <span class="mn-eyebrow">{{ section.settings.eyebrow }}</span>
+    <h1>{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h1>
+    <p>{{ section.settings.bajada }}</p>
+    <div class="mn-badges">
+      <span class="mn-badge"><i></i>{{ section.settings.horario_semana }}</span>
+      <span class="mn-badge"><i></i>{{ section.settings.horario_finde }}</span>
+    </div>
+    <div class="mn-act">
+      <a class="mn-btn p" href="https://wa.me/{{ wa }}?text={{ wa_pedir }}" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+      <a class="mn-btn" href="{{ routes.root_url }}#pedido">Armar pedido en la web</a>
+    </div>
+  </div>
+</header>
+
+<nav class="mn-nav" aria-label="Categorías de la carta">
+  <div class="mn-wrap">
+    <div class="mn-chips">
+      {%- for block in section.blocks -%}{%- if block.type == 'categoria' -%}
+        <a class="mn-chip{% if forloop.first %} on{% endif %}" href="#cat-{{ forloop.index }}" data-t="cat-{{ forloop.index }}">{{ block.settings.titulo }}</a>
+      {%- endif -%}{%- endfor -%}
+    </div>
+    <label class="mn-find"><span class="visually-hidden" style="position:absolute;left:-9999px">Buscar en la carta</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="mn-q" type="search" placeholder="Buscar en la carta" autocomplete="off">
+    </label>
+  </div>
+</nav>
+
+<main class="mn-body">
+  <div class="mn-wrap">
+  {%- for block in section.blocks -%}
+  {%- if block.type == 'categoria' -%}
+    {%- liquid
+      assign col = block.settings.coleccion
+      assign lines = block.settings.orden | newline_to_br | strip_newlines | split: '<br />'
+      assign used = '|'
+      assign gopen = false
+      assign cat_n = cat_n | plus: 1
+    -%}
+    <section class="mn-cat mn-rv" id="cat-{{ cat_n }}" aria-labelledby="cat-t-{{ cat_n }}">
+      <div class="mn-ch">
+        <span class="mn-ico" aria-hidden="true">
+          {%- case block.settings.icono -%}
+          {%- when 'frio' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12l-1.4 15.2a2 2 0 0 1-2 1.8H9.4a2 2 0 0 1-2-1.8L6 4Z"/><path d="M7.2 10h9.6"/><path d="m14 2-1.5 5"/><path d="M10.5 13.5h.01M13.5 15.5h.01M11.5 17h.01"/></svg>
+          {%- when 'dulce' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M4 20v-5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5"/><path d="M4 15c1.5 1.4 2.5 1.4 4 0s2.5-1.4 4 0 2.5 1.4 4 0 2.5-1.4 4 0"/><path d="M12 13V8"/><path d="M12 8c-1.2-1-1.2-2.6 0-3.8 1.2 1.2 1.2 2.8 0 3.8Z"/></svg>
+          {%- when 'sandwich' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a8 6 0 0 1 16 0Z"/><path d="M3 13.5c1.8 1.2 3 1.2 4.5 0s2.7-1.2 4.5 0 3-1.2 4.5 0 2.7 1.2 4.5 0"/><path d="M5 17h14"/><path d="M4 20.5h16"/></svg>
+          {%- when 'compartir' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="9" ry="4.5"/><path d="M7 13c0-2 2-3.5 5-3.5S17 11 17 13"/><path d="M9 9.5 8 6M12 9 12 5M15 9.5 16 6"/></svg>
+          {%- else -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v3M11 3v3M14 3v3"/></svg>
+          {%- endcase -%}
+        </span>
+        <div>
+          <h2 id="cat-t-{{ cat_n }}">{{ block.settings.titulo }}</h2>
+          {%- if block.settings.nota != blank -%}<p>{{ block.settings.nota }}</p>{%- endif -%}
+        </div>
+      </div>
+      <div class="mn-panel">
+      {%- for line in lines -%}
+        {%- assign ln = line | strip -%}
+        {%- if ln == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign first = ln | slice: 0 -%}
+        {%- if first == '#' -%}
+          {%- if gopen -%}</ul></div>{%- endif -%}
+          <div class="mn-grp"><h3 class="mn-sub">{{ ln | remove_first: '#' | strip }}</h3><ul class="mn-list">
+          {%- assign gopen = true -%}
+        {%- else -%}
+          {%- for p in col.products -%}
+            {%- if p.handle == ln -%}
+              {%- unless gopen -%}<div class="mn-grp"><ul class="mn-list">{%- assign gopen = true -%}{%- endunless -%}
+              {%- render 'sr-menu-item', p: p -%}
+              {%- assign used = used | append: p.handle | append: '|' -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- comment -%} lo que se agregue a la colección y no esté en la lista sale al final {%- endcomment -%}
+      {%- assign extra = false -%}
+      {%- for p in col.products -%}
+        {%- capture needle -%}|{{ p.handle }}|{%- endcapture -%}
+        {%- unless used contains needle or p.tags contains 'no-carta' -%}
+          {%- if extra == false -%}
+            {%- if gopen -%}</ul></div>{%- endif -%}
+            <div class="mn-grp"><h3 class="mn-sub">Más</h3><ul class="mn-list">
+            {%- assign gopen = true -%}{%- assign extra = true -%}
+          {%- endif -%}
+          {%- render 'sr-menu-item', p: p -%}
+        {%- endunless -%}
+      {%- endfor -%}
+      {%- if gopen -%}</ul></div>{%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+  {%- endfor -%}
+  <p class="mn-empty" id="mn-empty">No encontramos eso en la carta. Escríbenos por WhatsApp y te ayudamos.</p>
+  </div>
+</main>
+
+<section class="mn-info">
+  <div class="mn-wrap">
+    <div class="mn-cards">
+      <div class="mn-card mn-rv">
+        <h3><span>Abierto todos los días del año</span>Horario</h3>
+        <dl>
+          <div><dt>Lunes a viernes</dt><dd>{{ section.settings.hora_semana }}</dd></div>
+          <div><dt>Sábado y domingo</dt><dd>{{ section.settings.hora_finde }}</dd></div>
+        </dl>
+        <p style="margin-top:12px">{{ section.settings.pagos }}</p>
+      </div>
+      <div class="mn-card mn-rv">
+        <h3><span>Cómo llegar</span>Dónde estamos</h3>
+        <p><b>{{ section.settings.direccion }}</b></p>
+        <p>{{ section.settings.referencia }}</p>
+        <p><a href="{{ section.settings.maps_url }}" target="_blank" rel="noopener">Abrir en Google Maps →</a></p>
+      </div>
+      {%- for block in section.blocks -%}{%- if block.type == 'delivery' -%}
+      <div class="mn-card mn-rv">
+        <h3><span>{{ block.settings.nota }}</span>{{ block.settings.titulo }}</h3>
+        <dl>
+          {%- for p in block.settings.coleccion.products -%}
+            {%- assign dn = p.title | remove: 'Delivery ' | strip -%}
+            <div><dt>{{ dn | slice: 0 | upcase }}{{ dn | slice: 1, 60 }}</dt><dd>{{ p.price | money_without_trailing_zeros }}</dd></div>
+          {%- endfor -%}
+        </dl>
+        <p style="margin-top:12px"><a href="{{ routes.root_url }}#pedido">Agrégalo al armar tu pedido →</a></p>
+      </div>
+      {%- endif -%}{%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="mn-wrap">
+    <div class="mn-cta mn-rv">
+      <span class="mn-eyebrow">Por encargo</span>
+      <h2>¿Celebras algo? <em>La hacemos tuya.</em></h2>
+      <p>Tortas infantiles, de aniversario y de novios, y cajas box de regalo para toda ocasión. Cuéntanos tu idea y te respondemos con propuesta y valor.</p>
+      <div class="mn-act" style="margin-top:4px">
+        <a class="mn-btn p" href="https://wa.me/{{ wa }}?text={{ wa_cel }}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+        <a class="mn-btn" href="{{ routes.root_url }}#encargos">Ver tortas</a>
+      </div>
+    </div>
+    <p class="mn-note">Precios en pesos chilenos. La disponibilidad del día y los sabores se confirman en el local o por WhatsApp.</p>
+  </div>
+</section>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CafeOrCoffeeShop","name":"Sabor Rural","url":{{ shop.url | json }},"hasMenu":{{ canonical_url | json }},"telephone":"+{{ wa }}","address":{"@type":"PostalAddress","streetAddress":{{ section.settings.direccion | json }},"addressLocality":"Licantén","addressRegion":"Región del Maule","addressCountry":"CL"},"paymentAccepted":"Todos los medios de pago"}</script>
+<script>
+(function(){
+  var root=document.querySelector('.mn'); if(!root) return;
+  var q=root.querySelector('#mn-q'), empty=root.querySelector('#mn-empty');
+  var cats=[].slice.call(root.querySelectorAll('.mn-cat')), chips=[].slice.call(root.querySelectorAll('.mn-chip'));
+  var norm=function(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')};
+  if(q){q.addEventListener('input',function(){
+    var t=norm(q.value.trim()), any=false;
+    cats.forEach(function(c){
+      var vis=false;
+      [].slice.call(c.querySelectorAll('.mn-item')).forEach(function(i){var m=!t||norm(i.textContent).indexOf(t)>-1;i.hidden=!m;if(m)vis=true});
+      [].slice.call(c.querySelectorAll('.mn-grp')).forEach(function(g){g.hidden=!g.querySelector('.mn-item:not([hidden])')});
+      c.hidden=!vis; if(vis) any=true;
+    });
+    empty.classList.toggle('on',!any&&!!t);
+  })}
+  // categoría activa al desplazarse
+  if('IntersectionObserver' in window){
+    var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+      chips.forEach(function(c){var on=c.getAttribute('data-t')===e.target.id;c.classList.toggle('on',on);if(on){c.setAttribute('aria-current','true');var box=c.parentNode;box.scrollTo({left:c.offsetLeft-box.clientWidth/2+c.clientWidth/2,behavior:'smooth'})}else c.removeAttribute('aria-current')});
+    }})},{rootMargin:'-35% 0px -60% 0px'});
+    cats.forEach(function(c){spy.observe(c)});
+    var rv=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');rv.unobserve(e.target)}})},{threshold:.08});
+    [].slice.call(root.querySelectorAll('.mn-rv')).forEach(function(n){rv.observe(n)});
+  } else { [].slice.call(root.querySelectorAll('.mn-rv')).forEach(function(n){n.classList.add('in')}); }
+  // la barra se pega justo debajo de la cabecera
+  var top=document.querySelector('.sr .top'); if(top){var set=function(){root.style.setProperty('--mn-top',top.getBoundingClientRect().height+'px')};set();window.addEventListener('resize',set)}
+})();
+</script>
+</div>
+{% schema %}
+{
+  "name": "Sabor: carta",
+  "settings": [
+    {"type":"text","id":"eyebrow","label":"Sobretítulo","default":"Sabor Rural · Licantén"},
+    {"type":"text","id":"titulo_a","label":"Título","default":"La"},
+    {"type":"text","id":"titulo_b","label":"Título (palabra en rosado)","default":"carta"},
+    {"type":"textarea","id":"bajada","label":"Bajada","default":"Café de especialidad de origen Nicaragua, pastelería hecha desde cero, sándwiches y tablas para compartir."},
+    {"type":"text","id":"horario_semana","label":"Etiqueta horario (semana)","default":"Lun a vie · 9:00 a 21:00"},
+    {"type":"text","id":"horario_finde","label":"Etiqueta horario (fin de semana)","default":"Sáb y dom · 14:00 a 21:00"},
+    {"type":"text","id":"hora_semana","label":"Horario lunes a viernes","default":"9:00 a 21:00"},
+    {"type":"text","id":"hora_finde","label":"Horario sábado y domingo","default":"14:00 a 21:00"},
+    {"type":"text","id":"pagos","label":"Medios de pago","default":"Aceptamos todos los medios de pago."},
+    {"type":"text","id":"direccion","label":"Dirección","default":"Ruta J-60, km 95, Sector Lora"},
+    {"type":"textarea","id":"referencia","label":"Referencia para llegar","default":"A 9 km de Licantén, a mano derecha de la carretera, a orilla de camino y frente a la población Lora."},
+    {"type":"text","id":"maps_url","label":"Enlace de Google Maps","default":"https://www.google.com/maps/dir/?api=1&destination=Ruta+J-60+km+95%2C+Sector+Lora%2C+Licant%C3%A9n%2C+Chile"},
+    {"type":"text","id":"whatsapp","label":"WhatsApp (con código de país, sin +)","default":"56992101764"}
+  ],
+  "blocks": [
+    {
+      "type": "categoria",
+      "name": "Categoría de la carta",
+      "settings": [
+        {"type":"text","id":"titulo","label":"Título","default":"Categoría"},
+        {"type":"text","id":"nota","label":"Nota bajo el título"},
+        {"type":"select","id":"icono","label":"Icono","default":"cafe","options":[{"value":"cafe","label":"Taza"},{"value":"frio","label":"Vaso frío"},{"value":"dulce","label":"Pastelería"},{"value":"sandwich","label":"Sándwich"},{"value":"compartir","label":"Para compartir"}]},
+        {"type":"collection","id":"coleccion","label":"Colección"},
+        {"type":"textarea","id":"orden","label":"Orden: un producto por línea (su handle). Una línea que empieza con # es un subtítulo","info":"Los productos de la colección que no estén en la lista salen al final, salvo los que tengan la etiqueta no-carta."}
+      ]
+    },
+    {
+      "type": "delivery",
+      "name": "Delivery",
+      "limit": 1,
+      "settings": [
+        {"type":"text","id":"titulo","label":"Título","default":"Delivery"},
+        {"type":"text","id":"nota","label":"Sobretítulo","default":"A domicilio"},
+        {"type":"collection","id":"coleccion","label":"Colección con los costos de entrega"}
+      ]
+    }
+  ],
+  "presets": [{"name": "Sabor: carta"}]
+}
+{% endschema %}

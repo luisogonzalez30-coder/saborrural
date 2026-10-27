@@ -1,0 +1,78 @@
+{
+  "sections": {
+    "main": {
+      "type": "sr-menu",
+      "blocks": {
+        "cat1": {
+          "type": "categoria",
+          "settings": {
+            "titulo": "Cafés y calientes",
+            "nota": "Café de especialidad de origen Nicaragua, preparado al momento.",
+            "icono": "cafe",
+            "coleccion": "cafes-calientes",
+            "orden": "# Café\nristretto\nespresso\nespresso-doble\namericano\ncortado\nlatte\nvainilla-latte\ncappuccino\ncappuccino-vainilla\ncaramel-macchiato\nmocha\nmocha-blanco\ncafe-bombon\ncafe-vienes\naffogato\n# Otras bebidas calientes\nmatcha-latte\nchai-latte\nchocolate-caliente\nchocolate-caliente-con-crema\nchocolate-caliente-con-marshmallow\nchocolate-caliente-con-brownie\nte-tradicional\nte-en-variedades"
+          }
+        },
+        "cat2": {
+          "type": "categoria",
+          "settings": {
+            "titulo": "Bebidas frías",
+            "nota": "Frías y refrescantes, preparadas al momento.",
+            "icono": "frio",
+            "coleccion": "bebidas-frias",
+            "orden": "# Con café\niced-americano\niced-latte\niced-latte-con-sabor\ncafe-helado\nfrappuccino\n# Matcha\niced-matcha-latte\niced-matcha-latte-con-sabor\n# Refrescos\nlimonada-tradicional\nlimonada-con-sabor\nlimonada-butterfly\njugo-natural\nagua-mineral\nbebida-en-lata"
+          }
+        },
+        "cat3": {
+          "type": "categoria",
+          "settings": {
+            "titulo": "Pastelería",
+            "nota": "Hecha desde cero, sin premezclas ni conservantes.",
+            "icono": "dulce",
+            "coleccion": "dulces",
+            "orden": "# Brownies y galletas\nbrownie\nbrownie-con-helado\ngalleta-estilo-ny\ngalleta-ny-dubai\nalfajores-de-maicena-3-unidades\nrollo-de-canela\n# Tartas, pies y kuchen\nkuchen\npie-de-limon\npie-de-coco\nbanoffee\ntarta-chocolate-pistacho\ntarta-snickers\ntorta-porcion\n# Waffles y croissant\ncroissant-relleno\nwaffle-manjar-y-crema\nwaffle-con-helado-de-vainilla-crema-chantilly-y-frutas\n# Tarta entera\ntarta-completa"
+          }
+        },
+        "cat4": {
+          "type": "categoria",
+          "settings": {
+            "titulo": "Sándwiches",
+            "nota": "Pan recién horneado. Los clásicos vienen con papas fritas.",
+            "icono": "sandwich",
+            "coleccion": "sandwiches",
+            "orden": "# Bagels y croissant\nbagel-de-huevo\nbagel-de-huevo-palta-y-ciboulette\nbagel-de-queso\ncroissant-jamon-queso\n# Clásicos en pan ciabatta\nclasico-barros-luco\nclasico-italiano\nrural\nlorino"
+          }
+        },
+        "cat5": {
+          "type": "categoria",
+          "settings": {
+            "titulo": "Para compartir",
+            "nota": "Papas fritas con carne de vacuno de primera selección.",
+            "icono": "compartir",
+            "coleccion": "para-compartir",
+            "orden": "tabla-clasica\ntabla-mataquito\ntabla-mexicana\nporcion-de-papas-fritas"
+          }
+        },
+        "envio": {
+          "type": "delivery",
+          "settings": {
+            "titulo": "Delivery",
+            "nota": "A domicilio",
+            "coleccion": "delivery"
+          }
+        }
+      },
+      "block_order": [
+        "cat1",
+        "cat2",
+        "cat3",
+        "cat4",
+        "cat5",
+        "envio"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
