@@ -10,6 +10,8 @@ const TOKEN = process.env.IG_PAGE_TOKEN;
 const DRY = process.env.DRY_RUN === '1';
 const AHORA = process.env.AHORA ? new Date(process.env.AHORA) : new Date();
 const MAX_ATRASO_H = Number(process.env.MAX_ATRASO_H || 24);          // más viejo que esto se marca "vencido"
+const SEPARACION_MIN = Number(process.env.SEPARACION_MIN || 90);      // piezas atrasadas: mínimo entre una y otra (no salen en ráfaga)
+const TOLERANCIA_MIN = 20;                                            // hasta este atraso la pieza sale a su hora igual
 const REPO = process.env.GITHUB_REPOSITORY;                            // dueño/repo, lo pone GitHub Actions
 const RAMA = process.env.GITHUB_REF_NAME || 'main';
 const MEDIA_BASE = (process.env.MEDIA_BASE_URL || (REPO ? `https://raw.githubusercontent.com/${REPO}/${RAMA}/` : '')).replace(/\/?$/, '/');
@@ -117,6 +119,8 @@ async function main() {
     .sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
   console.log(`${AHORA.toISOString()} · ${pendientes.length} pieza(s) por publicar${DRY ? ' (ensayo: no se publica nada)' : ''}`);
 
+  // última pieza publicada (las copias post de historias no cuentan: salen pegadas a su historia)
+  let ultima = Math.max(0, ...Object.entries(estado).filter(([id, e]) => e.publicado && !id.endsWith('-post')).map(([, e]) => new Date(e.publicado).getTime()));
   let fallos = 0;
   for (const p of pendientes) {
     const atrasoH = (AHORA - new Date(p.fecha)) / 36e5;
@@ -125,10 +129,15 @@ async function main() {
       if (!DRY) estado[p.id] = { omitido: AHORA.toISOString(), motivo: `vencido hace ${atrasoH.toFixed(1)} h` };
       continue;
     }
-    if (DRY) { console.log(`- ${p.id} (${p.tipo}): se publicaría ${[].concat(p.media).map(urlMedia).join(' + ')}`); continue; }
+    if (!p.id.endsWith('-post') && atrasoH * 60 > TOLERANCIA_MIN && AHORA.getTime() - ultima < SEPARACION_MIN * 60000) {
+      console.log(`- ${p.id}: atrasada ${atrasoH.toFixed(1)} h, espera para no salir pegada a la anterior (separación ${SEPARACION_MIN} min)`);
+      continue;
+    }
+    if (DRY) { console.log(`- ${p.id} (${p.tipo}): se publicaría ${[].concat(p.media).map(urlMedia).join(' + ')}`); if (!p.id.endsWith('-post')) ultima = AHORA.getTime(); continue; }
     try {
       const r = await publicar(p);
       estado[p.id] = { publicado: new Date().toISOString(), ...r };
+      if (!p.id.endsWith('-post')) ultima = Date.now();
       console.log(`- ${p.id}: publicado ${r.permalink || r.media_id}`);
     } catch (err) {
       if (err.codigo === 190 || err.codigo === 102) {            // token vencido o inválido: no es culpa de la pieza
