@@ -38,7 +38,7 @@
 <script>(function(){var s=document.getElementById('regala');if(!s)return;if(!('IntersectionObserver' in window)){s.classList.add('live');return}new IntersectionObserver(function(es){es.forEach(function(e){s.classList.toggle('live',e.isIntersecting)})},{rootMargin:'80px'}).observe(s)})();</script>
 {% schema %}
 {
- "name": "Sabor Rural: botón gift card",
+ "name": "Sabor Rural: botón gift",
  "settings": [
   {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Gift card"},
   {"type": "text", "id": "titulo_a", "label": "Título", "default": "Regala una visita a"},
@@ -48,6 +48,6 @@
   {"type": "text", "id": "whatsapp", "label": "WhatsApp (solo números, con código de país)", "default": "56992101764"},
   {"type": "text", "id": "mensaje", "label": "Mensaje de WhatsApp", "default": "Hola Sabor Rural, quiero comprar una gift card."}
  ],
- "presets": [{"name": "Sabor Rural: botón gift card"}]
+ "presets": [{"name": "Sabor Rural: botón gift"}]
 }
 {% endschema %}
