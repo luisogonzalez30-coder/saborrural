@@ -18,8 +18,14 @@
   document.documentElement.classList.add('sr-lite');
   var si = window.setInterval;   /* sin giro automático de los carruseles (4,2 s, 4,6 s y 4,8 s); se mueven con el dedo */
   window.setInterval = function (f, t) { if (t === 4200 || t === 4600 || t === 4800) return 0; return si.apply(this, arguments); };
-  document.addEventListener('DOMContentLoaded', function () {   /* mapas y globo SVG: sin animación interna */
-    Array.prototype.forEach.call(document.querySelectorAll('.sr svg'), function (v) { if (v.pauseAnimations) v.pauseAnimations(); });
+  document.addEventListener('DOMContentLoaded', function () {   /* mapa y globo: animados solo mientras se ven */
+    var svgs = function (r, on) { Array.prototype.forEach.call(r.querySelectorAll('svg'), function (v) { if (on ? v.unpauseAnimations : v.pauseAnimations) { on ? v.unpauseAnimations() : v.pauseAnimations(); } }); };
+    svgs(document, false);
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle('live', e.isIntersecting); svgs(e.target, e.isIntersecting); });
+    }, { rootMargin: '60px' });
+    ['llegar', 'cafe'].forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
   });
 })();
 </script>

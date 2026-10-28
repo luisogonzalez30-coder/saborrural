@@ -1,7 +1,7 @@
 /* Sabor Rural: modo liviano.
    Se activa con la clase "sr-lite" en <html> (ver sections/sr-header.liquid): celulares táctiles y equipos con
-   poca memoria o pocos núcleos. Quita lo que más pesa al desplazarse: animaciones infinitas, filtros (brillo,
-   sombras apiladas), desenfoque de fondo, reflejos y escenas 3D. El diseño, los colores y el contenido no cambian.
+   poca memoria o pocos núcleos. Quita lo que más pesa al desplazarse: filtros (brillo, sombras apiladas), desenfoque de fondo,
+   reflejos, escenas 3D y las animaciones que repintan (se dejan las baratas, ver puntos 6 y 7). El diseño, los colores y el contenido no cambian.
    Para volver al modo completo: quitar la línea de sr-lite.css en sr-header.liquid. */
 
 /* 1. Sin animaciones CSS, sin filtros ni desenfoque de fondo */
@@ -13,7 +13,6 @@
   will-change:auto!important;
   scroll-behavior:auto!important}
 html.sr-lite{scroll-behavior:auto!important}
-.sr-lite .sr .ripple,.sr-lite .sr .pin-ground{display:none!important}
 
 /* 2. Tarjetas con "brillo apagado": un velo oscuro en vez de filter:brightness */
 .sr-lite .sr .ns::after,.sr-lite .sr .rc::after{content:"";position:absolute;inset:0;background:rgba(12,13,15,.5);transition:opacity .3s;pointer-events:none}
@@ -40,9 +39,25 @@ html.sr-lite{scroll-behavior:auto!important}
 .sr-lite .sr .form,.sr-lite .sr .cc-bar,.sr-lite .sr .gf-panel,.sr-lite .sr .kc-panel{box-shadow:none!important}
 .sr-lite .sr .hero h1,.sr-lite .sr .hero .lead,.sr-lite .sr .cafe .sec-head h2,.sr-lite .sr .evento h2,.sr-lite .sr .evento .ev-lead{text-shadow:0 1px 6px rgba(0,0,0,.5)!important}
 
-/* 5. Cinta de la carta: sin movimiento automático, se desliza con el dedo */
-.sr-lite .sr .cc-tick{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.sr-lite .sr .cc-tick::-webkit-scrollbar{display:none}
-
-/* 6. Transiciones largas de las fotos de la historia de novios */
+/* 5. Transiciones largas de las fotos de la historia de novios */
 .sr-lite .sr .frame img{transition:opacity .4s ease!important;transform:none!important}
+
+/* 6. Animaciones que SÍ se mantienen: solo mueven transform/opacidad (las baratas) y corren únicamente
+      mientras la sección está en pantalla (la clase "live" la ponen los scripts de cada sección). */
+.sr-lite .sr .gf.live .gf-go::after{animation:gf-ring 2.4s ease-out infinite!important}
+.sr-lite .sr .cc.live .cc-go::after{animation:cc-ring 2.4s ease-out infinite!important}
+.sr-lite .sr .cc.live .cc-track{animation:cc-run 60s linear infinite!important;will-change:transform!important}
+.sr-lite .kc.live .kc-clock::after{animation:kc-ping 1.9s ease-out infinite!important}
+.sr-lite .cu.live .cu-urg-dot{animation:cu-blink 1.4s ease-out infinite!important}
+.sr-lite .sr .open-pill i{animation:ping 1.8s infinite!important}
+
+/* 7. Mapa y globo animados. La línea punteada se mueve a pocos cuadros por segundo (steps), que se ve igual de
+      "viva" pero repinta mucho menos. */
+.sr-lite #llegar.live .pin-head{animation:bob 2.4s ease-in-out infinite!important}
+.sr-lite #llegar.live .ripple{animation:pulse 2.4s ease-out infinite!important}
+.sr-lite #llegar.live .ripple.r2{animation-delay:1.2s!important}
+.sr-lite #llegar.live .chile-svg .pulse{animation:pulse 2.2s ease-out infinite!important}
+.sr-lite #llegar.live .maule-top .dash{animation:sr-dash 1.4s steps(8) infinite!important}
+.sr-lite #cafe.live .cf-dash{animation:sr-cfdash 1.4s steps(5) infinite!important}
+@keyframes sr-dash{to{stroke-dashoffset:-32}}
+@keyframes sr-cfdash{to{stroke-dashoffset:-18}}
