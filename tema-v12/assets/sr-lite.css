@@ -9,7 +9,6 @@
   animation:none!important;
   filter:none!important;
   -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
-  -webkit-box-reflect:none!important;
   will-change:auto!important;
   scroll-behavior:auto!important}
 html.sr-lite{scroll-behavior:auto!important}
@@ -62,13 +61,21 @@ html.sr-lite{scroll-behavior:auto!important}
 @keyframes sr-dash{to{stroke-dashoffset:-32}}
 @keyframes sr-cfdash{to{stroke-dashoffset:-18}}
 
-/* 8. "Nuestro trabajo": la rueda 3D de 25 fotos era lo más pesado de la página. En modo liviano se muestra como
-      una tira horizontal plana con deslizamiento nativo del dedo (barato). Los botones de abajo siguen igual. */
-.sr-lite .sr .ring{height:auto!important;perspective:none!important;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;touch-action:pan-x pan-y!important;cursor:auto!important;padding:6px 16px 14px;scrollbar-width:none;overscroll-behavior-x:contain}
-.sr-lite .sr .ring::-webkit-scrollbar{display:none}
-.sr-lite .sr .ring::after{display:none!important}
-.sr-lite .sr .ring-rot{position:static!important;display:flex;gap:14px;width:max-content!important;height:auto!important;margin:0!important;transform:none!important;transform-style:flat!important;transition:none!important}
-.sr-lite .sr .rc{position:relative!important;inset:auto!important;flex:none;width:var(--cw);height:var(--ch);margin:0!important;transform:none!important;scroll-snap-align:center;-webkit-backface-visibility:visible!important;backface-visibility:visible!important;-webkit-box-reflect:none!important}
-.sr-lite .sr .rc::after{display:none!important}
-.sr-lite .sr .ring-ctrl,.sr-lite .sr #riTit{display:none!important}
-.sr-lite .sr .ring-info{min-height:0!important}
+/* 8. "Nuestro trabajo": se arma con el mismo abanico plano de cookies y café (ver trabajoFan en sr-header.liquid).
+      La rueda 3D original (25 fotos en 3D) queda oculta. Si el script no alcanzara a armar el abanico, se muestra
+      una tira plana deslizable como respaldo. */
+html.sr-lite.tf-on .sr #ring,html.sr-lite.tf-on .sr .ring-ctrl,html.sr-lite.tf-on .sr #riTit{display:none!important}
+.sr-lite .sr .ns.off{display:none!important}
+.sr-lite .sr .tf-info{min-height:0!important;margin-top:4px}
+.sr-lite .sr .tf-info h3{font-size:clamp(1.6rem,4.6vw,2.2rem)}
+.sr-lite .sr .tf-pos{font:600 13.5px var(--font-body);letter-spacing:.14em;color:#B9BAAF;font-variant-numeric:tabular-nums}
+.sr-lite .sr .obra .ring-info{min-height:0!important}
+/* sin animación de entrada mientras la página carga: los abanicos aparecen ya en su lugar */
+html.sr-lite:not(.sr-ready) .sr .ns{transition:none!important}
+/* respaldo (solo si no se armó el abanico) */
+html.sr-lite:not(.tf-on) .sr .ring{height:auto!important;perspective:none!important;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;touch-action:pan-x pan-y!important;cursor:auto!important;padding:6px 16px 14px;scrollbar-width:none}
+html.sr-lite:not(.tf-on) .sr .ring::-webkit-scrollbar{display:none}
+html.sr-lite:not(.tf-on) .sr .ring::after{display:none!important}
+html.sr-lite:not(.tf-on) .sr .ring-rot{position:static!important;display:flex;gap:14px;width:max-content!important;height:auto!important;margin:0!important;transform:none!important;transform-style:flat!important;transition:none!important}
+html.sr-lite:not(.tf-on) .sr .rc{position:relative!important;inset:auto!important;flex:none;width:var(--cw);height:var(--ch);margin:0!important;transform:none!important;scroll-snap-align:center;-webkit-backface-visibility:visible!important;backface-visibility:visible!important}
+html.sr-lite:not(.tf-on) .sr .rc::after{display:none!important}
