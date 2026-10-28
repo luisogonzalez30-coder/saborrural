@@ -1,0 +1,48 @@
+/* Sabor Rural: modo liviano.
+   Se activa con la clase "sr-lite" en <html> (ver sections/sr-header.liquid): celulares táctiles y equipos con
+   poca memoria o pocos núcleos. Quita lo que más pesa al desplazarse: animaciones infinitas, filtros (brillo,
+   sombras apiladas), desenfoque de fondo, reflejos y escenas 3D. El diseño, los colores y el contenido no cambian.
+   Para volver al modo completo: quitar la línea de sr-lite.css en sr-header.liquid. */
+
+/* 1. Sin animaciones CSS, sin filtros ni desenfoque de fondo */
+.sr-lite .sr *,.sr-lite .sr *::before,.sr-lite .sr *::after{
+  animation:none!important;
+  filter:none!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+  -webkit-box-reflect:none!important;
+  will-change:auto!important;
+  scroll-behavior:auto!important}
+html.sr-lite{scroll-behavior:auto!important}
+.sr-lite .sr .ripple,.sr-lite .sr .pin-ground{display:none!important}
+
+/* 2. Tarjetas con "brillo apagado": un velo oscuro en vez de filter:brightness */
+.sr-lite .sr .ns::after,.sr-lite .sr .rc::after{content:"";position:absolute;inset:0;background:rgba(12,13,15,.5);transition:opacity .3s;pointer-events:none}
+.sr-lite .sr .ns.on::after,.sr-lite .sr .rc.front::after{opacity:0}
+
+/* 3. Abanicos y mapas en plano (sin perspectiva 3D) */
+.sr-lite .sr .nfan,.sr-lite .sr .fan,.sr-lite .sr .panels,.sr-lite .sr .gifts,.sr-lite .sr .cf-globe,
+.sr-lite .sr .chile-fig,.sr-lite .sr .maule-wrap{perspective:none!important}
+.sr-lite .sr .ns{transform:translateX(calc(var(--o,0)*var(--dx))) scale(calc(var(--sc,1) - var(--a,0)*.06))!important;transition:transform .35s ease,opacity .25s!important;box-shadow:0 12px 20px -14px rgba(0,0,0,.85)!important;outline:0!important}
+.sr-lite .sr .ns.on{outline:1.5px solid rgba(242,132,151,.85)!important}
+.sr-lite .sr .fcard{transform:translateX(calc(var(--o,0)*var(--dx))) scale(calc(1 - var(--a,0)*.07)) translateY(calc(var(--lift,0)*-12px))!important;transform-style:flat!important;transition:transform .35s ease,opacity .25s!important;box-shadow:0 12px 20px -14px rgba(0,0,0,.8)!important}
+.sr-lite .sr .fpanel{box-shadow:none!important}
+.sr-lite .sr .rc{transition:none!important;box-shadow:none!important;outline:0!important}
+.sr-lite .sr .ring-rot{transition:transform .7s ease!important}
+.sr-lite .sr .chile-svg,.sr-lite .sr .chile-lg,.sr-lite .sr .cf-ball{transform:none!important;transition:none!important}
+.sr-lite .sr .maule-plane{transform:none!important;transform-style:flat!important;transition:none!important}
+.sr-lite .sr .maule-plane .layer{display:none!important}
+.sr-lite .sr .maule-top{box-shadow:inset 0 0 0 1px rgba(242,132,151,.4)!important}
+.sr-lite .sr .pin{transform:translate(-50%,-100%)!important;transform-style:flat!important}
+.sr-lite .sr .pin-tag{transform:translateX(-50%)!important}
+.sr-lite .sr .gcard,.sr-lite .sr .gcard:hover{transform:none!important;transform-style:flat!important}
+
+/* 4. Sombras enormes y sombras de texto muy difusas */
+.sr-lite .sr .form,.sr-lite .sr .cc-bar,.sr-lite .sr .gf-panel,.sr-lite .sr .kc-panel{box-shadow:none!important}
+.sr-lite .sr .hero h1,.sr-lite .sr .hero .lead,.sr-lite .sr .cafe .sec-head h2,.sr-lite .sr .evento h2,.sr-lite .sr .evento .ev-lead{text-shadow:0 1px 6px rgba(0,0,0,.5)!important}
+
+/* 5. Cinta de la carta: sin movimiento automático, se desliza con el dedo */
+.sr-lite .sr .cc-tick{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.sr-lite .sr .cc-tick::-webkit-scrollbar{display:none}
+
+/* 6. Transiciones largas de las fotos de la historia de novios */
+.sr-lite .sr .frame img{transition:opacity .4s ease!important;transform:none!important}

@@ -5,9 +5,24 @@
 {{ 'sr-3d.css' | asset_url | stylesheet_tag }}
 {{ 'sr-dark.css' | asset_url | stylesheet_tag }}
 {{ 'sr-v3.css' | asset_url | stylesheet_tag }}
+{{ 'sr-lite.css' | asset_url | stylesheet_tag }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Caveat:wght@500;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<script>
+/* Modo liviano: celulares táctiles y equipos con poca memoria o pocos núcleos. Estilos en sr-lite.css. */
+(function () {
+  var m = navigator.deviceMemory, c = navigator.hardwareConcurrency;
+  var touch = window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  if (!(touch || (m && m <= 4) || (c && c <= 4))) return;
+  document.documentElement.classList.add('sr-lite');
+  var si = window.setInterval;   /* sin giro automático de los carruseles (4,2 s, 4,6 s y 4,8 s); se mueven con el dedo */
+  window.setInterval = function (f, t) { if (t === 4200 || t === 4600 || t === 4800) return 0; return si.apply(this, arguments); };
+  document.addEventListener('DOMContentLoaded', function () {   /* mapas y globo SVG: sin animación interna */
+    Array.prototype.forEach.call(document.querySelectorAll('.sr svg'), function (v) { if (v.pauseAnimations) v.pauseAnimations(); });
+  });
+})();
+</script>
 <script>window.SR = { wa: {{ section.settings.whatsapp | json }} };</script>
 <script src="{{ 'sr.js' | asset_url }}" defer></script>
 <div class="sr">
