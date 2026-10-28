@@ -38,12 +38,40 @@
 .cu .cu-big:hover{background:rgba(58,22,32,.75)}
 .cu .cu-alt{color:#F3F1EA;font:700 .98rem/1.2 var(--font-body);text-decoration:underline;text-decoration-color:rgba(245,154,172,.6);text-underline-offset:4px}
 .cu .cu-alt:hover{color:#F59AAC}
+.cu .cu-urg{position:relative;display:flex;align-items:center;gap:14px;margin:0 auto 22px;max-width:640px;padding:16px 18px;border-radius:20px;text-align:left;color:#fff;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.1) 0 12px,transparent 12px 24px),linear-gradient(135deg,#E8344D,#B3122F);box-shadow:0 22px 44px -20px rgba(232,52,77,.95),inset 0 0 0 2px rgba(255,255,255,.28)}
+.cu .cu-urg-dot{flex:none;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 0 0 0 rgba(255,255,255,.8);animation:cu-blink 1.4s ease-out infinite;animation-play-state:paused}
+.cu.live .cu-urg-dot{animation-play-state:running}
+@keyframes cu-blink{0%{box-shadow:0 0 0 0 rgba(255,255,255,.85)}100%{box-shadow:0 0 0 16px rgba(255,255,255,0)}}
+.cu .cu-urg small{display:block;font:800 .76rem/1 var(--font-body);letter-spacing:.22em;text-transform:uppercase;opacity:.95}
+.cu .cu-urg strong{display:block;margin:5px 0 0;font:800 clamp(1.45rem,6.4vw,2.3rem)/1.02 var(--font-display);letter-spacing:-.02em}
+.cu .cu-urg span{display:block;margin-top:5px;font:700 .95rem/1.25 var(--font-body);opacity:.95}
+.cu .cu-tag.u{background:linear-gradient(135deg,#E8344D,#B3122F);color:#fff}
+.cu .cu-gal-h{margin:44px 0 0;text-align:center}
+.cu .cu-gal-h h2{font:800 clamp(1.7rem,7vw,2.6rem)/1.05 var(--font-display);letter-spacing:-.02em}
+.cu .cu-gal-h p{margin:10px auto 0;max-width:30em;color:#E4D6DA;font:500 1rem/1.45 var(--font-body)}
+.cu .cu-gal{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:22px 0 0}
+@media (min-width:760px){.cu .cu-gal{grid-template-columns:repeat(4,1fr);gap:12px}}
+.cu .cu-ph{position:relative;display:block;padding:0;border:0;border-radius:16px;overflow:hidden;background:#120A0E;cursor:zoom-in;aspect-ratio:3/4;box-shadow:0 18px 36px -24px rgba(0,0,0,.9)}
+.cu .cu-ph.wide{grid-column:span 2;aspect-ratio:16/10}
+.cu .cu-ph img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.cu .cu-ph:hover img{transform:scale(1.04)}
+.cu .cu-ph[hidden]{display:none}
+.cu .cu-more{display:flex;align-items:center;justify-content:center;width:100%;max-width:360px;min-height:52px;margin:18px auto 0;border:1px solid #F59AAC;border-radius:15px;background:rgba(10,8,10,.5);color:#F3F1EA;font:800 1rem/1 var(--font-display);cursor:pointer}
+.cu .cu-more:hover{background:rgba(58,22,32,.75)}
+.cu-lb{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;background:rgba(6,4,5,.94);padding:16px}
+.cu-lb.on{display:flex}
+.cu-lb img{max-width:100%;max-height:calc(100vh - 110px);border-radius:12px;box-shadow:0 30px 80px -20px #000}
+.cu-lb button{position:absolute;display:grid;place-items:center;width:52px;height:52px;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(20,12,15,.8);color:#fff;font:700 1.5rem/1 sans-serif;cursor:pointer}
+.cu-lb .x{top:14px;right:14px}.cu-lb .p{left:10px;top:50%;margin-top:-26px}.cu-lb .n{right:10px;top:50%;margin-top:-26px}
+.cu-lb .c{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#E4D6DA;font:600 .9rem/1 sans-serif}
+@media (prefers-reduced-motion:reduce){.cu .cu-urg-dot{animation:none}}
 .cu section{padding-bottom:50px}
 </style>
   <section aria-labelledby="cu-h-{{ section.id }}">
     <div class="cu-hero">
       <div class="cu-wrap">
-        <a class="cu-back" href="{{ routes.root_url }}">← Volver al inicio</a><br>
+        <a class="cu-back" href="{{ routes.root_url }}">← Volver al inicio</a>
+        <div class="cu-urg" role="note"><span class="cu-urg-dot" aria-hidden="true"></span><div><small>{{ section.settings.urg_pre }}</small><strong>{{ section.settings.urg_titulo }}</strong><span>{{ section.settings.urg_texto }}</span></div></div>
         <span class="cu-eyebrow">{{ section.settings.eyebrow }}</span>
         <h1 id="cu-h-{{ section.id }}">{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h1>
         <p class="cu-lead">{{ section.settings.bajada }}</p>
@@ -57,7 +85,7 @@
           {%- assign aprende = block.settings.aprenderas | split: ',' -%}
           <article class="cu-card" {{ block.shopify_attributes }}>
             <div class="cu-img">
-              <span class="cu-tag">Cupos limitados</span>
+              <span class="cu-tag u">{{ section.settings.urg_tag }}</span>
               <img src="{{ block.settings.imagen | file_url }}" style="object-position:{{ block.settings.posicion }}" alt="{{ block.settings.titulo | escape }}" width="1200" height="900" loading="lazy">
             </div>
             <div class="cu-body">
@@ -71,6 +99,19 @@
           </article>
         {%- endfor -%}
       </div>
+      {%- assign nfotos = section.settings.fotos | default: 17 -%}
+      <div class="cu-gal-h"><h2>{{ section.settings.gal_titulo }}</h2><p>{{ section.settings.gal_texto }}</p></div>
+      <div class="cu-gal" id="cuGal">
+        {%- for i in (1..nfotos) -%}
+          {%- assign n = i | prepend: '0' | slice: -2, 2 -%}
+          {%- capture f_t %}sr-curso-{{ n }}-t.jpg{% endcapture -%}
+          {%- capture f_g %}sr-curso-{{ n }}.jpg{% endcapture -%}
+          <button type="button" class="cu-ph{% if i == nfotos %} wide{% endif %}" data-full="{{ f_g | asset_url }}"{% if i > 8 and i != nfotos %} hidden data-extra{% endif %} aria-label="Ver foto {{ i }} de {{ nfotos }}">
+            <img src="{{ f_t | asset_url }}" alt="Taller en Sabor Rural, foto {{ i }}" width="480" height="640" loading="lazy">
+          </button>
+        {%- endfor -%}
+      </div>
+      {%- if nfotos > 9 -%}<button type="button" class="cu-more" id="cuMore">Ver más fotos</button>{%- endif -%}
       <p class="cu-info"><b>Fechas y valores</b>: consulta el próximo taller por WhatsApp.<br>Sabor Rural · Ruta J-60, km 95, Sector Lora, Licantén</p>
       <div class="cu-cta">
         <a class="cu-big" href="https://wa.me/{{ wa }}?text={{ wa_gen }}" target="_blank" rel="noopener">{{ section.settings.boton_otro }}</a>
@@ -79,6 +120,22 @@
     </div>
   </section>
 </div>
+<div class="cu-lb" id="cuLb" role="dialog" aria-modal="true" aria-label="Fotos de los talleres"><button type="button" class="x" aria-label="Cerrar">×</button><button type="button" class="p" aria-label="Anterior">‹</button><img alt=""><button type="button" class="n" aria-label="Siguiente">›</button><div class="c"></div></div>
+<script>(function(){var root=document.querySelector('.cu');if(!root)return;
+if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){root.classList.toggle('live',e.isIntersecting)})},{rootMargin:'80px'}).observe(root)}else{root.classList.add('live')}
+var g=document.getElementById('cuGal'),lb=document.getElementById('cuLb');if(!g||!lb)return;
+var more=document.getElementById('cuMore');if(more)more.addEventListener('click',function(){g.querySelectorAll('[data-extra]').forEach(function(b){b.hidden=false});more.remove()});
+var im=lb.querySelector('img'),cn=lb.querySelector('.c'),cur=0;
+function list(){return Array.prototype.filter.call(g.querySelectorAll('.cu-ph'),function(b){return !b.hidden})}
+function show(i){var l=list();cur=(i+l.length)%l.length;im.src=l[cur].getAttribute('data-full');cn.textContent=(cur+1)+' / '+l.length}
+function open(i){show(i);lb.classList.add('on');document.body.style.overflow='hidden'}
+function close(){lb.classList.remove('on');document.body.style.overflow='';im.removeAttribute('src')}
+g.addEventListener('click',function(e){var b=e.target.closest('.cu-ph');if(b)open(list().indexOf(b))});
+lb.querySelector('.x').addEventListener('click',close);lb.querySelector('.p').addEventListener('click',function(){show(cur-1)});lb.querySelector('.n').addEventListener('click',function(){show(cur+1)});
+lb.addEventListener('click',function(e){if(e.target===lb)close()});
+document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1)});
+var x0=null;lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});lb.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>50)show(cur+(d<0?1:-1));x0=null});
+})();</script>
 {% schema %}
 {
  "name": "Sabor Rural: cursos",
@@ -87,6 +144,13 @@
   {"type": "text", "id": "titulo_a", "label": "Título", "default": "Aprende en"},
   {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "nuestra cocina"},
   {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Cupos limitados, en el local. Hornea con nosotros y llévate lo que prepares."},
+  {"type": "text", "id": "urg_pre", "label": "Urgencia: texto pequeño", "default": "De urgencia"},
+  {"type": "text", "id": "urg_titulo", "label": "Urgencia: título", "default": "Últimas 2 fechas en noviembre"},
+  {"type": "text", "id": "urg_texto", "label": "Urgencia: bajada", "default": "Cupos limitados. Reserva tu lugar por WhatsApp antes de que se llenen."},
+  {"type": "text", "id": "urg_tag", "label": "Etiqueta de cada curso", "default": "Últimas 2 fechas · nov"},
+  {"type": "text", "id": "gal_titulo", "label": "Galería: título", "default": "Así se viven nuestros talleres"},
+  {"type": "text", "id": "gal_texto", "label": "Galería: texto", "default": "Fotos de talleres anteriores en nuestro local. Toca una foto para verla en grande."},
+  {"type": "range", "id": "fotos", "label": "Fotos de la galería", "min": 1, "max": 17, "step": 1, "default": 17},
   {"type": "text", "id": "boton_otro", "label": "Botón inferior", "default": "¿Otro taller en mente? Cuéntanos"},
   {"type": "text", "id": "mensaje_otro", "label": "Mensaje de WhatsApp (otro taller)", "default": "Hola Sabor Rural, quiero consultar por los próximos talleres y cursos."},
   {"type": "text", "id": "whatsapp", "label": "WhatsApp (números, con código de país)", "default": "56992101764"}

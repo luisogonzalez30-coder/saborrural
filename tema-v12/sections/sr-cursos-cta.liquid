@@ -1,6 +1,8 @@
 <style>
 .sr .tc{padding:30px 0}
 .sr .tc-panel{position:relative;overflow:hidden;display:grid;gap:16px;justify-items:center;text-align:center;border:1px solid rgba(242,132,151,.45);border-radius:28px;padding:32px 20px 28px;background:radial-gradient(90% 80% at 15% 0%,rgba(194,48,72,.5),transparent 68%),radial-gradient(70% 60% at 100% 100%,rgba(240,124,149,.22),transparent 70%),linear-gradient(165deg,#2A1119,#120A0E 72%);box-shadow:0 40px 70px -42px rgba(194,48,72,.75)}
+.sr .tc-urg{display:inline-flex;align-items:center;gap:10px;max-width:100%;padding:11px 16px;border-radius:99px;color:#fff;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.1) 0 10px,transparent 10px 20px),linear-gradient(135deg,#E8344D,#B3122F);box-shadow:0 14px 30px -14px rgba(232,52,77,.95),inset 0 0 0 2px rgba(255,255,255,.25);font:800 clamp(.82rem,3.4vw,1rem)/1.15 var(--font-body);letter-spacing:.04em;text-transform:uppercase}
+.sr .tc-urg i{flex:none;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.3)}
 .sr .tc-eyebrow{display:inline-block;font:700 12.5px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:#1A0A0F;background:linear-gradient(135deg,#F59AAC,#E2587C);padding:8px 14px;border-radius:99px}
 .sr .tc h2{font:800 clamp(2rem,8.6vw,3.6rem)/1 var(--font-display);letter-spacing:-.03em;color:#fff;margin:0;max-width:13em}
 .sr .tc h2 em{font-family:var(--font-chalk);font-style:normal;font-weight:700;color:#F59AAC;font-size:1.2em;letter-spacing:0}
@@ -17,6 +19,7 @@
   <section class="tc" id="talleres" aria-labelledby="tc-h-{{ section.id }}">
     <div class="wrap">
       <div class="tc-panel">
+        <span class="tc-urg"><i aria-hidden="true"></i>{{ section.settings.urgencia }}</span>
         <span class="tc-eyebrow">{{ section.settings.eyebrow }}</span>
         <h2 id="tc-h-{{ section.id }}">{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h2>
         <p>{{ section.settings.bajada }}</p>
@@ -24,7 +27,7 @@
           {%- assign chips = section.settings.chips | split: ',' -%}
           {%- for c in chips -%}<li>{{ c | strip }}</li>{%- endfor -%}
         </ul>
-        <a class="tc-go" href="{{ section.settings.enlace }}">{{ section.settings.boton }}
+        <a class="tc-go" href="{{ section.settings.enlace }}" target="_blank" rel="noopener">{{ section.settings.boton }}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -35,6 +38,7 @@
 {
  "name": "Sabor Rural: ir a cursos",
  "settings": [
+  {"type": "text", "id": "urgencia", "label": "Cinta de urgencia", "default": "De urgencia · últimas 2 fechas en noviembre"},
   {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Talleres y cursos"},
   {"type": "text", "id": "titulo_a", "label": "Título", "default": "Aprende en"},
   {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "nuestra cocina"},

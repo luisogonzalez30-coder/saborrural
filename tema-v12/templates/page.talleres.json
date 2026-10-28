@@ -11,7 +11,7 @@
             "aprenderas": "Masa, Relleno, Horneado",
             "imagen": "sr-tartas-vitrina.jpg",
             "posicion": "38% 50%",
-            "mensaje": "Hola, quiero cupo en el taller de tartas. ¿Cuándo es el próximo?"
+            "mensaje": "Hola, quiero cupo en el taller de tartas. Vi que quedan las últimas 2 fechas de noviembre, ¿cuál es la más próxima?"
           }
         },
         "c2": {
@@ -22,7 +22,7 @@
             "aprenderas": "",
             "imagen": "sr-taller-galletas.jpg",
             "posicion": "50% 50%",
-            "mensaje": "Hola, quiero cupo en el taller de galletas. ¿Cuándo es el próximo?"
+            "mensaje": "Hola, quiero cupo en el taller de galletas. Vi que quedan las últimas 2 fechas de noviembre, ¿cuál es la más próxima?"
           }
         },
         "c3": {
@@ -33,7 +33,7 @@
             "aprenderas": "",
             "imagen": "sr-torta-mariposas.jpg",
             "posicion": "50% 40%",
-            "mensaje": "Hola, quiero cupo en el taller de torta decorada. ¿Cuándo es el próximo?"
+            "mensaje": "Hola, quiero cupo en el taller de torta decorada. Vi que quedan las últimas 2 fechas de noviembre, ¿cuál es la más próxima?"
           }
         }
       },
