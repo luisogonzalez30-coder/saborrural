@@ -392,16 +392,16 @@
   "order": [
     "hero",
     "carta_top",
-    "trabajo",
-    "cookies",
     "encargo",
     "novios",
-    "talleres",
-    "carta_mid",
-    "cafe",
     "eventos",
     "regala",
-    "faq",
-    "llegar"
+    "talleres",
+    "trabajo",
+    "cookies",
+    "cafe",
+    "llegar",
+    "carta_mid",
+    "faq"
   ]
 }

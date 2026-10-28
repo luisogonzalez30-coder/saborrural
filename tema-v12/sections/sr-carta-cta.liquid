@@ -127,6 +127,7 @@
   </section>
 {%- endif -%}
 </div>
+<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href$="#pedido"]');if(a){e.preventDefault();location.href={{ url | json }}}});</script>
 {% schema %}
 {
   "name": "Sabor: botón de carta",
