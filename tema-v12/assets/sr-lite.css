@@ -61,3 +61,14 @@ html.sr-lite{scroll-behavior:auto!important}
 .sr-lite #cafe.live .cf-dash{animation:sr-cfdash 1.4s steps(5) infinite!important}
 @keyframes sr-dash{to{stroke-dashoffset:-32}}
 @keyframes sr-cfdash{to{stroke-dashoffset:-18}}
+
+/* 8. "Nuestro trabajo": la rueda 3D de 25 fotos era lo más pesado de la página. En modo liviano se muestra como
+      una tira horizontal plana con deslizamiento nativo del dedo (barato). Los botones de abajo siguen igual. */
+.sr-lite .sr .ring{height:auto!important;perspective:none!important;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;touch-action:pan-x pan-y!important;cursor:auto!important;padding:6px 16px 14px;scrollbar-width:none;overscroll-behavior-x:contain}
+.sr-lite .sr .ring::-webkit-scrollbar{display:none}
+.sr-lite .sr .ring::after{display:none!important}
+.sr-lite .sr .ring-rot{position:static!important;display:flex;gap:14px;width:max-content!important;height:auto!important;margin:0!important;transform:none!important;transform-style:flat!important;transition:none!important}
+.sr-lite .sr .rc{position:relative!important;inset:auto!important;flex:none;width:var(--cw);height:var(--ch);margin:0!important;transform:none!important;scroll-snap-align:center;-webkit-backface-visibility:visible!important;backface-visibility:visible!important;-webkit-box-reflect:none!important}
+.sr-lite .sr .rc::after{display:none!important}
+.sr-lite .sr .ring-ctrl,.sr-lite .sr #riTit{display:none!important}
+.sr-lite .sr .ring-info{min-height:0!important}
