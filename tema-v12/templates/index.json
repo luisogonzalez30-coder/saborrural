@@ -310,7 +310,7 @@
       "type": "sr-talleres"
     },
     "regala": {
-      "type": "sr-regala"
+      "type": "sr-gift-cta"
     },
     "faq": {
       "type": "sr-faq"
