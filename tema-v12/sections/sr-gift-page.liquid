@@ -1,6 +1,8 @@
 {%- liquid
   assign wa = section.settings.whatsapp
-  assign gcol = collections[section.settings.coleccion]
+  assign ghandle = section.settings.coleccion | default: 'gift-cards'
+  assign gcol = collections[ghandle]
+  assign gcount = gcol.products | size
   assign textos = 'Para una persona|Para compartir de a dos|Para una mesa con amigos' | split: '|'
   assign wa_gen = section.settings.mensaje | url_encode
 -%}
@@ -53,7 +55,7 @@
       </div>
     </div>
     <div class="gp-wrap">
-      {%- if gcol.products_count > 0 -%}
+      {%- if gcount > 0 -%}
       <div class="gp-cards">
         {%- for p in gcol.products -%}
           {%- capture msg -%}Hola Sabor Rural, quiero comprar la {{ p.title }}.{%- endcapture -%}
