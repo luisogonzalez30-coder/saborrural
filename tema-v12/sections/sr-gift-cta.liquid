@@ -1,6 +1,7 @@
 {%- liquid
   assign wa = section.settings.whatsapp
   assign wa_txt = section.settings.mensaje | url_encode
+  assign gcol = collections[section.settings.coleccion]
 -%}
 <style>
 .sr .gf{padding:30px 0}
@@ -17,6 +18,11 @@
 .sr .gf-go:active{transform:scale(.98)}
 .sr .gf-go svg{width:26px;height:26px;transition:transform .2s}
 .sr .gf-go:hover svg{transform:translateX(6px)}
+.sr .gf-amts{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;width:100%;max-width:520px}
+.sr .gf-amts a{flex:1 1 130px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 10px;border:1px solid rgba(242,132,151,.4);border-radius:16px;background:rgba(16,9,13,.9);color:#fff;text-decoration:none;transition:transform .2s,border-color .2s,background .2s}
+.sr .gf-amts a:hover,.sr .gf-amts a:focus-visible{transform:translateY(-3px);border-color:#F59AAC;background:rgba(58,22,32,.75)}
+.sr .gf-amts b{font:800 1.25rem/1 var(--font-display)}
+.sr .gf-amts small{font:700 .78rem/1.1 var(--font-body);color:#F59AAC}
 @keyframes gf-ring{0%{transform:scale(1);opacity:.75}100%{transform:scale(1.1,1.3);opacity:0}}
 @media (prefers-reduced-motion:reduce){.sr .gf-go::after{animation:none}}
 </style>
@@ -31,6 +37,14 @@
         <a class="gf-go" href="https://wa.me/{{ wa }}?text={{ wa_txt }}" target="_blank" rel="noopener">{{ section.settings.boton }}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
+        {%- if gcol.products_count > 0 -%}
+        <div class="gf-amts" role="group" aria-label="Montos de gift card">
+          {%- for p in gcol.products -%}
+            {%- capture msg -%}Hola Sabor Rural, quiero comprar la {{ p.title }}.{%- endcapture -%}
+            <a href="https://wa.me/{{ wa }}?text={{ msg | url_encode }}" target="_blank" rel="noopener"><b>{{ p.price | money_without_trailing_zeros }}</b><small>Pagar por WhatsApp</small></a>
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
       </div>
     </div>
   </section>
@@ -46,6 +60,7 @@
   {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Una gift card para quien ama el café o necesita una pausa. Pídela por WhatsApp."},
   {"type": "text", "id": "boton", "label": "Texto del botón", "default": "Compra aquí tu gift card"},
   {"type": "text", "id": "whatsapp", "label": "WhatsApp (solo números, con código de país)", "default": "56992101764"},
+  {"type": "text", "id": "coleccion", "label": "Colección de gift cards (handle)", "default": "gift-cards"},
   {"type": "text", "id": "mensaje", "label": "Mensaje de WhatsApp", "default": "Hola Sabor Rural, quiero comprar una gift card."}
  ],
  "presets": [{"name": "Sabor Rural: botón gift"}]
