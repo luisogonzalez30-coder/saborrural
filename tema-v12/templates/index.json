@@ -12,6 +12,9 @@
     "hero": {
       "type": "sr-hero"
     },
+    "kuchen": {
+      "type": "sr-kuchen"
+    },
     "trabajo": {
       "type": "sr-trabajo",
       "blocks": {
@@ -392,6 +395,7 @@
   "order": [
     "hero",
     "carta_top",
+    "kuchen",
     "encargo",
     "novios",
     "eventos",

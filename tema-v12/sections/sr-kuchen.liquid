@@ -1,0 +1,82 @@
+{%- liquid
+  assign wa = section.settings.whatsapp
+  assign wa_txt = section.settings.mensaje | url_encode
+  assign carta = section.settings.carta_url
+-%}
+<div class="sr kc">
+<style>
+.kc{--ln:rgba(242,132,151,.3)}
+.kc .kc-sec{padding:34px 0}
+.kc .kc-panel{position:relative;overflow:hidden;display:grid;gap:22px;border:1px solid var(--ln);border-radius:30px;padding:22px 18px 26px;background:radial-gradient(90% 70% at 100% 0%,rgba(194,48,72,.42),transparent 68%),radial-gradient(70% 60% at 0% 100%,rgba(240,124,149,.18),transparent 70%),linear-gradient(165deg,#2A1119,#120A0E 72%);box-shadow:0 40px 70px -42px rgba(194,48,72,.7)}
+@media (min-width:860px){.kc .kc-panel{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;gap:38px;padding:34px 38px}}
+.kc .kc-photo{position:relative;margin:0;border-radius:22px;overflow:hidden;aspect-ratio:3/4;background:#120A0E;box-shadow:0 26px 50px -30px rgba(0,0,0,.9)}
+.kc .kc-photo img{display:block;width:100%;height:100%;object-fit:cover}
+.kc .kc-badge{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:99px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 .92rem/1 var(--font-display);box-shadow:0 12px 24px -10px rgba(226,88,124,.9)}
+.kc .kc-badge svg{width:18px;height:18px}
+.kc .kc-eyebrow{display:inline-block;font:700 12.5px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:#1A0A0F;background:linear-gradient(135deg,#F59AAC,#E2587C);padding:8px 14px;border-radius:99px}
+.kc h2{font:800 clamp(2.1rem,8.6vw,3.8rem)/1 var(--font-display);letter-spacing:-.03em;color:#fff;margin:14px 0 0}
+.kc h2 em{font-family:var(--font-chalk);font-style:normal;font-weight:700;color:#F59AAC;font-size:1.2em;letter-spacing:0}
+.kc .kc-lead{margin:14px 0 0;color:#E4D6DA;font-size:clamp(1rem,2.9vw,1.14rem);line-height:1.5}
+.kc .kc-flav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}
+.kc .kc-flav li{padding:9px 14px;border:1px solid var(--ln);border-radius:99px;background:rgba(10,8,10,.55);color:#F3F1EA;font:600 .9rem/1 var(--font-body)}
+.kc .kc-steps{display:grid;gap:10px;margin:20px 0 0;padding:0;list-style:none;counter-reset:k}
+.kc .kc-steps li{counter-increment:k;position:relative;padding:14px 14px 14px 58px;border:1px solid var(--ln);border-radius:16px;background:rgba(16,9,13,.92)}
+.kc .kc-steps li::before{content:counter(k);position:absolute;left:14px;top:13px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 1rem/1 var(--font-display)}
+.kc .kc-steps b{display:block;font:800 1rem/1.2 var(--font-display);color:#fff}
+.kc .kc-steps span{display:block;margin-top:3px;color:#D3C9CC;font:500 .93rem/1.35 var(--font-body)}
+.kc .kc-go{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:66px;margin:22px 0 0;border-radius:18px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 clamp(1.1rem,4.6vw,1.35rem)/1 var(--font-display);text-decoration:none;box-shadow:0 18px 36px -14px rgba(226,88,124,.9);transition:transform .15s,filter .15s}
+.kc .kc-go:hover{filter:brightness(1.07);transform:translateY(-2px)}
+.kc .kc-go:active{transform:scale(.98)}
+.kc .kc-go svg{width:26px;height:26px}
+.kc .kc-alt{display:inline-block;margin-top:14px;color:#F3F1EA;font:700 .96rem/1.2 var(--font-body);text-decoration:underline;text-decoration-color:rgba(245,154,172,.6);text-underline-offset:4px}
+.kc .kc-alt:hover{color:#F59AAC}
+.kc .kc-note{margin:14px 0 0;color:#BFB4B7;font:500 .88rem/1.4 var(--font-body)}
+</style>
+  <section class="kc-sec" id="kuchen" aria-labelledby="kc-h-{{ section.id }}">
+    <div class="wrap">
+      <div class="kc-panel">
+        <figure class="kc-photo">
+          <img src="{{ 'sr-kuchen.jpg' | asset_url }}" alt="Tarta con cobertura rosada, merengues y rodajas de limón frente al letrero de Sabor Rural" width="1200" height="1600" loading="lazy">
+          <figcaption class="kc-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>{{ section.settings.insignia }}</figcaption>
+        </figure>
+        <div>
+          <span class="kc-eyebrow">{{ section.settings.eyebrow }}</span>
+          <h2 id="kc-h-{{ section.id }}">{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h2>
+          <p class="kc-lead">{{ section.settings.bajada }}</p>
+          <ul class="kc-flav" aria-label="Kuchen de la carta">
+            {%- assign sabores = section.settings.sabores | split: ',' -%}
+            {%- for s in sabores -%}<li>{{ s | strip }}</li>{%- endfor -%}
+          </ul>
+          <ol class="kc-steps">
+            <li><b>Elige tu kuchen</b><span>Escoge el sabor que más te guste.</span></li>
+            <li><b>Escríbenos por WhatsApp</b><span>Pídelo con un día de anticipación.</span></li>
+            <li><b>Retíralo al día siguiente</b><span>Pasa por Sabor Rural, Ruta J-60 km 95, Licantén.</span></li>
+          </ol>
+          <a class="kc-go" href="https://wa.me/{{ wa }}?text={{ wa_txt }}" target="_blank" rel="noopener">{{ section.settings.boton }}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="kc-alt" href="{{ carta }}">Ver los kuchen y sus precios en la carta</a>
+          <p class="kc-note">Consulta por WhatsApp el valor y el tamaño del kuchen entero.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+ "name": "Sabor Rural: kuchen",
+ "settings": [
+  {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Pastelería por encargo"},
+  {"type": "text", "id": "titulo_a", "label": "Título", "default": "Encarga tu"},
+  {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "kuchen"},
+  {"type": "text", "id": "insignia", "label": "Insignia sobre la foto", "default": "Disponible al día siguiente"},
+  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Pídelo hoy y retíralo mañana. Hecho desde cero, sin premezclas ni conservantes."},
+  {"type": "text", "id": "sabores", "label": "Sabores (separados por coma)", "default": "Berries, Frambuesa, Frutilla, Manzana canela y nuez, Nuez"},
+  {"type": "text", "id": "boton", "label": "Texto del botón", "default": "Encargar mi kuchen"},
+  {"type": "text", "id": "mensaje", "label": "Mensaje de WhatsApp", "default": "Hola Sabor Rural, quiero encargar un kuchen para mañana."},
+  {"type": "text", "id": "whatsapp", "label": "WhatsApp (números, con código de país)", "default": "56992101764"},
+  {"type": "text", "id": "carta_url", "label": "Enlace de la carta", "default": "/pages/carta"}
+ ],
+ "presets": [{"name": "Sabor Rural: kuchen"}]
+}
+{% endschema %}

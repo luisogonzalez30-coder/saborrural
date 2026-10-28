@@ -28,6 +28,11 @@
 ## Cajas box de regalo
 - Se hacen **cajas box de regalo para toda ocasión**, por encargo. El contenido, tamaños y precios se cotizan por WhatsApp (no inventes qué trae cada caja).
 
+## Kuchen por encargo
+- Se puede **encargar kuchen y retirarlo al día siguiente** (hay que pedirlo con un día de anticipación). Se pide por WhatsApp y se retira en Licantén.
+- Sabores de la carta: berries, frambuesa, frutilla, manzana canela y nuez, nuez (la porción cuesta $3.000). El valor y el tamaño del kuchen entero NO están confirmados: se cotizan por WhatsApp.
+- En la web hay una sección "Encarga tu kuchen": https://rq96ev-nk.myshopify.com/#kuchen
+
 ## Tortas por encargo
 - Incluye tortas infantiles (tema, colores y mensaje a elección), tortas de aniversario y fechas especiales, y diseños a gusto del cliente.
 - Cómo se encarga: 1) el cliente cuenta su idea (se puede adjuntar una imagen de referencia); 2) recibe propuesta y valor; 3) reserva la fecha con un abono; 4) la retira en Licantén.
