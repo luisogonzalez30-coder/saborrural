@@ -1,0 +1,98 @@
+{%- liquid
+  assign wa = section.settings.whatsapp
+  assign gcol = collections[section.settings.coleccion]
+  assign textos = 'Para una persona|Para compartir de a dos|Para una mesa con amigos' | split: '|'
+  assign wa_gen = section.settings.mensaje | url_encode
+-%}
+<div class="sr gp">
+<style>
+.gp{--pk:#F07C95;--pk2:#E2587C;--ln:rgba(242,132,151,.28);background:#0C0D0F;color:#F3F1EA;overflow-x:clip}
+.gp *{box-sizing:border-box}
+.gp .gp-wrap{max-width:1040px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.gp h1,.gp h2,.gp h3{font-family:var(--font-display);margin:0;color:#fff}
+.gp .gp-hero{padding:46px 0 26px;text-align:center;background:radial-gradient(80% 90% at 85% 0%,rgba(194,48,72,.42),transparent 68%),radial-gradient(60% 60% at 0% 100%,rgba(240,124,149,.16),transparent 70%)}
+.gp .gp-back{display:inline-block;margin-bottom:18px;color:#E4D6DA;font:700 .92rem/1 var(--font-body);text-decoration:none;opacity:.85}
+.gp .gp-back:hover{color:#F59AAC}
+.gp .gp-eyebrow{display:inline-block;font:700 12.5px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:#1A0A0F;background:linear-gradient(135deg,#F59AAC,#E2587C);padding:8px 14px;border-radius:99px}
+.gp h1{font:800 clamp(2.2rem,9vw,4.2rem)/1 var(--font-display);letter-spacing:-.03em;margin:16px auto 0;max-width:12em}
+.gp h1 em{font-family:var(--font-chalk);font-style:normal;font-weight:700;color:#F59AAC;font-size:1.2em;letter-spacing:0}
+.gp .gp-lead{max-width:34em;margin:14px auto 0;color:#E4D6DA;font-size:clamp(1rem,2.9vw,1.15rem);line-height:1.5}
+.gp .gp-cards{display:grid;gap:16px;margin:28px 0 0}
+@media (min-width:760px){.gp .gp-cards{grid-template-columns:repeat(3,1fr);gap:20px}}
+.gp .gp-card{position:relative;overflow:hidden;display:grid;gap:14px;align-content:space-between;min-height:230px;padding:20px;border:1px solid var(--ln);border-radius:24px;background:radial-gradient(90% 80% at 100% 0%,rgba(194,48,72,.5),transparent 66%),linear-gradient(160deg,#2A1119,#120A0E 75%);box-shadow:0 30px 60px -38px rgba(194,48,72,.7)}
+.gp .gp-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.gp .gp-top img{width:46px;height:46px}
+.gp .gp-tag{font:700 11.5px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:#F59AAC}
+.gp .gp-amt{font:800 clamp(2.4rem,11vw,3.2rem)/1 var(--font-display);letter-spacing:-.03em;color:#fff}
+.gp .gp-for{margin:6px 0 0;color:#E4D6DA;font:600 1rem/1.3 var(--font-body)}
+.gp .gp-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.gp .gp-foot span{font:600 .82rem/1.2 var(--font-body);color:#D3C9CC}
+.gp .gp-buy{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 18px;border-radius:14px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 1rem/1 var(--font-display);text-decoration:none;box-shadow:0 14px 28px -14px rgba(226,88,124,.9);transition:transform .15s,filter .15s}
+.gp .gp-buy:hover{filter:brightness(1.07);transform:translateY(-2px)}
+.gp .gp-steps{display:grid;gap:12px;margin:34px 0 0;padding:0;list-style:none;counter-reset:s}
+@media (min-width:760px){.gp .gp-steps{grid-template-columns:repeat(3,1fr);gap:16px}}
+.gp .gp-steps li{counter-increment:s;padding:18px 18px 18px 64px;position:relative;border:1px solid var(--ln);border-radius:18px;background:rgba(16,9,13,.9)}
+.gp .gp-steps li::before{content:counter(s);position:absolute;left:16px;top:16px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 1.05rem/1 var(--font-display)}
+.gp .gp-steps b{display:block;font:800 1.05rem/1.2 var(--font-display);color:#fff}
+.gp .gp-steps span{display:block;margin-top:4px;color:#D3C9CC;font:500 .95rem/1.35 var(--font-body)}
+.gp .gp-cta{display:flex;flex-direction:column;align-items:center;gap:12px;margin:30px 0 0}
+.gp .gp-big{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:520px;min-height:66px;border-radius:18px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 clamp(1.1rem,4.6vw,1.35rem)/1 var(--font-display);text-decoration:none;box-shadow:0 18px 36px -14px rgba(226,88,124,.9)}
+.gp .gp-big svg{width:26px;height:26px}
+.gp .gp-alt{color:#F3F1EA;font:700 .98rem/1.2 var(--font-body);text-decoration:underline;text-decoration-color:rgba(245,154,172,.6);text-underline-offset:4px}
+.gp .gp-info{margin:34px 0 0;padding:18px;border:1px solid var(--ln);border-radius:18px;background:rgba(16,9,13,.9);text-align:center;color:#E4D6DA;font:500 .98rem/1.5 var(--font-body)}
+.gp .gp-info b{color:#fff}
+.gp section{padding-bottom:46px}
+</style>
+  <section aria-labelledby="gp-h-{{ section.id }}">
+    <div class="gp-hero">
+      <div class="gp-wrap">
+        <a class="gp-back" href="{{ routes.root_url }}">← Volver al inicio</a><br>
+        <span class="gp-eyebrow">{{ section.settings.eyebrow }}</span>
+        <h1 id="gp-h-{{ section.id }}">{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h1>
+        <p class="gp-lead">{{ section.settings.bajada }}</p>
+      </div>
+    </div>
+    <div class="gp-wrap">
+      {%- if gcol.products_count > 0 -%}
+      <div class="gp-cards">
+        {%- for p in gcol.products -%}
+          {%- capture msg -%}Hola Sabor Rural, quiero comprar la {{ p.title }}.{%- endcapture -%}
+          <article class="gp-card">
+            <div class="gp-top"><img src="{{ 'sr-logo-blanco.png' | file_url }}" alt="Sabor Rural" width="46" height="46" loading="lazy"><span class="gp-tag">Gift card</span></div>
+            <div><div class="gp-amt">{{ p.price | money_without_trailing_zeros }}</div><p class="gp-for">{{ textos[forloop.index0] }}</p></div>
+            <div class="gp-foot"><span>Sabor Rural · Licantén</span><a class="gp-buy" href="https://wa.me/{{ wa }}?text={{ msg | url_encode }}" target="_blank" rel="noopener">Pagar por WhatsApp</a></div>
+          </article>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+      <ol class="gp-steps">
+        <li><b>Elige el monto</b><span>Elige la gift card que prefieras.</span></li>
+        <li><b>Escríbenos por WhatsApp</b><span>Te abrimos el chat con el mensaje ya escrito.</span></li>
+        <li><b>Pago y entrega</b><span>Coordinamos el pago y la entrega por el mismo chat.</span></li>
+      </ol>
+      <div class="gp-cta">
+        <a class="gp-big" href="https://wa.me/{{ wa }}?text={{ wa_gen }}" target="_blank" rel="noopener">{{ section.settings.boton }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="gp-alt" href="{{ routes.root_url }}pages/carta">Ver también la carta</a>
+      </div>
+      <p class="gp-info"><b>Sabor Rural</b> · Ruta J-60, km 95, Sector Lora, Licantén<br>Lunes a viernes 9:00 – 21:00 · Sábado y domingo 14:00 – 21:00</p>
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+ "name": "Sabor Rural: gift page",
+ "settings": [
+  {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Gift card"},
+  {"type": "text", "id": "titulo_a", "label": "Título", "default": "Regala una visita a"},
+  {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "Sabor Rural"},
+  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Una gift card para quien ama el café o necesita una pausa. Elige el monto y pídela por WhatsApp."},
+  {"type": "text", "id": "boton", "label": "Texto del botón grande", "default": "Compra aquí tu gift card"},
+  {"type": "text", "id": "coleccion", "label": "Colección de gift cards (handle)", "default": "gift-cards"},
+  {"type": "text", "id": "whatsapp", "label": "WhatsApp (números, con código de país)", "default": "56992101764"},
+  {"type": "text", "id": "mensaje", "label": "Mensaje de WhatsApp", "default": "Hola Sabor Rural, quiero comprar una gift card."}
+ ],
+ "presets": [{"name": "Sabor Rural: gift page"}]
+}
+{% endschema %}
