@@ -1,0 +1,51 @@
+{
+  "sections": {
+    "main": {
+      "type": "sr-cursos",
+      "blocks": {
+        "c1": {
+          "type": "curso",
+          "settings": {
+            "titulo": "Taller de tartas",
+            "texto": "Masa, relleno y horneado, paso a paso.",
+            "aprenderas": "Masa, Relleno, Horneado",
+            "imagen": "sr-tartas-vitrina.jpg",
+            "posicion": "38% 50%",
+            "mensaje": "Hola, quiero cupo en el taller de tartas. ¿Cuándo es el próximo?"
+          }
+        },
+        "c2": {
+          "type": "curso",
+          "settings": {
+            "titulo": "Taller de galletas",
+            "texto": "Recetas simples para hacer en casa, con técnica de pastelería.",
+            "aprenderas": "",
+            "imagen": "sr-taller-galletas.jpg",
+            "posicion": "50% 50%",
+            "mensaje": "Hola, quiero cupo en el taller de galletas. ¿Cuándo es el próximo?"
+          }
+        },
+        "c3": {
+          "type": "curso",
+          "settings": {
+            "titulo": "Taller de torta decorada",
+            "texto": "Arma y decora tu propia torta.",
+            "aprenderas": "",
+            "imagen": "sr-torta-mariposas.jpg",
+            "posicion": "50% 40%",
+            "mensaje": "Hola, quiero cupo en el taller de torta decorada. ¿Cuándo es el próximo?"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

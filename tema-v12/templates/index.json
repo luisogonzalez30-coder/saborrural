@@ -310,7 +310,7 @@
       "type": "sr-eventos"
     },
     "talleres": {
-      "type": "sr-talleres"
+      "type": "sr-cursos-cta"
     },
     "regala": {
       "type": "sr-gift-cta"

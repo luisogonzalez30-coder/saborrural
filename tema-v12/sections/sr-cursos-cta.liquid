@@ -1,0 +1,48 @@
+<style>
+.sr .tc{padding:30px 0}
+.sr .tc-panel{position:relative;overflow:hidden;display:grid;gap:16px;justify-items:center;text-align:center;border:1px solid rgba(242,132,151,.45);border-radius:28px;padding:32px 20px 28px;background:radial-gradient(90% 80% at 15% 0%,rgba(194,48,72,.5),transparent 68%),radial-gradient(70% 60% at 100% 100%,rgba(240,124,149,.22),transparent 70%),linear-gradient(165deg,#2A1119,#120A0E 72%);box-shadow:0 40px 70px -42px rgba(194,48,72,.75)}
+.sr .tc-eyebrow{display:inline-block;font:700 12.5px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:#1A0A0F;background:linear-gradient(135deg,#F59AAC,#E2587C);padding:8px 14px;border-radius:99px}
+.sr .tc h2{font:800 clamp(2rem,8.6vw,3.6rem)/1 var(--font-display);letter-spacing:-.03em;color:#fff;margin:0;max-width:13em}
+.sr .tc h2 em{font-family:var(--font-chalk);font-style:normal;font-weight:700;color:#F59AAC;font-size:1.2em;letter-spacing:0}
+.sr .tc p{margin:0;max-width:34em;color:#E4D6DA;font-size:clamp(1rem,2.9vw,1.15rem);line-height:1.5}
+.sr .tc-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0;padding:0;list-style:none}
+.sr .tc-chips li{padding:9px 14px;border:1px solid rgba(242,132,151,.3);border-radius:99px;background:rgba(10,8,10,.55);color:#F3F1EA;font:600 .9rem/1 var(--font-body)}
+.sr .tc-go{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:520px;min-height:68px;border-radius:18px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 clamp(1.1rem,4.6vw,1.4rem)/1 var(--font-display);letter-spacing:-.01em;text-decoration:none;box-shadow:0 18px 36px -14px rgba(226,88,124,.9);transition:transform .15s,filter .15s}
+.sr .tc-go:hover{filter:brightness(1.07);transform:translateY(-2px)}
+.sr .tc-go:active{transform:scale(.98)}
+.sr .tc-go svg{width:26px;height:26px;transition:transform .2s}
+.sr .tc-go:hover svg{transform:translateX(6px)}
+</style>
+<div class="sr">
+  <section class="tc" id="talleres" aria-labelledby="tc-h-{{ section.id }}">
+    <div class="wrap">
+      <div class="tc-panel">
+        <span class="tc-eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2 id="tc-h-{{ section.id }}">{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h2>
+        <p>{{ section.settings.bajada }}</p>
+        <ul class="tc-chips" aria-label="Talleres">
+          {%- assign chips = section.settings.chips | split: ',' -%}
+          {%- for c in chips -%}<li>{{ c | strip }}</li>{%- endfor -%}
+        </ul>
+        <a class="tc-go" href="{{ section.settings.enlace }}">{{ section.settings.boton }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+ "name": "Sabor Rural: ir a cursos",
+ "settings": [
+  {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Talleres y cursos"},
+  {"type": "text", "id": "titulo_a", "label": "Título", "default": "Aprende en"},
+  {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "nuestra cocina"},
+  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Cupos limitados, en el local. Hornea con nosotros y llévate lo que prepares."},
+  {"type": "text", "id": "chips", "label": "Talleres (separados por coma)", "default": "Tartas, Galletas, Torta decorada"},
+  {"type": "text", "id": "boton", "label": "Texto del botón", "default": "Ver todos los cursos"},
+  {"type": "text", "id": "enlace", "label": "Enlace del botón", "default": "/pages/talleres"}
+ ],
+ "presets": [{"name": "Sabor Rural: ir a cursos"}]
+}
+{% endschema %}

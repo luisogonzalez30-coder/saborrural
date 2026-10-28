@@ -1,0 +1,110 @@
+{%- liquid
+  assign wa = section.settings.whatsapp
+  assign wa_gen = section.settings.mensaje_otro | url_encode
+-%}
+<div class="sr cu">
+<style>
+.cu{--ln:rgba(242,132,151,.3);background:#0C0D0F;color:#F3F1EA;overflow-x:clip}
+.cu *{box-sizing:border-box}
+.cu .cu-wrap{max-width:1120px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.cu h1,.cu h2,.cu h3{font-family:var(--font-display);margin:0;color:#fff}
+.cu .cu-hero{padding:46px 0 22px;text-align:center;background:radial-gradient(80% 90% at 85% 0%,rgba(194,48,72,.42),transparent 68%),radial-gradient(60% 60% at 0% 100%,rgba(240,124,149,.16),transparent 70%)}
+.cu .cu-back{display:inline-block;margin-bottom:18px;color:#E4D6DA;font:700 .92rem/1 var(--font-body);text-decoration:none;opacity:.85}
+.cu .cu-back:hover{color:#F59AAC}
+.cu .cu-eyebrow{display:inline-block;font:700 12.5px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:#1A0A0F;background:linear-gradient(135deg,#F59AAC,#E2587C);padding:8px 14px;border-radius:99px}
+.cu h1{font:800 clamp(2.2rem,9vw,4.2rem)/1 var(--font-display);letter-spacing:-.03em;margin:16px auto 0;max-width:12em}
+.cu h1 em{font-family:var(--font-chalk);font-style:normal;font-weight:700;color:#F59AAC;font-size:1.2em;letter-spacing:0}
+.cu .cu-lead{max-width:34em;margin:14px auto 0;color:#E4D6DA;font-size:clamp(1rem,2.9vw,1.15rem);line-height:1.5}
+.cu .cu-facts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:20px 0 0}
+.cu .cu-facts span{padding:9px 14px;border:1px solid var(--ln);border-radius:99px;background:rgba(10,8,10,.55);font:700 .86rem/1 var(--font-body);color:#F3F1EA}
+.cu .cu-grid{display:grid;gap:18px;margin:28px 0 0}
+@media (min-width:760px){.cu .cu-grid{grid-template-columns:repeat(3,1fr);gap:20px}}
+.cu .cu-card{position:relative;display:grid;grid-template-rows:auto 1fr;overflow:hidden;border:1px solid var(--ln);border-radius:24px;background:linear-gradient(165deg,#2A1119,#120A0E 75%);box-shadow:0 30px 60px -38px rgba(194,48,72,.6)}
+.cu .cu-img{position:relative;aspect-ratio:4/3;background:#120A0E}
+.cu .cu-img img{display:block;width:100%;height:100%;object-fit:cover}
+.cu .cu-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(18,10,14,.85))}
+.cu .cu-tag{position:absolute;left:12px;top:12px;z-index:1;padding:8px 12px;border-radius:99px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 .74rem/1 var(--font-body);letter-spacing:.1em;text-transform:uppercase}
+.cu .cu-body{display:grid;gap:12px;align-content:start;padding:18px 18px 20px}
+.cu .cu-body h3{font:800 1.4rem/1.1 var(--font-display);letter-spacing:-.02em}
+.cu .cu-body p{margin:0;color:#E4D6DA;font:500 1rem/1.45 var(--font-body)}
+.cu .cu-learn{margin:2px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.cu .cu-learn li{padding:7px 12px;border:1px solid var(--ln);border-radius:99px;background:rgba(10,8,10,.55);font:600 .85rem/1 var(--font-body)}
+.cu .cu-buy{display:flex;align-items:center;justify-content:center;min-height:52px;margin-top:6px;border-radius:15px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 1.02rem/1 var(--font-display);text-decoration:none;box-shadow:0 14px 28px -14px rgba(226,88,124,.9);transition:transform .15s,filter .15s}
+.cu .cu-buy:hover{filter:brightness(1.07);transform:translateY(-2px)}
+.cu .cu-info{margin:30px 0 0;padding:18px;border:1px solid var(--ln);border-radius:18px;background:rgba(16,9,13,.9);text-align:center;color:#E4D6DA;font:500 1rem/1.5 var(--font-body)}
+.cu .cu-info b{color:#fff}
+.cu .cu-cta{display:flex;flex-direction:column;align-items:center;gap:12px;margin:26px 0 0}
+.cu .cu-big{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:520px;min-height:64px;border-radius:18px;border:1px solid #F59AAC;background:rgba(10,8,10,.5);color:#F3F1EA;font:800 clamp(1.05rem,4.4vw,1.25rem)/1 var(--font-display);text-decoration:none}
+.cu .cu-big:hover{background:rgba(58,22,32,.75)}
+.cu .cu-alt{color:#F3F1EA;font:700 .98rem/1.2 var(--font-body);text-decoration:underline;text-decoration-color:rgba(245,154,172,.6);text-underline-offset:4px}
+.cu .cu-alt:hover{color:#F59AAC}
+.cu section{padding-bottom:50px}
+</style>
+  <section aria-labelledby="cu-h-{{ section.id }}">
+    <div class="cu-hero">
+      <div class="cu-wrap">
+        <a class="cu-back" href="{{ routes.root_url }}">← Volver al inicio</a><br>
+        <span class="cu-eyebrow">{{ section.settings.eyebrow }}</span>
+        <h1 id="cu-h-{{ section.id }}">{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h1>
+        <p class="cu-lead">{{ section.settings.bajada }}</p>
+        <div class="cu-facts"><span>Cupos limitados</span><span>En nuestro local</span><span>Te llevas lo que preparas</span></div>
+      </div>
+    </div>
+    <div class="cu-wrap">
+      <div class="cu-grid">
+        {%- for block in section.blocks -%}
+          {%- assign wa_q = block.settings.mensaje | url_encode -%}
+          {%- assign aprende = block.settings.aprenderas | split: ',' -%}
+          <article class="cu-card" {{ block.shopify_attributes }}>
+            <div class="cu-img">
+              <span class="cu-tag">Cupos limitados</span>
+              <img src="{{ block.settings.imagen | file_url }}" style="object-position:{{ block.settings.posicion }}" alt="{{ block.settings.titulo | escape }}" width="1200" height="900" loading="lazy">
+            </div>
+            <div class="cu-body">
+              <h3>{{ block.settings.titulo }}</h3>
+              <p>{{ block.settings.texto }}</p>
+              {%- if block.settings.aprenderas != blank -%}
+              <ul class="cu-learn" aria-label="Qué aprenderás">{%- for a in aprende -%}<li>{{ a | strip }}</li>{%- endfor -%}</ul>
+              {%- endif -%}
+              <a class="cu-buy" href="https://wa.me/{{ wa }}?text={{ wa_q }}" target="_blank" rel="noopener">Quiero un cupo</a>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+      <p class="cu-info"><b>Fechas y valores</b>: consulta el próximo taller por WhatsApp.<br>Sabor Rural · Ruta J-60, km 95, Sector Lora, Licantén</p>
+      <div class="cu-cta">
+        <a class="cu-big" href="https://wa.me/{{ wa }}?text={{ wa_gen }}" target="_blank" rel="noopener">{{ section.settings.boton_otro }}</a>
+        <a class="cu-alt" href="{{ routes.root_url }}pages/carta">Ver también la carta</a>
+      </div>
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+ "name": "Sabor Rural: cursos",
+ "settings": [
+  {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Talleres y cursos"},
+  {"type": "text", "id": "titulo_a", "label": "Título", "default": "Aprende en"},
+  {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "nuestra cocina"},
+  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Cupos limitados, en el local. Hornea con nosotros y llévate lo que prepares."},
+  {"type": "text", "id": "boton_otro", "label": "Botón inferior", "default": "¿Otro taller en mente? Cuéntanos"},
+  {"type": "text", "id": "mensaje_otro", "label": "Mensaje de WhatsApp (otro taller)", "default": "Hola Sabor Rural, quiero consultar por los próximos talleres y cursos."},
+  {"type": "text", "id": "whatsapp", "label": "WhatsApp (números, con código de país)", "default": "56992101764"}
+ ],
+ "blocks": [
+  {
+   "type": "curso",
+   "name": "Curso",
+   "settings": [
+    {"type": "text", "id": "titulo", "label": "Nombre del curso", "default": "Taller"},
+    {"type": "textarea", "id": "texto", "label": "Descripción", "default": "Descripción del taller."},
+    {"type": "text", "id": "aprenderas", "label": "Qué aprenderás (separado por comas)", "default": ""},
+    {"type": "text", "id": "imagen", "label": "Foto (nombre del archivo en Contenido > Archivos)", "default": "sr-taller-galletas.jpg"},
+    {"type": "text", "id": "posicion", "label": "Posición de la foto", "default": "50% 50%"},
+    {"type": "text", "id": "mensaje", "label": "Mensaje de WhatsApp", "default": "Hola, quiero cupo en el taller. ¿Cuándo es el próximo?"}
+   ]
+  }
+ ],
+ "presets": [{"name": "Sabor Rural: cursos"}]
+}
+{% endschema %}
