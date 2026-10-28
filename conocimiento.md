@@ -28,9 +28,11 @@
 ## Cajas box de regalo
 - Se hacen **cajas box de regalo para toda ocasión**, por encargo. El contenido, tamaños y precios se cotizan por WhatsApp (no inventes qué trae cada caja).
 
-## Kuchen por encargo
-- Se puede **encargar kuchen y retirarlo al día siguiente** (hay que pedirlo con un día de anticipación). Se pide por WhatsApp y se retira en Licantén.
-- Sabores de la carta: berries, frambuesa, frutilla, manzana canela y nuez, nuez (la porción cuesta $3.000). El valor y el tamaño del kuchen entero NO están confirmados: se cotizan por WhatsApp.
+## Kuchen, pies y tartas por encargo
+- Se pueden **encargar kuchen, pies y tartas, disponibles en 24 horas**: se piden con un día de anticipación por WhatsApp y se retiran al día siguiente en Licantén.
+- Kuchen de la carta: berries, frambuesa, frutilla, manzana canela y nuez, nuez (la porción cuesta $3.000).
+- Pies y tartas: pie de limón ($3.000), pie de coco ($3.000), banoffee ($3.500), tarta Snickers ($3.000), tarta chocolate y pistacho ($3.500) y frambuesa miga. Hay más variedades: la disponibilidad se consulta por WhatsApp.
+- Los precios de la carta son por porción. El valor y el tamaño de la pieza entera NO están confirmados: se cotizan por WhatsApp.
 - En la web hay una sección "Encarga tu kuchen": https://rq96ev-nk.myshopify.com/#kuchen
 
 ## Tortas por encargo

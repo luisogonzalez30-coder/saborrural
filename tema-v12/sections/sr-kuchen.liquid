@@ -1,25 +1,39 @@
 {%- liquid
   assign wa = section.settings.whatsapp
   assign wa_txt = section.settings.mensaje | url_encode
+  assign wa_var = section.settings.mensaje_variedades | url_encode
   assign carta = section.settings.carta_url
 -%}
 <div class="sr kc">
 <style>
 .kc{--ln:rgba(242,132,151,.3)}
 .kc .kc-sec{padding:34px 0}
+.kc .kc-alert{position:relative;display:flex;align-items:center;gap:16px;margin:0 0 16px;padding:18px 18px;border-radius:24px;color:#1A0A0F;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.14) 0 14px,transparent 14px 28px),linear-gradient(135deg,#F9B8C5,#E2587C 70%,#D2406A);box-shadow:0 26px 50px -22px rgba(226,88,124,.95),inset 0 0 0 2px rgba(255,255,255,.35)}
+.kc .kc-clock{position:relative;flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#1A0A0F;color:#F9B8C5}
+.kc .kc-clock svg{width:34px;height:34px}
+.kc .kc-clock::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:3px solid #fff;opacity:0;pointer-events:none;animation:kc-ping 1.9s ease-out infinite;animation-play-state:paused}
+.kc.live .kc-clock::after{animation-play-state:running}
+@keyframes kc-ping{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.5);opacity:0}}
+.kc .kc-alert small{display:block;font:800 .74rem/1 var(--font-body);letter-spacing:.2em;text-transform:uppercase;opacity:.85}
+.kc .kc-alert strong{display:block;margin:6px 0 0;font:800 clamp(1.7rem,7.6vw,2.9rem)/.98 var(--font-display);letter-spacing:-.03em}
+.kc .kc-alert span{display:block;margin-top:6px;font:700 clamp(.95rem,3.6vw,1.12rem)/1.25 var(--font-body)}
+@media (min-width:860px){.kc .kc-alert{padding:22px 30px;gap:24px}.kc .kc-clock{width:84px;height:84px}.kc .kc-clock svg{width:44px;height:44px}}
 .kc .kc-panel{position:relative;overflow:hidden;display:grid;gap:22px;border:1px solid var(--ln);border-radius:30px;padding:22px 18px 26px;background:radial-gradient(90% 70% at 100% 0%,rgba(194,48,72,.42),transparent 68%),radial-gradient(70% 60% at 0% 100%,rgba(240,124,149,.18),transparent 70%),linear-gradient(165deg,#2A1119,#120A0E 72%);box-shadow:0 40px 70px -42px rgba(194,48,72,.7)}
 @media (min-width:860px){.kc .kc-panel{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;gap:38px;padding:34px 38px}}
 .kc .kc-photo{position:relative;margin:0;border-radius:22px;overflow:hidden;aspect-ratio:3/4;background:#120A0E;box-shadow:0 26px 50px -30px rgba(0,0,0,.9)}
 .kc .kc-photo img{display:block;width:100%;height:100%;object-fit:cover}
-.kc .kc-badge{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:99px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 .92rem/1 var(--font-display);box-shadow:0 12px 24px -10px rgba(226,88,124,.9)}
+.kc .kc-badge{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border-radius:99px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 .98rem/1 var(--font-display);box-shadow:0 12px 24px -10px rgba(226,88,124,.9)}
 .kc .kc-badge svg{width:18px;height:18px}
 .kc .kc-eyebrow{display:inline-block;font:700 12.5px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:#1A0A0F;background:linear-gradient(135deg,#F59AAC,#E2587C);padding:8px 14px;border-radius:99px}
-.kc h2{font:800 clamp(2.1rem,8.6vw,3.8rem)/1 var(--font-display);letter-spacing:-.03em;color:#fff;margin:14px 0 0}
+.kc h2{font:800 clamp(2.1rem,8.6vw,3.6rem)/1 var(--font-display);letter-spacing:-.03em;color:#fff;margin:14px 0 0}
 .kc h2 em{font-family:var(--font-chalk);font-style:normal;font-weight:700;color:#F59AAC;font-size:1.2em;letter-spacing:0}
 .kc .kc-lead{margin:14px 0 0;color:#E4D6DA;font-size:clamp(1rem,2.9vw,1.14rem);line-height:1.5}
-.kc .kc-flav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}
-.kc .kc-flav li{padding:9px 14px;border:1px solid var(--ln);border-radius:99px;background:rgba(10,8,10,.55);color:#F3F1EA;font:600 .9rem/1 var(--font-body)}
-.kc .kc-steps{display:grid;gap:10px;margin:20px 0 0;padding:0;list-style:none;counter-reset:k}
+.kc .kc-gh{margin:20px 0 0;font:800 .8rem/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:#F59AAC}
+.kc .kc-flav{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0;padding:0;list-style:none}
+.kc .kc-flav li,.kc .kc-flav a{padding:9px 14px;border:1px solid var(--ln);border-radius:99px;background:rgba(10,8,10,.55);color:#F3F1EA;font:600 .9rem/1 var(--font-body);text-decoration:none}
+.kc .kc-flav a{border-style:dashed;border-color:#F59AAC;color:#F59AAC;font-weight:800}
+.kc .kc-flav a:hover{background:rgba(58,22,32,.75)}
+.kc .kc-steps{display:grid;gap:10px;margin:22px 0 0;padding:0;list-style:none;counter-reset:k}
 .kc .kc-steps li{counter-increment:k;position:relative;padding:14px 14px 14px 58px;border:1px solid var(--ln);border-radius:16px;background:rgba(16,9,13,.92)}
 .kc .kc-steps li::before{content:counter(k);position:absolute;left:14px;top:13px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 1rem/1 var(--font-display)}
 .kc .kc-steps b{display:block;font:800 1rem/1.2 var(--font-display);color:#fff}
@@ -28,12 +42,23 @@
 .kc .kc-go:hover{filter:brightness(1.07);transform:translateY(-2px)}
 .kc .kc-go:active{transform:scale(.98)}
 .kc .kc-go svg{width:26px;height:26px}
+.kc .kc-var{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin:10px 0 0;border:1px solid #F59AAC;border-radius:16px;color:#F3F1EA;font:800 1rem/1 var(--font-display);text-decoration:none;background:rgba(10,8,10,.5)}
+.kc .kc-var:hover{background:rgba(58,22,32,.75)}
 .kc .kc-alt{display:inline-block;margin-top:14px;color:#F3F1EA;font:700 .96rem/1.2 var(--font-body);text-decoration:underline;text-decoration-color:rgba(245,154,172,.6);text-underline-offset:4px}
 .kc .kc-alt:hover{color:#F59AAC}
 .kc .kc-note{margin:14px 0 0;color:#BFB4B7;font:500 .88rem/1.4 var(--font-body)}
+@media (prefers-reduced-motion:reduce){.kc .kc-clock::after{animation:none}}
 </style>
   <section class="kc-sec" id="kuchen" aria-labelledby="kc-h-{{ section.id }}">
     <div class="wrap">
+      <div class="kc-alert" role="note">
+        <span class="kc-clock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg></span>
+        <div>
+          <small>{{ section.settings.aviso_pre }}</small>
+          <strong>{{ section.settings.aviso_titulo }}</strong>
+          <span>{{ section.settings.aviso_texto }}</span>
+        </div>
+      </div>
       <div class="kc-panel">
         <figure class="kc-photo">
           <img src="{{ 'sr-kuchen.jpg' | asset_url }}" alt="Tarta con cobertura rosada, merengues y rodajas de limón frente al letrero de Sabor Rural" width="1200" height="1600" loading="lazy">
@@ -43,37 +68,51 @@
           <span class="kc-eyebrow">{{ section.settings.eyebrow }}</span>
           <h2 id="kc-h-{{ section.id }}">{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h2>
           <p class="kc-lead">{{ section.settings.bajada }}</p>
-          <ul class="kc-flav" aria-label="Kuchen de la carta">
+          <p class="kc-gh">Kuchen</p>
+          <ul class="kc-flav" aria-label="Kuchen">
             {%- assign sabores = section.settings.sabores | split: ',' -%}
             {%- for s in sabores -%}<li>{{ s | strip }}</li>{%- endfor -%}
           </ul>
+          <p class="kc-gh">Pies y tartas</p>
+          <ul class="kc-flav" aria-label="Pies y tartas">
+            {%- assign tartas = section.settings.tartas | split: ',' -%}
+            {%- for s in tartas -%}<li>{{ s | strip }}</li>{%- endfor -%}
+            <li><a href="https://wa.me/{{ wa }}?text={{ wa_var }}" target="_blank" rel="noopener">+ más variedades: consulta</a></li>
+          </ul>
           <ol class="kc-steps">
-            <li><b>Elige tu kuchen</b><span>Escoge el sabor que más te guste.</span></li>
+            <li><b>Elige tu kuchen, pie o tarta</b><span>Escoge el que más te guste o consulta las variedades.</span></li>
             <li><b>Escríbenos por WhatsApp</b><span>Pídelo con un día de anticipación.</span></li>
-            <li><b>Retíralo al día siguiente</b><span>Pasa por Sabor Rural, Ruta J-60 km 95, Licantén.</span></li>
+            <li><b>Retíralo en 24 horas</b><span>Pasa por Sabor Rural, Ruta J-60 km 95, Licantén.</span></li>
           </ol>
           <a class="kc-go" href="https://wa.me/{{ wa }}?text={{ wa_txt }}" target="_blank" rel="noopener">{{ section.settings.boton }}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <a class="kc-alt" href="{{ carta }}">Ver los kuchen y sus precios en la carta</a>
-          <p class="kc-note">Consulta por WhatsApp el valor y el tamaño del kuchen entero.</p>
+          <a class="kc-var" href="https://wa.me/{{ wa }}?text={{ wa_var }}" target="_blank" rel="noopener">Consultar variedades disponibles</a>
+          <a class="kc-alt" href="{{ carta }}">Ver los precios en la carta</a>
+          <p class="kc-note">Consulta por WhatsApp el valor y el tamaño del kuchen o la tarta entera.</p>
         </div>
       </div>
     </div>
   </section>
 </div>
+<script>(function(){var s=document.querySelector('.kc');if(!s)return;if(!('IntersectionObserver' in window)){s.classList.add('live');return}new IntersectionObserver(function(es){es.forEach(function(e){s.classList.toggle('live',e.isIntersecting)})},{rootMargin:'80px'}).observe(s)})();</script>
 {% schema %}
 {
  "name": "Sabor Rural: kuchen",
  "settings": [
-  {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Pastelería por encargo"},
+  {"type": "text", "id": "aviso_pre", "label": "Banner: texto pequeño", "default": "Importante antes de pedir"},
+  {"type": "text", "id": "aviso_titulo", "label": "Banner: título", "default": "Disponible en 24 horas"},
+  {"type": "text", "id": "aviso_texto", "label": "Banner: bajada", "default": "Encárgalo hoy y retíralo mañana. Pídelo con un día de anticipación."},
+  {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Kuchen, pies y tartas"},
   {"type": "text", "id": "titulo_a", "label": "Título", "default": "Encarga tu"},
   {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "kuchen"},
-  {"type": "text", "id": "insignia", "label": "Insignia sobre la foto", "default": "Disponible al día siguiente"},
-  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Pídelo hoy y retíralo mañana. Hecho desde cero, sin premezclas ni conservantes."},
-  {"type": "text", "id": "sabores", "label": "Sabores (separados por coma)", "default": "Berries, Frambuesa, Frutilla, Manzana canela y nuez, Nuez"},
-  {"type": "text", "id": "boton", "label": "Texto del botón", "default": "Encargar mi kuchen"},
-  {"type": "text", "id": "mensaje", "label": "Mensaje de WhatsApp", "default": "Hola Sabor Rural, quiero encargar un kuchen para mañana."},
+  {"type": "text", "id": "insignia", "label": "Insignia sobre la foto", "default": "Disponible en 24 horas"},
+  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Kuchen, pies y tartas hechos desde cero, sin premezclas ni conservantes. Elige el tuyo y retíralo en 24 horas."},
+  {"type": "text", "id": "sabores", "label": "Kuchen (separados por coma)", "default": "Berries, Frambuesa, Frutilla, Manzana canela y nuez, Nuez"},
+  {"type": "text", "id": "tartas", "label": "Pies y tartas (separados por coma)", "default": "Pie de limón, Pie de coco, Banoffee, Tarta Snickers, Tarta chocolate y pistacho, Frambuesa miga"},
+  {"type": "text", "id": "boton", "label": "Texto del botón", "default": "Encargar ahora"},
+  {"type": "text", "id": "mensaje", "label": "Mensaje de WhatsApp (encargar)", "default": "Hola Sabor Rural, quiero encargar un kuchen o tarta para mañana."},
+  {"type": "text", "id": "mensaje_variedades", "label": "Mensaje de WhatsApp (variedades)", "default": "Hola Sabor Rural, ¿qué variedades de kuchen, pies y tartas tienen para encargar?"},
   {"type": "text", "id": "whatsapp", "label": "WhatsApp (números, con código de país)", "default": "56992101764"},
   {"type": "text", "id": "carta_url", "label": "Enlace de la carta", "default": "/pages/carta"}
  ],
