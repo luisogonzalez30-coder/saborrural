@@ -78,7 +78,7 @@
           {%- endcase -%}
           <article class="gp-card">
             <div class="gp-top"><img src="{{ 'sr-logo-blanco.png' | file_url }}" alt="Sabor Rural" width="46" height="46" loading="lazy"><span class="gp-tag">Gift card</span></div>
-            <div><div class="gp-amt">{{ p.price | money_without_trailing_zeros }}</div><p class="gp-for">{{ para }}</p></div>
+            <div><div class="gp-amt">{% render 'sr-clp', c: p.price %}</div><p class="gp-for">{{ para }}</p></div>
             <div class="gp-foot"><span>Sabor Rural · Licantén</span>
               {%- if p.available -%}<button type="button" class="gp-buy" data-vid="{{ v.id }}">Comprar</button>{%- endif -%}
             </div>

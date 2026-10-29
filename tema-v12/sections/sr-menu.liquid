@@ -240,7 +240,7 @@
         <dl>
           {%- for p in block.settings.coleccion.products -%}
             {%- assign dn = p.title | remove: 'Delivery ' | strip -%}
-            <div><dt>{{ dn | slice: 0 | upcase }}{{ dn | slice: 1, 60 }}</dt><dd>{{ p.price | money_without_trailing_zeros }}</dd></div>
+            <div><dt>{{ dn | slice: 0 | upcase }}{{ dn | slice: 1, 60 }}</dt><dd>{% render 'sr-clp', c: p.price %}</dd></div>
           {%- endfor -%}
         </dl>
         <p style="margin-top:12px"><a href="https://wa.me/{{ wa }}?text={{ wa_pedir }}" target="_blank" rel="noopener">Pide con delivery por WhatsApp →</a></p>

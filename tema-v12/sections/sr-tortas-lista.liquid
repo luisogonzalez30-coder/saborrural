@@ -74,6 +74,12 @@
 .tl .tl-msg b{display:block;margin-bottom:6px;font:700 .72rem/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:#F28497}
 .tl .tl-go{display:flex;align-items:center;justify-content:center;gap:10px;min-height:60px;border-radius:16px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 1.15rem/1 var(--font-display);text-decoration:none;box-shadow:0 16px 30px -14px rgba(226,88,124,.9)}
 .tl .tl-go:hover{filter:brightness(1.07)}
+.tl button.tl-go{width:100%;border:0;cursor:pointer}
+.tl button.tl-go:disabled{cursor:not-allowed;filter:grayscale(.55) brightness(.8)}
+.tl .tl-wa{display:block;text-align:center;color:#F3F1EA;font:700 .92rem/1.2 var(--font-body);text-decoration:underline;text-decoration-color:rgba(245,154,172,.6);text-underline-offset:4px}
+.tl .tl-why{margin:0;color:#F8B7C4;font:600 .86rem/1.35 var(--font-body);text-align:center}
+.tl .tl-why:empty{display:none}
+.tl .tl-lbl{font:700 .88rem/1.2 var(--font-body);color:#E4D6DA}
 .tl .tl-fine{margin:0;color:#A9ABA3;font-size:.82rem;text-align:center}
 .tl .tl-insp{padding:10px 0 50px}
 .tl .tl-insp h2{font:800 clamp(1.5rem,4.6vw,2rem)/1.1 var(--font-display);margin-bottom:14px}
@@ -133,7 +139,7 @@
       <span class="tl-eyebrow">{{ section.settings.eyebrow }}</span>
       <h1 id="tl-h-{{ section.id }}">{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h1>
       <p class="tl-lead">{{ section.settings.bajada }}</p>
-      <ul class="tl-chips"><li>28 sabores</li><li>De 15 a 40 personas</li><li>Reserva con abono</li><li>Mínimo 3 días de anticipación</li></ul>
+      <ul class="tl-chips"><li>28 sabores</li><li>De 15 a 40 personas</li><li>Pagas en línea</li><li>Mínimo 3 días completos</li><li>Retiro gratis</li></ul>
       <div class="tl-esp">
         <span class="tl-esp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></span>
         <p class="tl-esp-t"><b>{{ section.settings.esp_titulo }}</b><span>{{ section.settings.esp_texto }}</span></p>
@@ -168,26 +174,21 @@
 
         <div class="tl-step">
           <h2><b>3</b>Cuéntanos cómo la quieres</h2>
-          <p class="tl-sub">Fecha, entrega y el mensaje que quieres en tu torta.</p>
+          <p class="tl-sub">Fecha, horario de retiro y el mensaje que quieres en tu torta.</p>
           <div class="tl-form">
             <div class="tl-two">
               <div class="tl-fld"><label for="tlOc">Ocasión</label>
                 <select id="tlOc"><option>Cumpleaños</option><option>Aniversario</option><option>Bautizo o comunión</option><option>Matrimonio</option><option>Otra ocasión</option></select></div>
               <div class="tl-fld"><label for="tlFe">Fecha que la necesitas</label><input id="tlFe" type="date">
-                <span class="tl-help tl-help-pk">Mínimo 3 días de anticipación para agendar y retirar tu torta.</span></div>
+                <span class="tl-help tl-help-pk" id="tlFeH">Mínimo 3 días completos de anticipación.</span></div>
             </div>
 
-            <div class="tl-fld">
-              <label id="tlEnL">Entrega</label>
-              <div class="tl-ent" role="radiogroup" aria-labelledby="tlEnL">
-                <button type="button" class="tl-opt" role="radio" data-e="retiro" aria-checked="true"><b>Retiro en local</b><small>Ruta J-60, km 95, Sector Lora, Licantén</small></button>
-                <button type="button" class="tl-opt" role="radio" data-e="despacho" aria-checked="false"><b>Despacho</b><small>Licantén, Licantén zona costa, Curepto, Hualañé y Vichuquén</small></button>
-              </div>
-              <div class="tl-zona" id="tlZona" hidden>
-                <label for="tlZ">¿A qué zona?</label>
-                <select id="tlZ"><option>Licantén</option><option>Licantén zona costa</option><option>Curepto</option><option>Hualañé</option><option>Vichuquén</option></select>
-                <span class="tl-help">Coordinamos el despacho por WhatsApp.</span>
-              </div>
+            <div class="tl-two">
+              <div class="tl-fld"><span class="tl-lbl">Entrega</span>
+                <div class="tl-opt" aria-checked="true" style="cursor:default"><b>Retiro gratis en el local</b><small>Ruta J-60, km 95, Sector Lora, Licantén</small></div></div>
+              <div class="tl-fld"><label for="tlHr">Horario de retiro</label>
+                <select id="tlHr"></select>
+                <span class="tl-help">Lunes a viernes de 9:00 a 21:00 · Sábado y domingo de 14:00 a 21:00.</span></div>
             </div>
 
             <div class="tl-write">
@@ -198,10 +199,10 @@
 
             <div class="tl-two">
               <div class="tl-fld"><label for="tlNo2">Tu nombre</label><input id="tlNo2" type="text" placeholder="Cómo te llamas" autocomplete="given-name"></div>
-              <div class="tl-fld"><label for="tlId">Decoración y otros detalles</label>
-                <textarea id="tlId" placeholder="Ej.: cobertura blanca, flores, colores, fondant, tema del cumpleaños"></textarea></div>
+              <div class="tl-fld"><label for="tlId">Comentarios (opcional)</label>
+                <textarea id="tlId" placeholder="Ej.: color de la crema, sin nueces"></textarea></div>
             </div>
-            <span class="tl-help">Si tienes una foto de inspiración, envíala por el chat de WhatsApp después de abrirlo.</span>
+            <span class="tl-help">Aquí se encargan tortas sin diseño especial. Si quieres diseño, fondant o figuras, <a id="tlEsp3" href="https://wa.me/{{ wa }}?text={{ section.settings.esp_mensaje | url_encode }}" target="_blank" rel="noopener" style="color:#F59AAC;font-weight:700">escríbenos por WhatsApp</a>.</span>
           </div>
         </div>
       </div>
@@ -211,12 +212,14 @@
         <ul class="tl-rows">
           <li><span>Torta</span><b id="sTorta">Sin elegir</b></li>
           <li><span>Para</span><b id="sPers">20 personas</b></li>
+          <li><span>Retiro</span><b id="sRet">Elige fecha y horario</b></li>
         </ul>
-        <div class="tl-total"><span>Valor referencial</span><strong id="sTot">—</strong></div>
-        <div class="tl-msg" id="sMsg"><b>Así llegará tu mensaje</b><span></span></div>
-        <a class="tl-go" id="sGo" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+        <div class="tl-total"><span>Total</span><strong id="sTot">—</strong></div>
+        <p class="tl-why" id="sWhy"></p>
+        <button type="button" class="tl-go" id="sPay">Pagar y agendar</button>
+        <a class="tl-wa" id="sGo" href="#" target="_blank" rel="noopener">Prefiero pedir por WhatsApp</a>
         <p class="tl-esp-2">¿Diseño, fondant o algo especial? <a id="tlEsp2" href="https://wa.me/{{ wa }}?text={{ section.settings.esp_mensaje | url_encode }}" target="_blank" rel="noopener">Escríbenos</a></p>
-        <p class="tl-fine">Te confirmamos disponibilidad y valor final por WhatsApp. La fecha se reserva con un abono y se agenda con mínimo 3 días de anticipación.</p>
+        <p class="tl-fine">Pagas el total en línea con Mercado Pago y retiras gratis en el local. Tortas sin diseño: mínimo 3 días completos de anticipación.</p>
       </aside>
     </div>
 
@@ -233,7 +236,15 @@
     <p class="tl-info"><b>Sabor Rural</b> · Ruta J-60, km 95, Sector Lora, Licantén<br>Lunes a viernes 9:00 – 21:00 · Sábado y domingo 14:00 – 21:00</p>
   </div>
 
-<script type="application/json" id="tlData">[
+{%- assign tp = all_products[section.settings.producto] -%}
+<script type="application/json" id="tlData">
+{%- if tp.id -%}[
+{%- for sabor in tp.options_with_values[0].values -%}
+{%- assign sn = sabor | append: '' -%}{%- assign ps = '' -%}{%- assign vs = '' -%}
+{%- for v in tp.variants -%}{%- if v.option1 == sn -%}{%- assign pr = v.price | divided_by: 100 -%}{%- assign ps = ps | append: ',' | append: pr -%}{%- assign vs = vs | append: ',' | append: v.id -%}{%- endif -%}{%- endfor -%}
+[{{ sn | json }}{{ ps }},[{{ vs | remove_first: ',' }}]]{%- unless forloop.last -%},{%- endunless -%}
+{%- endfor -%}]
+{%- else -%}[
 ["Durazno",25500,34000,42500,51000,59500,68000],
 ["Piña",25500,34000,42500,51000,59500,68000],
 ["Selva negra",25500,34000,42500,51000,59500,68000],
@@ -262,7 +273,8 @@
 ["Panqueque chocolate",30000,40000,50000,60000,70000,80000],
 ["Panqueque lúcuma manjar",30000,40000,50000,60000,70000,80000],
 ["Panqueque chocolate naranja",30000,40000,50000,60000,70000,80000]
-]</script>
+]{%- endif -%}
+</script>
 <script type="application/json" id="tlDet">{
 "durazno": "Bizcocho de vainilla, trozos de durazno, manjar y crema chantilly.",
 "pina": "Bizcocho de vainilla, trozos de piña y crema chantilly.",
@@ -292,6 +304,7 @@
 "panqueque lucuma manjar": "Finas capas de panqueque rellenas de crema de lúcuma y manjar.",
 "panqueque chocolate naranja": "Finas capas de panqueque rellenas de crema de naranja y chocolate."
 }</script>
+{%- render 'sr-pagar' -%}
 <script>
 (function () {
   var root = document.getElementById('tl'); if (!root) return;
@@ -324,16 +337,22 @@
     fl.appendChild(b);
   });
   $('tlQ').addEventListener('input', function () { st.q = norm(this.value.trim()); render(); });
-  ['tlOc', 'tlFe', 'tlZ', 'tlNo2', 'tlId', 'tlMs'].forEach(function (id) { $(id).addEventListener('input', summary); $(id).addEventListener('change', summary); });
-  Array.prototype.forEach.call(root.querySelectorAll('.tl-opt'), function (b) {
-    b.addEventListener('click', function () {
-      st.e = b.getAttribute('data-e');
-      Array.prototype.forEach.call(root.querySelectorAll('.tl-opt'), function (x) { x.setAttribute('aria-checked', String(x === b)); });
-      $('tlZona').hidden = st.e !== 'despacho'; summary();
-    });
-  });
-  /* mínimo 3 días de anticipación */
-  var min = new Date(); min.setDate(min.getDate() + 3); $('tlFe').min = iso(min);
+  ['tlOc', 'tlHr', 'tlNo2', 'tlId', 'tlMs'].forEach(function (id) { $(id).addEventListener('input', summary); $(id).addEventListener('change', summary); });
+  $('tlFe').addEventListener('change', function () { horarios(); summary(); }); $('tlFe').addEventListener('input', function () { horarios(); summary(); });
+  /* tortas sin diseño: mínimo 3 días completos entre el pedido y el retiro (si pides el lunes, retiras desde el viernes) */
+  var min = new Date(); min.setDate(min.getDate() + 4); var MIN = iso(min); $('tlFe').min = MIN;
+  $('tlFeH').textContent = 'Mínimo 3 días completos de anticipación: la primera fecha disponible es el ' + fecha(MIN) + '.';
+  var SEMANA = ['9:00 a 12:00', '12:00 a 15:00', '15:00 a 18:00', '18:00 a 21:00'], FINDE = ['14:00 a 17:00', '17:00 a 21:00'];
+  function horarios() {
+    var hr = $('tlHr'), v = $('tlFe').value, prev = hr.value; hr.textContent = '';
+    if (!v) { hr.appendChild(el('option', null, 'Elige primero la fecha')); hr.options[0].value = ''; hr.disabled = true; return; }
+    var p = v.split('-'), dia = new Date(+p[0], +p[1] - 1, +p[2]).getDay(), list = (dia === 0 || dia === 6) ? FINDE : SEMANA;
+    hr.disabled = false; hr.appendChild(el('option', null, 'Elige un horario')); hr.options[0].value = '';
+    list.forEach(function (h) { var o = el('option', null, h + ' hrs'); o.value = h; hr.appendChild(o); });
+    if (list.indexOf(prev) >= 0) hr.value = prev;
+  }
+  horarios();
+  var DESIGN = false;
 
   function match(row) {
     var name = norm(row[0]);
@@ -377,34 +396,45 @@
   function summary() {
     var row = st.sel >= 0 ? DATA[st.sel] : null, big = st.n === 'mas';
     var price = row && !big ? row[1 + idx(st.n)] : null, det = row ? detalle(row) : '';
+    var vid = row && !big && row[7] ? row[7][idx(st.n)] : null;
+    var fe = $('tlFe').value, hr = $('tlHr').value, fechaOk = !!fe && fe >= MIN;
     $('sTorta').textContent = row ? row[0] : 'Sin elegir';
     $('sPers').textContent = big ? 'Más de 40 personas' : st.n + ' personas';
+    $('sRet').textContent = fechaOk && hr ? fecha(fe) + ', ' + hr + ' hrs' : 'Elige fecha y horario';
     $('sTot').textContent = big ? 'A medida' : (price ? clp(price) : '—');
     var nom = $('tlNo2').value.trim() || '[tu nombre]', idea = $('tlId').value.trim(), msj = $('tlMs').value.trim();
-    var entrega = st.e === 'despacho' ? 'Despacho a ' + $('tlZ').value : 'Retiro en local';
     var t = 'Hola Sabor Rural, soy ' + nom + '. Quiero encargar una torta:' +
       '\n• Torta: ' + (row ? row[0] : 'por definir') +
       (det ? '\n• Lleva: ' + det : '') +
       '\n• Para: ' + (big ? 'más de 40 personas (necesito cotización personalizada)' : st.n + ' personas') +
-      (price ? '\n• Valor referencial: ' + clp(price) : '') +
+      (price ? '\n• Valor: ' + clp(price) : '') +
       '\n• Ocasión: ' + $('tlOc').value +
-      '\n• Fecha: ' + fecha($('tlFe').value) +
-      '\n• Entrega: ' + entrega +
+      '\n• Retiro en el local: ' + fecha(fe) + (hr ? ', ' + hr + ' hrs' : '') +
       '\n• Mensaje escrito en la torta: ' + (msj || 'sin mensaje') +
-      '\n• Decoración y otros detalles: ' + (idea || 'por definir') +
-      '\n¿Me confirmas disponibilidad y valor final?';
-    $('sMsg').querySelector('span').textContent = t;
+      (idea ? '\n• ' + (DESIGN ? 'Idea' : 'Comentarios') + ': ' + idea : '') +
+      '\n¿Me confirmas disponibilidad?';
     $('sGo').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t);
-    $('sGo').textContent = big ? 'Cotizar por WhatsApp' : 'Enviar pedido por WhatsApp';
+    var why = big ? 'Para más de 40 personas cotizamos por WhatsApp.' : DESIGN ? 'Esta torta lleva diseño: la cotizamos por WhatsApp.' : !row ? 'Elige un sabor.' : !vid ? 'Este sabor se pide por WhatsApp.' : !fechaOk ? 'Elige una fecha desde el ' + fecha(MIN) + '.' : !hr ? 'Elige el horario de retiro.' : '';
+    var pay = $('sPay'), solo = big || DESIGN;
+    pay.hidden = solo; pay.disabled = !!why; $('sWhy').textContent = why;
+    pay.textContent = !why ? 'Pagar ' + clp(price) + ' y agendar' : 'Pagar y agendar';
+    $('sGo').textContent = solo ? (big ? 'Cotizar por WhatsApp' : 'Cotizar mi diseño por WhatsApp') : 'Prefiero pedir por WhatsApp';
+    $('sGo').className = solo ? 'tl-go' : 'tl-wa';
     var e = 'Hola Sabor Rural, soy ' + nom + '. Mi torta lleva un diseño especial, fondant u otro requisito y quiero consultarlo.' +
       (big ? '\nTamaño: más de 40 personas.' : '\nTamaño: ' + st.n + ' personas.') + (row ? '\nSabor que me gusta: ' + row[0] + '.' : '') + (idea ? '\nIdea: ' + idea : '');
-    $('tlEsp').href = $('tlEsp2').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(e);
+    $('tlEsp').href = $('tlEsp2').href = $('tlEsp3').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(e);
   }
+  $('sPay').addEventListener('click', function () {
+    var row = st.sel >= 0 ? DATA[st.sel] : null; if (!row || !row[7] || st.n === 'mas') return;
+    var props = { 'Retiro': fecha($('tlFe').value) + ', ' + $('tlHr').value + ' hrs', 'Ocasión': $('tlOc').value, 'Mensaje en la torta': $('tlMs').value.trim() || 'Sin mensaje' };
+    var c = $('tlId').value.trim(); if (c) props['Comentarios'] = c;
+    window.SRPay.buy([{ id: +row[7][idx(st.n)], quantity: 1, properties: props }], this);
+  });
   if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { root.classList.toggle('live', es[0].isIntersecting); }).observe(document.querySelector('.tl-esp'));
   /* datos que llegan desde la portada ("Quiero una así", torta de novios) */
   try {
     var q = new URLSearchParams(window.location.search);
-    if (q.get('idea')) $('tlId').value = q.get('idea');
+    if (q.get('idea')) { $('tlId').value = q.get('idea'); DESIGN = true; }
     if (q.get('ocasion')) { var oc = $('tlOc'); Array.prototype.forEach.call(oc.options, function (o) { if (o.text === q.get('ocasion') || o.value === q.get('ocasion')) oc.value = o.value; }); }
     var pn = q.get('personas'); if (pn === 'mas') st.n = 'mas'; else if (pn && idx(+pn) >= 0) st.n = +pn;
   } catch (e) {}
@@ -419,12 +449,13 @@
   {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Tortas por encargo"},
   {"type": "text", "id": "titulo_a", "label": "Título", "default": "Elige tu"},
   {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "torta"},
-  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Elige cuántas personas, escoge el sabor y mira el valor al tiro. Envías tu pedido por WhatsApp y reservas tu fecha con un abono."},
+  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Elige cuántas personas, escoge el sabor y mira el valor al tiro. Pagas en línea y la retiras gratis en el local. Diseños especiales, por WhatsApp."},
   {"type": "text", "id": "foto", "label": "Foto principal (archivo de Contenido > Archivos)", "default": "sr-encargo-corazon.jpg"},
   {"type": "text", "id": "esp_titulo", "label": "Aviso de diseño especial: título", "default": "¿Tu torta lleva diseño, fondant o algo especial?"},
   {"type": "text", "id": "esp_texto", "label": "Aviso de diseño especial: texto", "default": "Cuéntanos tu idea y la cotizamos a tu medida."},
   {"type": "text", "id": "esp_boton", "label": "Aviso de diseño especial: botón", "default": "Contáctanos por WhatsApp"},
   {"type": "text", "id": "esp_mensaje", "label": "Aviso de diseño especial: mensaje de WhatsApp", "default": "Hola Sabor Rural, mi torta lleva un diseño especial, fondant u otro requisito y quiero consultarlo."},
+  {"type": "text", "id": "producto", "label": "Producto de tortas (handle)", "default": "torta-encargo", "info": "Opciones: Sabor y Personas. Los precios de la página salen de aquí."},
   {"type": "text", "id": "whatsapp", "label": "WhatsApp (con código de país, sin +)", "default": "56992101764"}
  ],
  "presets": [{"name": "Sabor Rural: tortas"}]

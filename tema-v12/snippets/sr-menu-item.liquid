@@ -3,14 +3,14 @@
   <div class="mn-line">
     <span class="mn-nm">{{ p.title }}</span>
     <i class="mn-dots" aria-hidden="true"></i>
-    <span class="mn-pr">{%- if p.price_varies -%}<small>desde</small>{%- endif -%}{{ p.price | money_without_trailing_zeros }}</span>
+    <span class="mn-pr">{%- if p.price_varies -%}<small>desde</small>{%- endif -%}{% render 'sr-clp', c: p.price %}</span>
   </div>
   {%- if p.description != blank -%}<span class="mn-ds">{{ p.description | strip_html | truncate: 300 }}</span>{%- endif -%}
   {%- if p.available and p.price > 0 -%}
   <div class="mn-add">
     {%- unless p.has_only_default_variant -%}
       <select class="mn-var" aria-label="Opción de {{ p.title | escape }}">
-        {%- for v in p.variants -%}{%- if v.available -%}<option value="{{ v.id }}">{{ v.title }}{% if p.price_varies %} · {{ v.price | money_without_trailing_zeros }}{% endif %}</option>{%- endif -%}{%- endfor -%}
+        {%- for v in p.variants -%}{%- if v.available -%}<option value="{{ v.id }}">{{ v.title }}{% if p.price_varies %} · {% render 'sr-clp', c: v.price %}{% endif %}</option>{%- endif -%}{%- endfor -%}
       </select>
     {%- endunless -%}
     <button type="button" class="mn-addb" data-vid="{{ p.selected_or_first_available_variant.id }}" aria-label="Agregar {{ p.title | escape }} al pedido">+ Agregar</button>

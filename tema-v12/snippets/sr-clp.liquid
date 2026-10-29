@@ -1,0 +1,16 @@
+{%- comment -%} Precio en pesos chilenos con punto de miles ($3.000), sin depender del formato de moneda de la tienda. Parámetro: c (precio en centavos de Liquid) {%- endcomment -%}
+{%- liquid
+  assign n = c | divided_by: 100
+  if n >= 1000000
+    assign a = n | divided_by: 1000000
+    assign b = n | modulo: 1000000 | divided_by: 1000 | plus: 1000 | append: '' | slice: 1, 3
+    assign d = n | modulo: 1000 | plus: 1000 | append: '' | slice: 1, 3
+    echo '$' | append: a | append: '.' | append: b | append: '.' | append: d
+  elsif n >= 1000
+    assign a = n | divided_by: 1000
+    assign d = n | modulo: 1000 | plus: 1000 | append: '' | slice: 1, 3
+    echo '$' | append: a | append: '.' | append: d
+  else
+    echo '$' | append: n
+  endif
+-%}

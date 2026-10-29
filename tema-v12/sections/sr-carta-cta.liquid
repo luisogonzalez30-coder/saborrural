@@ -81,7 +81,7 @@
               {%- else -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v3M11 3v3M14 3v3"/></svg>
               {%- endcase -%}
               <b>{{ block.settings.titulo }}</b>
-              {%- if minp > 0 -%}<small>desde {{ minp | money_without_trailing_zeros }}</small>{%- endif -%}
+              {%- if minp > 0 -%}<small>desde {% render 'sr-clp', c: minp %}</small>{%- endif -%}
             </a>
           {%- endfor -%}
         </div>
@@ -96,7 +96,7 @@
             {%- for pass in (1..2) -%}
               {%- for block in section.blocks -%}
                 {%- for p in block.settings.coleccion.products limit: 6 -%}
-                  {%- unless p.tags contains 'no-carta' -%}<span>{{ p.title | truncate: 34 }}<b>{{ p.price | money_without_trailing_zeros }}</b></span>{%- endunless -%}
+                  {%- unless p.tags contains 'no-carta' -%}<span>{{ p.title | truncate: 34 }}<b>{% render 'sr-clp', c: p.price %}</b></span>{%- endunless -%}
                 {%- endfor -%}
               {%- endfor -%}
             {%- endfor -%}
