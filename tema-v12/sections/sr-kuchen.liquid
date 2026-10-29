@@ -10,7 +10,7 @@
 .kc .kc-sec{padding:34px 0}
 .kc .kc-alert{position:relative;display:flex;align-items:center;gap:16px;margin:0 0 16px;padding:18px 18px;border-radius:24px;color:#1A0A0F;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.14) 0 14px,transparent 14px 28px),linear-gradient(135deg,#F9B8C5,#E2587C 70%,#D2406A);box-shadow:0 26px 50px -22px rgba(226,88,124,.95),inset 0 0 0 2px rgba(255,255,255,.35)}
 .kc .kc-clock{position:relative;flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#1A0A0F;color:#F9B8C5}
-.kc .kc-clock svg{width:34px;height:34px}
+.kc .kc-clock svg{position:absolute;left:50%;top:50%;width:34px;height:34px;margin:0;transform:translate(-50%,-50%);display:block}
 .kc .kc-clock::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:3px solid #fff;opacity:0;pointer-events:none;animation:kc-ping 1.9s ease-out infinite;animation-play-state:paused}
 .kc.live .kc-clock::after{animation-play-state:running}
 @keyframes kc-ping{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.5);opacity:0}}
