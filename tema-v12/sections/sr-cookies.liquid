@@ -1,6 +1,19 @@
 {{ 'sr-extra.css' | asset_url | stylesheet_tag }}
+<style>
+.sr .cookies{isolation:isolate}
+.sr .ck-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;background:#0C0D0F}
+.sr .ck-bg img,.sr .ck-bg video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:.6}
+.sr .ck-bg video{opacity:0;transition:opacity 1.2s ease}
+.sr .ck-bg video.on{opacity:.6}
+.sr .ck-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0C0D0F 0%,rgba(12,13,15,.35) 18%,rgba(12,13,15,.55) 70%,#0C0D0F 100%),linear-gradient(90deg,rgba(12,13,15,.5),rgba(194,48,72,.14))}
+@media (prefers-reduced-motion:reduce){.sr .ck-bg video{display:none}}
+</style>
 <div class="sr">
   <section id="cookies" class="cookies">
+    <div class="ck-bg" aria-hidden="true">
+      <img src="{{ 'sr-cookies-bg.jpg' | asset_url }}" alt="" width="640" height="360" loading="lazy">
+      <video muted loop playsinline preload="none" tabindex="-1" data-src="{{ 'sr-cookies-bg.mp4' | file_url }}"></video>
+    </div>
     <div class="wrap">
       <div class="n-head">
         <p class="eyebrow">Cookies</p>
@@ -32,6 +45,27 @@
   </section>
 </div>
 <script src="{{ 'sr-extra.js' | asset_url }}" defer></script>
+<script>
+/* Video de fondo: se carga y se reproduce solo mientras la sección está en pantalla. En celulares básicos (modo liviano),
+   con ahorro de datos o con "reducir movimiento" no se descarga: queda la foto difuminada. */
+(function () {
+  var sec = document.getElementById('cookies'); if (!sec) return;
+  var v = sec.querySelector('.ck-bg video'); if (!v || !('IntersectionObserver' in window)) return;
+  var c = navigator.connection || {};
+  if (document.documentElement.classList.contains('sr-lite') || c.saveData || /(^|-)2g$/.test(c.effectiveType || '') ||
+      (window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches)) return;
+  var loaded = false;
+  v.addEventListener('playing', function () { v.classList.add('on'); });
+  new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting) {
+        if (!loaded) { v.src = v.getAttribute('data-src'); loaded = true; }
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+      } else if (loaded) { v.pause(); }
+    });
+  }, { rootMargin: '60px' }).observe(sec);
+})();
+</script>
 {% schema %}
 {
  "name": "Sabor Rural: cookies",
