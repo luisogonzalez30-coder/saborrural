@@ -1,0 +1,33 @@
+{%- comment -%}
+  Ayudante de pago: agrega productos al carrito de Shopify y abre el checkout, donde se paga con Mercado Pago.
+  Se puede renderizar en varias secciones de la misma página: el objeto se define una sola vez.
+{%- endcomment -%}
+<script>
+window.SRPay = window.SRPay || (function () {
+  var R = {{ routes.root_url | json }}.replace(/\/$/, '');
+  function json(res) { return res.json().then(function (j) { if (!res.ok) throw new Error(j.description || j.message || 'No se pudo agregar'); return j; }); }
+  var api = {
+    add: function (items) {
+      return fetch(R + '/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ items: items }) }).then(json);
+    },
+    cart: function () { return fetch(R + '/cart.js', { headers: { Accept: 'application/json' } }).then(json); },
+    checkout: function () { location.href = R + '/checkout'; },
+    cartUrl: R + '/cart',
+    busy: function (btn, on, txt) {
+      if (!btn) return;
+      if (on) { btn.setAttribute('data-txt', btn.textContent); btn.textContent = txt || 'Abriendo el pago…'; btn.disabled = true; btn.setAttribute('aria-busy', 'true'); }
+      else { if (btn.hasAttribute('data-txt')) btn.textContent = btn.getAttribute('data-txt'); btn.disabled = false; btn.removeAttribute('aria-busy'); }
+    },
+    buy: function (items, btn) {
+      api.busy(btn, true);
+      return api.add(items).then(api.checkout).catch(function (e) {
+        api.busy(btn, false);
+        alert('No pudimos abrir el pago (' + e.message + '). Inténtalo de nuevo o escríbenos por WhatsApp.');
+      });
+    }
+  };
+  /* al volver atrás desde el pago, el navegador puede restaurar el botón como "Abriendo el pago…" */
+  window.addEventListener('pageshow', function () { Array.prototype.forEach.call(document.querySelectorAll('[aria-busy="true"]'), function (b) { api.busy(b, false); }); });
+  return api;
+})();
+</script>

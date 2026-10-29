@@ -67,6 +67,21 @@
 .mn-ds{display:block;margin-top:5px;max-width:46em;color:#A9ABA3;font-size:.94rem;line-height:1.42}
 .mn-opt{display:block;margin-top:5px;color:#C9C7BE;font-size:.88rem}
 .mn-opt b{color:var(--pk);font-weight:700}
+.mn-add{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:9px}
+.mn-var{min-height:38px;max-width:100%;padding:0 10px;border-radius:9px;border:1px solid rgba(243,241,234,.25);background:#15171B;color:#F3F1EA;font:600 14px/1 var(--font-body)}
+.mn-addb{min-height:38px;padding:0 14px;border-radius:9px;border:1.5px solid var(--pk);background:transparent;color:var(--pk);font:700 14px/1 var(--font-body);cursor:pointer;transition:all .15s}
+.mn-addb:hover{background:var(--pk);color:#1A0A0F}
+.mn-addb.ok{background:var(--pk);color:#1A0A0F}
+.mn-addb:disabled{opacity:.6;cursor:wait}
+.mn-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px max(12px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px));background:rgba(12,13,15,.96);border-top:1px solid var(--ln);box-shadow:0 -18px 40px -20px #000;transform:translateY(110%);transition:transform .25s}
+.mn-bar.on{transform:none}
+.mn-bar .mn-wrap{display:flex;align-items:center;gap:10px}
+.mn-bar-t{flex:1;min-width:0;font:600 13.5px/1.25 var(--font-body);color:#C9C7BE}
+.mn-bar-t b{display:block;font:800 1.25rem/1.1 var(--font-display);color:#fff}
+.mn-bar a,.mn-bar button{flex:none;display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 16px;border-radius:10px;font:700 15px/1 var(--font-body);text-decoration:none;cursor:pointer}
+.mn-bar a{border:1.5px solid rgba(243,241,234,.35);color:#F3F1EA}
+.mn-bar button{border:0;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font-weight:800}
+.mn.has-bar{padding-bottom:84px}
 .mn-empty{display:none;text-align:center;color:#A9ABA3;padding:30px 0 50px}
 .mn-empty.on{display:block}
 @media (min-width:900px){
@@ -112,9 +127,11 @@
       <span class="mn-badge"><i></i>{{ section.settings.horario_finde }}</span>
     </div>
     <div class="mn-act">
-      <a class="mn-btn p" href="https://wa.me/{{ wa }}?text={{ wa_pedir }}" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+      <a class="mn-btn p" href="#cat-1">Pide y paga en línea</a>
+      <a class="mn-btn" href="https://wa.me/{{ wa }}?text={{ wa_pedir }}" target="_blank" rel="noopener">Pedir por WhatsApp</a>
       <a class="mn-btn" href="{{ section.settings.maps_url }}" target="_blank" rel="noopener">Cómo llegar</a>
     </div>
+    <p style="margin:14px 0 0;color:#D9D7CE;font:600 14.5px/1.4 var(--font-body)">Arma tu pedido, págalo con Mercado Pago y retíralo en el local.</p>
   </div>
 </header>
 
@@ -244,11 +261,43 @@
         <a class="mn-btn" href="{{ routes.root_url }}#encargos">Ver tortas</a>
       </div>
     </div>
-    <p class="mn-note">Precios en pesos chilenos. La disponibilidad del día y los sabores se confirman en el local o por WhatsApp.</p>
+    <p class="mn-note">Precios en pesos chilenos. Los pedidos pagados en línea se retiran en el local. Si algo no está disponible ese día, te escribimos por WhatsApp.</p>
   </div>
 </section>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CafeOrCoffeeShop","name":"Sabor Rural","url":{{ shop.url | json }},"hasMenu":{{ canonical_url | json }},"telephone":"+{{ wa }}","address":{"@type":"PostalAddress","streetAddress":{{ section.settings.direccion | json }},"addressLocality":"Licantén","addressRegion":"Región del Maule","addressCountry":"CL"},"paymentAccepted":"Todos los medios de pago"}</script>
+<div class="mn-bar" id="mnBar" aria-live="polite">
+  <div class="mn-wrap">
+    <span class="mn-bar-t"><span id="mnBarN">Tu pedido</span><b id="mnBarT">$0</b></span>
+    <a id="mnBarV" href="{{ routes.cart_url }}">Ver</a>
+    <button type="button" id="mnBarP">Pagar</button>
+  </div>
+</div>
+{%- render 'sr-pagar' -%}
+<script>
+(function(){
+  var root=document.querySelector('.mn'); if(!root||!window.SRPay) return;
+  var bar=document.getElementById('mnBar');
+  var clp=function(n){return '$'+String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.')};
+  function show(c){
+    var on=c&&c.item_count>0; bar.classList.toggle('on',!!on); root.classList.toggle('has-bar',!!on); if(!on) return;
+    document.getElementById('mnBarN').textContent='Tu pedido · '+c.item_count+(c.item_count===1?' producto':' productos');
+    document.getElementById('mnBarT').textContent=clp(c.total_price/100);
+  }
+  SRPay.cart().then(show).catch(function(){});
+  [].slice.call(root.querySelectorAll('.mn-addb')).forEach(function(b){
+    b.addEventListener('click',function(){
+      var sel=b.parentNode.querySelector('.mn-var'), id=+(sel?sel.value:b.getAttribute('data-vid'));
+      b.disabled=true;
+      SRPay.add([{id:id,quantity:1}]).then(SRPay.cart).then(function(c){
+        show(c); b.disabled=false; b.classList.add('ok'); b.textContent='✓ Agregado';
+        setTimeout(function(){b.classList.remove('ok');b.textContent='+ Agregar'},1400);
+      }).catch(function(e){b.disabled=false;alert('No pudimos agregarlo ('+e.message+').')});
+    });
+  });
+  document.getElementById('mnBarP').addEventListener('click',function(){SRPay.busy(this,true);SRPay.checkout()});
+})();
+</script>
 <script>
 (function(){
   var root=document.querySelector('.mn'); if(!root) return;

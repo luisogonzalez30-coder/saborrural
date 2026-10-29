@@ -3,6 +3,9 @@
   assign wa_txt = section.settings.mensaje | url_encode
   assign wa_var = section.settings.mensaje_variedades | url_encode
   assign carta = section.settings.carta_url
+  assign ent = all_products[section.settings.entera]
+  assign kp = all_products[section.settings.kuchen]
+  assign dulces = collections[section.settings.coleccion_tartas]
 -%}
 <div class="sr kc">
 <style>
@@ -65,6 +68,8 @@
 .kc .kc-go{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:66px;margin:22px 0 0;border-radius:18px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 clamp(1.1rem,4.6vw,1.35rem)/1 var(--font-display);text-decoration:none;box-shadow:0 18px 36px -14px rgba(226,88,124,.9);transition:transform .15s,filter .15s}
 .kc .kc-go:hover{filter:brightness(1.07);transform:translateY(-2px)}
 .kc .kc-go:active{transform:scale(.98)}
+.kc button.kc-go{border:0;cursor:pointer;font-family:var(--font-display)}
+.kc button.kc-go:disabled{cursor:not-allowed;filter:grayscale(.55) brightness(.8);transform:none}
 .kc .kc-go svg{width:26px;height:26px}
 .kc .kc-note{margin:14px 0 0;color:#BFB4B7;font:500 .88rem/1.4 var(--font-body)}
 @media (prefers-reduced-motion:reduce){.kc .kc-clock::after{animation:none}}
@@ -90,15 +95,24 @@
           <p class="kc-lead">{{ section.settings.bajada }}</p>
           <p class="kc-gh">1 · Elige tu kuchen</p>
           <div class="kc-flav" id="kcK" role="group" aria-label="Kuchen">
-            {%- assign sabores = section.settings.sabores | split: ',' -%}
-            {%- for s in sabores -%}{%- assign par = s | split: '|' -%}{%- assign pp = par[1] | strip | plus: 0 -%}{%- assign pe = par[2] | strip | plus: 0 -%}<button type="button" class="kc-chip" data-n="{{ par[0] | strip | escape }}" data-p="{{ pp }}" data-e="{{ pe }}" aria-pressed="false"><b>{{ par[0] | strip }}</b><small>{%- if pp > 0 -%}Porción ${{ pp | divided_by: 1000 | floor }}.{{ pp | modulo: 1000 | plus: 1000 | append: '' | slice: 1, 3 }}{%- else -%}Porción: consultar{%- endif -%}</small><small>{%- if pe > 0 -%}Entera ${{ pe | divided_by: 1000 | floor }}.{{ pe | modulo: 1000 | plus: 1000 | append: '' | slice: 1, 3 }}{%- else -%}Entera: consultar{%- endif -%}</small></button>{%- endfor -%}
+            {%- for v in kp.variants -%}
+              {%- assign key = 'Kuchen ' | append: v.title -%}
+              {%- assign ve = nil -%}
+              {%- for x in ent.variants -%}{%- if x.title == key -%}{%- assign ve = x -%}{%- endif -%}{%- endfor -%}
+              {%- render 'sr-kc-chip', n: v.title, vp: v, ve: ve -%}
+            {%- endfor -%}
           </div>
           <p class="kc-gh">2 · O elige un pie o una tarta</p>
           <div class="kc-flav" id="kcT" role="group" aria-label="Pies y tartas">
-            {%- assign tartas = section.settings.tartas | split: ',' -%}
-            {%- for s in tartas -%}{%- assign par = s | split: '|' -%}{%- assign pp = par[1] | strip | plus: 0 -%}{%- assign pe = par[2] | strip | plus: 0 -%}<button type="button" class="kc-chip" data-n="{{ par[0] | strip | escape }}" data-p="{{ pp }}" data-e="{{ pe }}" aria-pressed="false"><b>{{ par[0] | strip }}</b><small>{%- if pp > 0 -%}Porción ${{ pp | divided_by: 1000 | floor }}.{{ pp | modulo: 1000 | plus: 1000 | append: '' | slice: 1, 3 }}{%- else -%}Porción: consultar{%- endif -%}</small><small>{%- if pe > 0 -%}Entera ${{ pe | divided_by: 1000 | floor }}.{{ pe | modulo: 1000 | plus: 1000 | append: '' | slice: 1, 3 }}{%- else -%}Entera: consultar{%- endif -%}</small></button>{%- endfor -%}
+            {%- for x in ent.variants -%}
+              {%- assign pre = x.title | slice: 0, 7 -%}
+              {%- if pre == 'Kuchen ' -%}{%- continue -%}{%- endif -%}
+              {%- assign vp = nil -%}
+              {%- for pr in dulces.products -%}{%- if pr.title == x.title and pr.has_only_default_variant -%}{%- assign vp = pr.selected_or_first_available_variant -%}{%- endif -%}{%- endfor -%}
+              {%- render 'sr-kc-chip', n: x.title, vp: vp, ve: x -%}
+            {%- endfor -%}
           </div>
-          <p class="kc-hint">Toca para agregar. Precios de la carta: por porción y pieza entera.</p>
+          <p class="kc-hint">Toca para agregar. Precios por porción y por pieza entera.</p>
 
           <div class="kc-order" id="kcOrder" hidden>
             <h3>Tu pedido</h3>
@@ -107,40 +121,42 @@
               <button type="button" data-m="por" aria-pressed="true">Porciones</button>
               <button type="button" data-m="ent" aria-pressed="false">Pieza entera</button>
             </div>
-            <div class="kc-two">
-              <label>Retiro<input type="date" id="kcFe"></label>
-              <label>Tu nombre<input type="text" id="kcNo" placeholder="Cómo te llamas" autocomplete="given-name"></label>
+            <div class="kc-two" style="grid-template-columns:1fr">
+              <label>¿Qué día lo retiras?<input type="date" id="kcFe" required></label>
             </div>
-            <div class="kc-total"><span id="kcTl">Total referencial</span><strong id="kcTot">—</strong></div>
+            <div class="kc-total"><span id="kcTl">Total</span><strong id="kcTot">—</strong></div>
             <p class="kc-note" id="kcNt"></p>
           </div>
 
-          <a class="kc-go" id="kcGo" href="https://wa.me/{{ wa }}?text={{ wa_txt }}" target="_blank" rel="noopener"><span id="kcGoT">{{ section.settings.boton }}</span>
+          <button type="button" class="kc-go" id="kcGo"><span id="kcGoT">{{ section.settings.boton }}</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <p class="kc-fine">Pídelo con un día de anticipación y retíralo en 24 horas en Sabor Rural, Ruta J-60 km 95, Licantén.</p>
-          <p class="kc-links"><a href="https://wa.me/{{ wa }}?text={{ wa_var }}" target="_blank" rel="noopener">¿Buscas otra variedad? Consúltala</a><span aria-hidden="true">·</span><a href="{{ carta }}">Ver la carta</a></p>
+          </button>
+          <p class="kc-fine">Pagas en línea con Mercado Pago y lo retiras desde el día siguiente en Sabor Rural, Ruta J-60 km 95, Licantén.</p>
+          <p class="kc-links"><a id="kcWa" href="https://wa.me/{{ wa }}?text={{ wa_txt }}" target="_blank" rel="noopener">Prefiero pedir por WhatsApp</a><span aria-hidden="true">·</span><a href="https://wa.me/{{ wa }}?text={{ wa_var }}" target="_blank" rel="noopener">¿Buscas otra variedad? Consúltala</a><span aria-hidden="true">·</span><a href="{{ carta }}">Ver la carta</a></p>
         </div>
       </div>
     </div>
   </section>
 </div>
+{%- render 'sr-pagar' -%}
 <script>
 (function () {
   var root = document.querySelector('.kc'); if (!root) return;
-  var WA = {{ wa | json }}, BASE = {{ section.settings.mensaje | json }};
-  var items = {}, mode = 'por', order = [];
+  var WA = {{ wa | json }}, BASE = {{ section.settings.mensaje | json }}, BTN = {{ section.settings.boton | json }};
+  var items = {}, mode = 'por', order = [], ready = false;
   function $(id) { return document.getElementById(id); }
   function clp(n) { return '$' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
   function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
   function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
-  function fecha(v) { if (!v) return 'mañana'; var p = v.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
-  var man = new Date(); man.setDate(man.getDate() + 1); $('kcFe').min = iso(man); $('kcFe').value = iso(man);
+  function fecha(v) { var p = v.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
+  /* se encarga con un día de anticipación: la fecha mínima de retiro es mañana */
+  var man = new Date(); man.setDate(man.getDate() + 1); var MIN = iso(man); $('kcFe').min = MIN; $('kcFe').value = MIN;
+  function unit(it) { return mode === 'por' ? { v: it.vp, p: it.p } : { v: it.ve, p: it.e }; }
   Array.prototype.forEach.call(root.querySelectorAll('.kc-chip'), function (b) {
     b.addEventListener('click', function () {
       var n = b.getAttribute('data-n');
       if (items[n]) { delete items[n]; order = order.filter(function (x) { return x !== n; }); b.setAttribute('aria-pressed', 'false'); }
-      else { items[n] = { q: 1, p: +b.getAttribute('data-p') || 0, e: +b.getAttribute('data-e') || 0, btn: b }; order.push(n); b.setAttribute('aria-pressed', 'true'); }
+      else { items[n] = { q: 1, vp: b.getAttribute('data-vp'), p: +b.getAttribute('data-p') || 0, ve: b.getAttribute('data-ve'), e: +b.getAttribute('data-e') || 0, btn: b }; order.push(n); b.setAttribute('aria-pressed', 'true'); }
       render();
     });
   });
@@ -151,37 +167,41 @@
       render();
     });
   });
-  ['kcFe', 'kcNo'].forEach(function (id) { $(id).addEventListener('input', render); $(id).addEventListener('change', render); });
+  $('kcFe').addEventListener('input', render); $('kcFe').addEventListener('change', render);
   function render() {
     var box = $('kcOrder'), ul = $('kcLines'); box.hidden = !order.length; ul.textContent = '';
-    var total = 0, unk = 0, lines = [];
+    var total = 0, falta = [], lines = [], fe = $('kcFe').value, ent = mode === 'ent';
     order.forEach(function (n) {
-      var it = items[n], li = el('li'), nm = el('span', 'nm', n), u = mode === 'por' ? it.p : it.e;
-      var sub = u ? clp(u) + (mode === 'por' ? ' c/porción' : ' c/pieza entera') : 'precio por confirmar';
-      nm.appendChild(el('small', null, sub));
+      var it = items[n], u = unit(it), li = el('li'), nm = el('span', 'nm', n);
+      nm.appendChild(el('small', null, u.v ? clp(u.p) + (ent ? ' c/pieza entera' : ' c/porción') : (ent ? 'sin precio de pieza entera' : 'no se vende por porción')));
       var st = el('span', 'kc-step'), m = el('button', null, '−'), o = el('output', null, it.q), pl = el('button', null, '+');
       m.type = pl.type = 'button'; m.setAttribute('aria-label', 'Menos ' + n); pl.setAttribute('aria-label', 'Más ' + n);
       m.addEventListener('click', function () { if (it.q > 1) it.q--; else { delete items[n]; order = order.filter(function (x) { return x !== n; }); it.btn.setAttribute('aria-pressed', 'false'); } render(); });
       pl.addEventListener('click', function () { it.q++; render(); });
       st.appendChild(m); st.appendChild(o); st.appendChild(pl);
-      var pr = el('span', 'pr', u ? clp(u * it.q) : '—');
-      li.appendChild(nm); li.appendChild(st); li.appendChild(pr); ul.appendChild(li);
-      if (u) total += u * it.q; else unk++;
-      lines.push('• ' + it.q + ' × ' + n + (mode === 'por' ? ' (porciones)' : ' (pieza entera)') + (u ? ' — ' + clp(u * it.q) : ' — precio por confirmar'));
+      li.appendChild(nm); li.appendChild(st); li.appendChild(el('span', 'pr', u.v ? clp(u.p * it.q) : '—')); ul.appendChild(li);
+      if (u.v) total += u.p * it.q; else falta.push(n);
+      lines.push('• ' + it.q + ' × ' + n + (ent ? ' (pieza entera)' : ' (porciones)') + (u.v ? ' — ' + clp(u.p * it.q) : ''));
     });
-    var ent = mode === 'ent';
-    $('kcTot').textContent = !order.length ? '—' : clp(total) + (unk ? ' +' : '');
+    var fechaOk = !!fe && fe >= MIN;
+    $('kcTot').textContent = order.length ? clp(total) : '—';
     $('kcTl').textContent = ent ? 'Total (piezas enteras)' : 'Total (porciones)';
-    $('kcNt').textContent = unk ? 'Falta confirmar el precio de algunos productos: te lo decimos por WhatsApp.' : (ent ? 'Valor de la carta por pieza entera. Confirmamos disponibilidad por WhatsApp.' : 'Valor de la carta por porción. Confirmamos disponibilidad por WhatsApp.');
+    $('kcNt').textContent = falta.length
+      ? falta.join(', ') + (ent ? ' no tiene precio de pieza entera: cámbialo a porciones o consúltalo por WhatsApp.' : ' no se vende por porción: cámbialo a pieza entera o consúltalo por WhatsApp.')
+      : (!fechaOk ? 'Elige una fecha de retiro desde mañana.' : 'Pagas en línea con Mercado Pago y lo retiras el ' + fecha(fe) + ' en el local.');
+    ready = order.length > 0 && !falta.length && fechaOk;
     var go = $('kcGo');
-    if (!order.length) { go.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(BASE); $('kcGoT').textContent = {{ section.settings.boton | json }}; return; }
-    var nom = $('kcNo').value.trim() || '[tu nombre]';
-    var t = 'Hola Sabor Rural, soy ' + nom + '. Quiero encargar para retirar el ' + fecha($('kcFe').value) + ':\n' + lines.join('\n') +
-      '\nTotal: ' + clp(total) + (unk ? ' (más lo que falta confirmar)' : '') +
-      '\nRetiro en el local. ¿Me confirmas disponibilidad?';
-    go.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t);
-    $('kcGoT').textContent = 'Pedir por WhatsApp' + (total ? ' · ' + clp(total) : '');
+    go.disabled = order.length > 0 && !ready;
+    $('kcGoT').textContent = !order.length ? BTN : (ready ? 'Pagar ' + clp(total) + ' y encargar' : 'Revisa tu pedido');
+    $('kcWa').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(!order.length ? BASE :
+      'Hola Sabor Rural, quiero encargar para retirar el ' + (fe ? fecha(fe) : 'mañana') + ':\n' + lines.join('\n') + '\n¿Me confirmas disponibilidad?');
   }
+  $('kcGo').addEventListener('click', function () {
+    if (!order.length) { var k = $('kcK'); k.scrollIntoView({ behavior: 'smooth', block: 'center' }); var f = k.querySelector('.kc-chip'); if (f) f.focus({ preventScroll: true }); return; }
+    if (!ready) return;
+    var fe = fecha($('kcFe').value);
+    window.SRPay.buy(order.map(function (n) { var it = items[n]; return { id: +unit(it).v, quantity: it.q, properties: { 'Retiro': fe } }; }), $('kcGo'));
+  });
   render();
 })();
 </script>
@@ -197,10 +217,11 @@
   {"type": "text", "id": "titulo_a", "label": "Título", "default": "Encarga tu"},
   {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "kuchen"},
   {"type": "text", "id": "insignia", "label": "Insignia sobre la foto", "default": "Disponible en 24 horas"},
-  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Kuchen, pies y tartas hechos desde cero, sin premezclas ni conservantes. Elige el tuyo y retíralo en 24 horas."},
-  {"type": "text", "id": "sabores", "label": "Kuchen: Nombre|porción|entera", "default": "Berries|3000|17000, Frambuesa|3000|17000, Frutilla|3000|17000, Manzana canela y nuez|3000|17000, Nuez|3000|17000"},
-  {"type": "text", "id": "tartas", "label": "Pies y tartas: Nombre|porción|entera", "default": "Pie de limón|3000|17000, Pie de coco|3000|17000, Banoffee|3500|17000, Tarta Snickers|3000|17000, Tarta chocolate y pistacho|3500|19000, Frambuesa miga||17000"},
-  {"type": "text", "id": "boton", "label": "Texto del botón", "default": "Encargar ahora"},
+  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Kuchen, pies y tartas hechos desde cero, sin premezclas ni conservantes. Elige el tuyo, págalo en línea y retíralo en 24 horas."},
+  {"type": "text", "id": "kuchen", "label": "Producto de kuchen por porción (handle)", "default": "kuchen", "info": "Cada variante es un sabor."},
+  {"type": "text", "id": "entera", "label": "Producto de piezas enteras (handle)", "default": "kuchen-tarta-entera", "info": "Variantes 'Kuchen <sabor>' para los kuchen; el resto son pies y tartas."},
+  {"type": "text", "id": "coleccion_tartas", "label": "Colección con las porciones de pies y tartas (handle)", "default": "dulces"},
+  {"type": "text", "id": "boton", "label": "Texto del botón (sin nada elegido)", "default": "Elige tu kuchen y paga en línea"},
   {"type": "text", "id": "mensaje", "label": "Mensaje de WhatsApp (encargar)", "default": "Hola Sabor Rural, quiero encargar un kuchen o tarta para mañana."},
   {"type": "text", "id": "mensaje_variedades", "label": "Mensaje de WhatsApp (variedades)", "default": "Hola Sabor Rural, ¿qué variedades de kuchen, pies y tartas tienen para encargar?"},
   {"type": "text", "id": "whatsapp", "label": "WhatsApp (números, con código de país)", "default": "56992101764"},
