@@ -130,6 +130,27 @@
 .tl .tl-det p{margin:0;font:500 .98rem/1.45 var(--font-body);color:#F3F1EA}
 .tl .tl-det a{justify-self:start;margin-top:2px;color:#7CF0AB;font:700 .9rem/1.2 var(--font-body)}
 @media (max-width:760px){.tl .tl-main{grid-template-columns:1fr}.tl .tl-sum{position:static}.tl .tl-hero-img{width:100%;opacity:.45;-webkit-mask-image:none;mask-image:none}.tl .tl-ph{grid-template-columns:repeat(2,1fr)}.tl .tl-two{grid-template-columns:1fr}}
+
+.tl .tl-how{background:linear-gradient(180deg,#0C0D0F 0%,#150a0e 55%,#0C0D0F 100%);border-top:1px solid var(--ln);border-bottom:1px solid rgba(255,255,255,.06)}
+.tl .tl-how .tl-w{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:36px;align-items:center;padding-top:40px;padding-bottom:44px}
+.tl .tl-how-eb{display:inline-block;font:700 12.5px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--pk)}
+.tl .tl-how h2{margin:10px 0 0;font:800 clamp(1.8rem,5.6vw,2.6rem)/1.05 var(--font-display);letter-spacing:-.02em}
+.tl .tl-how h2 em{font-style:normal;color:#F59AAC}
+.tl .tl-how-p{margin:12px 0 0;color:#D9D7CE;font-size:1.02rem;line-height:1.5;max-width:30em}
+.tl .tl-how-s{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px}
+.tl .tl-how-s li{display:flex;align-items:center;gap:12px;font:700 1rem/1.25 var(--font-body);color:#F3F1EA}
+.tl .tl-how-s b{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#F59AAC,#E2587C);color:#1A0A0F;font:800 .92rem/1 var(--font-display)}
+.tl .tl-how-go{display:inline-flex;align-items:center;gap:8px;margin-top:22px;min-height:50px;padding:0 24px;border-radius:14px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 1rem/1 var(--font-body);text-decoration:none;box-shadow:0 10px 26px rgba(226,88,124,.32)}
+.tl .tl-vid{position:relative;aspect-ratio:16/9;border-radius:22px;overflow:hidden;border:1px solid var(--ln);background:#0C0D0F;box-shadow:0 18px 50px rgba(194,48,72,.28);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tl .tl-vid picture,.tl .tl-vid img,.tl .tl-vid video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.tl .tl-vid video{opacity:0;transition:opacity .5s ease}
+.tl .tl-vid video.on{opacity:1}
+.tl .tl-play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;box-shadow:0 8px 26px rgba(0,0,0,.5);cursor:pointer;transition:opacity .25s}
+.tl .tl-play svg{width:30px;height:30px;margin-left:4px}
+.tl .tl-vid.is-on .tl-play{opacity:0;pointer-events:none}
+.tl .tl-snd{position:absolute;right:12px;bottom:12px;min-height:40px;padding:0 14px;border:1px solid rgba(255,255,255,.4);border-radius:99px;background:rgba(12,13,15,.8);color:#fff;font:700 .86rem/1 var(--font-body);cursor:pointer}
+.tl .tl-snd[hidden]{display:none}
+@media (max-width:760px){.tl .tl-how .tl-w{grid-template-columns:1fr;gap:24px}.tl .tl-vid{aspect-ratio:9/16;max-width:320px;width:100%;margin:0 auto}.tl .tl-how-go{width:100%;justify-content:center}}
 </style>
 
   <section class="tl-hero" aria-labelledby="tl-h-{{ section.id }}">
@@ -151,7 +172,26 @@
     </div>
   </section>
 
-  <div class="tl-w">
+  <section class="tl-how" aria-labelledby="tl-how-{{ section.id }}">
+    <div class="tl-w">
+      <div class="tl-how-t">
+        <span class="tl-how-eb">Cómo encargar</span>
+        <h2 id="tl-how-{{ section.id }}">Tu torta en <em>1 minuto</em></h2>
+        <p class="tl-how-p">Mira el paso a paso: eliges para cuántas personas, el sabor, la fecha y el horario, y pagas en línea. Retiras gratis en el local.</p>
+        <ol class="tl-how-s"><li><b>1</b>Elige para cuántas personas</li><li><b>2</b>Escoge el sabor y mira el valor</li><li><b>3</b>Fecha, horario y mensaje</li><li><b>4</b>Paga en línea y retira gratis</li></ol>
+        <a class="tl-how-go" href="#tl-pasos">Elegir mi torta ↓</a>
+      </div>
+      <div class="tl-vid" role="group" aria-label="Video: cómo encargar tu torta">
+        {%- assign pm = section.settings.poster_movil | file_url -%}{%- assign pd = section.settings.poster_escritorio | file_url -%}
+        <picture><source media="(min-width:761px)" srcset="{{ pd }}"><img src="{{ pm }}" alt="Video: cómo encargar tu torta en Sabor Rural" width="540" height="960" loading="lazy" decoding="async"></picture>
+        <video muted loop playsinline preload="none" data-m="{{ section.settings.video_movil | file_url }}" data-d="{{ section.settings.video_escritorio | file_url }}"></video>
+        <button type="button" class="tl-play" aria-label="Reproducir video"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+        <button type="button" class="tl-snd"{% unless section.settings.con_audio %} hidden{% endunless %}>Activar sonido</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="tl-w" id="tl-pasos">
     <div class="tl-main">
       <div>
         <div class="tl-step">
@@ -441,6 +481,27 @@
   render();
 })();
 </script>
+<script>
+(function () {
+  var box = document.querySelector('#tl .tl-vid'); if (!box) return;
+  var v = box.querySelector('video'), snd = box.querySelector('.tl-snd'), mq = window.matchMedia('(max-width:760px)'), c = navigator.connection || {}, loaded = '';
+  var lite = document.documentElement.classList.contains('sr-lite') || c.saveData || /(^|-)2g$/.test(c.effectiveType || '') || (window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
+  function go() {
+    var s = mq.matches ? v.getAttribute('data-m') : v.getAttribute('data-d');
+    if (loaded !== s) { v.src = s; loaded = s; }
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+  }
+  v.addEventListener('playing', function () { v.classList.add('on'); box.classList.add('is-on'); });
+  v.addEventListener('pause', function () { box.classList.remove('is-on'); });
+  box.addEventListener('click', function (e) {
+    if (snd && e.target === snd) return;
+    if (!v.paused) v.pause(); else go();
+  });
+  if (snd) snd.addEventListener('click', function () { v.muted = !v.muted; snd.textContent = v.muted ? 'Activar sonido' : 'Silenciar'; if (!v.muted) { v.currentTime = 0; go(); } });
+  if ('IntersectionObserver' in window && !lite) new IntersectionObserver(function (es) { if (es[0].isIntersecting) go(); else v.pause(); }, { threshold: .5 }).observe(box);
+  if (mq.addEventListener) mq.addEventListener('change', function () { var was = !v.paused; v.classList.remove('on'); loaded = ''; v.removeAttribute('src'); if (was) go(); });
+})();
+</script>
 </div>
 {% schema %}
 {
@@ -455,6 +516,11 @@
   {"type": "text", "id": "esp_texto", "label": "Aviso de diseño especial: texto", "default": "Cuéntanos tu idea y la cotizamos a tu medida."},
   {"type": "text", "id": "esp_boton", "label": "Aviso de diseño especial: botón", "default": "Contáctanos por WhatsApp"},
   {"type": "text", "id": "esp_mensaje", "label": "Aviso de diseño especial: mensaje de WhatsApp", "default": "Hola Sabor Rural, mi torta lleva un diseño especial, fondant u otro requisito y quiero consultarlo."},
+  {"type": "text", "id": "video_movil", "label": "Video móvil (archivo de Contenido > Archivos)", "default": "sr-como-encargar-movil.mp4"},
+  {"type": "text", "id": "video_escritorio", "label": "Video escritorio (archivo)", "default": "sr-como-encargar-escritorio.mp4"},
+  {"type": "text", "id": "poster_movil", "label": "Portada del video móvil (archivo)", "default": "sr-como-encargar-movil.jpg"},
+  {"type": "text", "id": "poster_escritorio", "label": "Portada del video escritorio (archivo)", "default": "sr-como-encargar-escritorio.jpg"},
+  {"type": "checkbox", "id": "con_audio", "label": "El video trae voz (muestra el botón de sonido)", "default": false},
   {"type": "text", "id": "producto", "label": "Producto de tortas (handle)", "default": "torta-encargo", "info": "Opciones: Sabor y Personas. Los precios de la página salen de aquí."},
   {"type": "text", "id": "whatsapp", "label": "WhatsApp (con código de país, sin +)", "default": "56992101764"}
  ],
