@@ -1,0 +1,296 @@
+{%- liquid
+  assign wa = section.settings.whatsapp
+  assign foto = section.settings.foto | default: 'sr-encargo-corazon.jpg'
+  assign fu = foto | file_url
+  if fu contains '?'
+    assign hero_src = fu | append: '&width=1000'
+  else
+    assign hero_src = fu | append: '?width=1000'
+  endif
+-%}
+<div class="sr tl" id="tl" data-wa="{{ wa }}">
+<style>
+.tl{--pk:#F07C95;--pk2:#E2587C;--ln:rgba(242,132,151,.28);background:#0C0D0F;color:#F3F1EA;overflow-x:clip}
+.tl *{box-sizing:border-box}
+.tl .tl-w{max-width:1120px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.tl h1,.tl h2,.tl h3{font-family:var(--font-display);margin:0;color:#fff}
+.tl .tl-hero{position:relative;overflow:hidden;isolation:isolate;background:radial-gradient(80% 90% at 85% 0%,rgba(194,48,72,.42),transparent 68%),#0C0D0F}
+.tl .tl-hero-img{position:absolute;top:0;right:0;bottom:0;width:min(52%,560px);z-index:-1;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 38%);mask-image:linear-gradient(90deg,transparent 0,#000 38%)}
+.tl .tl-hero-img img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 70%}
+.tl .tl-hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0C0D0F 0%,transparent 14%,transparent 82%,#0C0D0F 100%)}
+.tl .tl-hero .tl-w{padding-top:34px;padding-bottom:54px;min-height:480px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.tl .tl-back{align-self:flex-start;color:#E4D6DA;font:700 .92rem/1 var(--font-body);text-decoration:none;opacity:.9}
+.tl .tl-back:hover{color:#F59AAC}
+.tl .tl-eyebrow{align-self:flex-start;font:700 12.5px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:#1A0A0F;background:linear-gradient(135deg,#F59AAC,#E2587C);padding:8px 14px;border-radius:99px}
+.tl h1{font:800 clamp(2.4rem,9vw,4.6rem)/1 var(--font-display);letter-spacing:-.03em;max-width:9em;text-shadow:0 2px 18px rgba(0,0,0,.7)}
+.tl h1 em{font-family:var(--font-chalk);font-style:normal;font-weight:700;color:#F59AAC;font-size:1.2em;letter-spacing:0}
+.tl .tl-lead{max-width:30em;color:#F3F1EA;font-size:clamp(1rem,2.9vw,1.15rem);line-height:1.5;text-shadow:0 2px 14px rgba(0,0,0,.8)}
+.tl .tl-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.tl .tl-chips li{padding:9px 14px;border:1px solid var(--ln);border-radius:99px;background:rgba(10,8,10,.6);color:#F3F1EA;font:600 .9rem/1 var(--font-body)}
+.tl .tl-main{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.9fr);gap:28px;align-items:start;padding:34px 0 40px}
+.tl .tl-step{margin-bottom:34px}
+.tl .tl-step>h2{display:flex;align-items:center;gap:12px;font:800 clamp(1.4rem,4.4vw,1.9rem)/1.1 var(--font-display);letter-spacing:-.015em}
+.tl .tl-step>h2 b{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#F59AAC,#E2587C);color:#1A0A0F;font:800 1.05rem/1 var(--font-display)}
+.tl .tl-sub{margin:8px 0 14px;color:#C9CBC2;font-size:.98rem}
+.tl .tl-sizes{display:flex;flex-wrap:wrap;gap:10px}
+.tl .tl-sz{min-height:52px;padding:0 20px;border-radius:14px;border:1.5px solid rgba(255,255,255,.22);background:rgba(21,23,27,.9);color:#F3F1EA;font:700 1.02rem/1 var(--font-body);cursor:pointer}
+.tl .tl-sz small{display:block;margin-top:3px;font:600 .72rem/1 var(--font-body);opacity:.75}
+.tl .tl-sz[aria-pressed="true"]{background:linear-gradient(135deg,#F7A9B8,#E2587C);border-color:transparent;color:#1A0A0F}
+.tl .tl-note{margin:12px 0 0;padding:12px 14px;border-left:4px solid var(--pk);background:#15171B;border-radius:6px;color:#E4D6DA;font-size:.95rem}
+.tl .tl-note[hidden]{display:none}
+.tl .tl-tools{display:grid;gap:12px;margin-bottom:14px}
+.tl .tl-search{width:100%;min-height:50px;padding:0 16px;border-radius:14px;border:1.5px solid #34373E;background:#0C0D0F;color:#F3F1EA;font:500 16px var(--font-body)}
+.tl .tl-search::placeholder{color:#6F727A}
+.tl .tl-fl{display:flex;flex-wrap:wrap;gap:8px}
+.tl .tl-f{min-height:42px;padding:0 15px;border-radius:99px;border:1.5px solid rgba(255,255,255,.25);background:transparent;color:#F3F1EA;font:600 .9rem/1 var(--font-body);cursor:pointer}
+.tl .tl-f[aria-pressed="true"]{background:#F3F1EA;color:#0C0D0F;border-color:#F3F1EA}
+.tl .tl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px}
+.tl .tl-card{position:relative;display:grid;gap:8px;align-content:space-between;min-height:116px;padding:15px 14px 14px;text-align:left;border-radius:16px;border:1.5px solid #2A2D33;background:#15171B;color:#F3F1EA;cursor:pointer;font-family:var(--font-body)}
+.tl .tl-card:hover{border-color:rgba(242,132,151,.6)}
+.tl .tl-card b{font:800 1.08rem/1.15 var(--font-display);color:#fff}
+.tl .tl-card span{font:800 1.35rem/1 var(--font-display);color:#F8B7C4;font-variant-numeric:tabular-nums}
+.tl .tl-card small{font:600 .74rem/1 var(--font-body);color:#A9ABA3}
+.tl .tl-card[aria-pressed="true"]{border-color:#F59AAC;background:linear-gradient(160deg,#3A1620,#150B0F 75%);box-shadow:0 0 0 1px rgba(245,154,172,.5)}
+.tl .tl-card[aria-pressed="true"]::after{content:"✓";position:absolute;top:10px;right:12px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#F59AAC;color:#1A0A0F;font:800 14px/1 var(--font-body)}
+.tl .tl-empty{padding:18px;border:1px dashed #3A3D44;border-radius:14px;color:#C9CBC2;text-align:center}
+.tl .tl-empty[hidden]{display:none}
+.tl .tl-form{display:grid;gap:14px}
+.tl .tl-two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tl .tl-fld{display:grid;gap:6px;min-width:0}
+.tl .tl-fld label{font:700 .88rem/1.2 var(--font-body);color:#E4D6DA}
+.tl .tl-fld input,.tl .tl-fld select,.tl .tl-fld textarea{width:100%;min-height:50px;padding:10px 14px;border-radius:12px;border:1.5px solid #34373E;background:#0C0D0F;color:#F3F1EA;font:500 16px var(--font-body)}
+.tl .tl-fld textarea{min-height:104px;resize:vertical}
+.tl .tl-fld input::placeholder,.tl .tl-fld textarea::placeholder{color:#6F727A}
+.tl .tl-fld .tl-help{font-size:.82rem;color:#A9ABA3}
+.tl .tl-sum{position:sticky;top:16px;display:grid;gap:14px;padding:22px 20px;border:1px solid rgba(242,132,151,.45);border-radius:22px;background:radial-gradient(90% 70% at 100% 0%,rgba(194,48,72,.4),transparent 66%),linear-gradient(165deg,#2A1119,#120A0E 75%)}
+.tl .tl-sum h2{font:800 1.5rem/1.1 var(--font-display)}
+.tl .tl-rows{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.tl .tl-rows li{display:flex;justify-content:space-between;gap:12px;font-size:.98rem;color:#E4D6DA}
+.tl .tl-rows li b{color:#fff;text-align:right}
+.tl .tl-total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.14)}
+.tl .tl-total span{color:#C9CBC2;font-size:.92rem}
+.tl .tl-total strong{font:800 2rem/1 var(--font-display);color:#fff;font-variant-numeric:tabular-nums}
+.tl .tl-msg{padding:12px 14px;border:1.5px dashed #3A3D44;border-radius:12px;background:#0C0D0F;color:#B6B8B0;font-size:.86rem;white-space:pre-wrap;overflow-wrap:anywhere;max-height:200px;overflow:auto}
+.tl .tl-msg b{display:block;margin-bottom:6px;font:700 .72rem/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:#F28497}
+.tl .tl-go{display:flex;align-items:center;justify-content:center;gap:10px;min-height:60px;border-radius:16px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 1.15rem/1 var(--font-display);text-decoration:none;box-shadow:0 16px 30px -14px rgba(226,88,124,.9)}
+.tl .tl-go:hover{filter:brightness(1.07)}
+.tl .tl-fine{margin:0;color:#A9ABA3;font-size:.82rem;text-align:center}
+.tl .tl-insp{padding:10px 0 50px}
+.tl .tl-insp h2{font:800 clamp(1.5rem,4.6vw,2rem)/1.1 var(--font-display);margin-bottom:14px}
+.tl .tl-ph{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tl .tl-ph figure{margin:0;border-radius:14px;overflow:hidden;background:#15171B}
+.tl .tl-ph img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+.tl .tl-info{margin:0 0 46px;padding:18px;border:1px solid var(--ln);border-radius:18px;background:rgba(16,9,13,.9);text-align:center;color:#E4D6DA;font:500 .98rem/1.5 var(--font-body)}
+.tl .tl-info b{color:#fff}
+@media (max-width:760px){.tl .tl-main{grid-template-columns:1fr}.tl .tl-sum{position:static}.tl .tl-hero-img{width:100%;opacity:.45;-webkit-mask-image:none;mask-image:none}.tl .tl-ph{grid-template-columns:repeat(2,1fr)}.tl .tl-two{grid-template-columns:1fr}}
+</style>
+
+  <section class="tl-hero" aria-labelledby="tl-h-{{ section.id }}">
+    <div class="tl-hero-img" aria-hidden="true"><img src="{{ hero_src }}" alt="" width="1000" height="1250" fetchpriority="high"></div>
+    <div class="tl-w">
+      <a class="tl-back" href="{{ routes.root_url }}">← Volver al inicio</a>
+      <span class="tl-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h1 id="tl-h-{{ section.id }}">{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h1>
+      <p class="tl-lead">{{ section.settings.bajada }}</p>
+      <ul class="tl-chips"><li>28 sabores</li><li>De 15 a 40 personas</li><li>Reserva con abono</li></ul>
+    </div>
+  </section>
+
+  <div class="tl-w">
+    <div class="tl-main">
+      <div>
+        <div class="tl-step">
+          <h2><b>1</b>¿Para cuántas personas?</h2>
+          <p class="tl-sub">El valor cambia según el tamaño.</p>
+          <div class="tl-sizes" id="tlSizes" role="group" aria-label="Cantidad de personas"></div>
+          <p class="tl-note" id="tlBig" hidden>Para más de 40 personas armamos la torta a tu medida: te atendemos de forma personalizada por WhatsApp.</p>
+        </div>
+
+        <div class="tl-step">
+          <h2><b>2</b>Elige tu torta</h2>
+          <p class="tl-sub">Cada sabor muestra su valor para el tamaño que elegiste.</p>
+          <div class="tl-tools">
+            <input class="tl-search" id="tlQ" type="search" placeholder="Buscar sabor: chocolate, manjar, frutilla…" autocomplete="off" aria-label="Buscar sabor">
+            <div class="tl-fl" id="tlFl" role="group" aria-label="Filtrar por tipo"></div>
+          </div>
+          <div class="tl-grid" id="tlGrid"></div>
+          <p class="tl-empty" id="tlNo" hidden>No encontramos ese sabor. Prueba con otra palabra o cuéntanos tu idea abajo.</p>
+        </div>
+
+        <div class="tl-step">
+          <h2><b>3</b>Cuéntanos cómo la quieres</h2>
+          <p class="tl-sub">Bizcocho, relleno, cobertura y decoración: escríbelo con tus palabras y lo conversamos por WhatsApp.</p>
+          <div class="tl-form">
+            <div class="tl-two">
+              <div class="tl-fld"><label for="tlOc">Ocasión</label>
+                <select id="tlOc"><option>Cumpleaños</option><option>Aniversario</option><option>Bautizo o comunión</option><option>Matrimonio</option><option>Otra ocasión</option></select></div>
+              <div class="tl-fld"><label for="tlFe">Fecha que la necesitas</label><input id="tlFe" type="date"></div>
+            </div>
+            <div class="tl-two">
+              <div class="tl-fld"><label for="tlEn">Entrega</label>
+                <select id="tlEn"><option>Retiro en Licantén</option><option>Consultar despacho a Curicó o Talca</option></select></div>
+              <div class="tl-fld"><label for="tlNo2">Tu nombre</label><input id="tlNo2" type="text" placeholder="Cómo te llamas" autocomplete="given-name"></div>
+            </div>
+            <div class="tl-fld"><label for="tlId">Bizcocho, relleno, cobertura y decoración</label>
+              <textarea id="tlId" placeholder="Ej.: bizcocho de vainilla, relleno de manjar y frutilla, cobertura blanca, flores y el mensaje “Feliz cumple Sofía”"></textarea>
+              <span class="tl-help">Si tienes una foto de inspiración, envíala por el chat de WhatsApp después de abrirlo.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="tl-sum" aria-label="Resumen de tu pedido">
+        <h2>Tu pedido</h2>
+        <ul class="tl-rows">
+          <li><span>Torta</span><b id="sTorta">Sin elegir</b></li>
+          <li><span>Para</span><b id="sPers">20 personas</b></li>
+        </ul>
+        <div class="tl-total"><span>Valor referencial</span><strong id="sTot">—</strong></div>
+        <div class="tl-msg" id="sMsg"><b>Así llegará tu mensaje</b><span></span></div>
+        <a class="tl-go" id="sGo" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+        <p class="tl-fine">Te confirmamos disponibilidad y valor final por WhatsApp. La fecha se reserva con un abono.</p>
+      </aside>
+    </div>
+
+    <section class="tl-insp" aria-labelledby="tl-i-{{ section.id }}">
+      <h2 id="tl-i-{{ section.id }}">Inspírate con nuestro trabajo</h2>
+      <div class="tl-ph">
+        {%- for f in 'sr-obra-oreo.jpg,sr-obra-lazo.jpg,sr-obra-lucuma.jpg,sr-obra-guindas.jpg' | split: ',' -%}
+          {%- assign pu = f | file_url -%}{%- if pu contains '?' -%}{%- assign ps = pu | append: '&width=420' -%}{%- else -%}{%- assign ps = pu | append: '?width=420' -%}{%- endif -%}
+          <figure><img src="{{ ps }}" alt="Torta hecha en Sabor Rural" width="420" height="525" loading="lazy" decoding="async"></figure>
+        {%- endfor -%}
+      </div>
+    </section>
+    <p class="tl-info"><b>Sabor Rural</b> · Ruta J-60, km 95, Sector Lora, Licantén<br>Lunes a viernes 9:00 – 21:00 · Sábado y domingo 14:00 – 21:00</p>
+  </div>
+
+<script type="application/json" id="tlData">[
+["Durazno",25500,34000,42500,51000,59500,68000],
+["Piña",25500,34000,42500,51000,59500,68000],
+["Selva negra",25500,34000,42500,51000,59500,68000],
+["Amapola",25500,34000,42500,51000,59500,68000],
+["Almendra manjar",27000,36000,45000,54000,63000,72000],
+["Café nuez",27000,36000,45000,54000,63000,72000],
+["Frambuesa",27000,36000,45000,54000,63000,72000],
+["Frutilla",27000,36000,45000,54000,63000,72000],
+["Praline nuez manjar",27000,36000,45000,54000,63000,72000],
+["Lúcuma manjar",27000,36000,45000,54000,63000,72000],
+["Mocca manjar",27000,36000,45000,54000,63000,72000],
+["Red velvet",29000,38000,47500,57000,66500,76000],
+["Chocolate manjar",29000,38000,47500,57000,66500,76000],
+["Cinco leches",29000,38000,47500,57000,66500,76000],
+["Carrot cake",29000,38000,47500,57000,66500,76000],
+["Doble chocolate",29000,38000,47500,57000,66500,76000],
+["Amor",29000,38000,47500,57000,66500,76000],
+["Rogel",29000,38000,47500,57000,66500,76000],
+["Isadora",29000,38000,47500,57000,66500,76000],
+["Pompadour",29000,38000,47500,57000,66500,76000],
+["San Jorge",29000,38000,47500,57000,66500,76000],
+["Mil hojas manjar",29000,38000,47500,57000,66500,76000],
+["Hojarasca manjar",29000,38000,47500,57000,66500,76000],
+["Premium chocolate naranja",30000,40000,50000,60000,70000,80000],
+["Panqueque naranja",30000,40000,50000,60000,70000,80000],
+["Panqueque chocolate",30000,40000,50000,60000,70000,80000],
+["Panqueque lúcuma manjar",30000,40000,50000,60000,70000,80000],
+["Panqueque chocolate naranja",30000,40000,50000,60000,70000,80000]
+]</script>
+<script>
+(function () {
+  var root = document.getElementById('tl'); if (!root) return;
+  var DATA = JSON.parse(document.getElementById('tlData').textContent);
+  var SIZES = [15, 20, 25, 30, 35, 40], WA = root.getAttribute('data-wa') || '';
+  var FILTERS = [['all', 'Todas'], ['manjar', 'Con manjar'], ['chocolate', 'Chocolate'], ['fruta', 'Frutas'], ['panqueque', 'Panqueque']];
+  var KEYS = { manjar: ['manjar'], chocolate: ['chocolate'], fruta: ['durazno', 'piña', 'frambuesa', 'frutilla', 'naranja'], panqueque: ['panqueque'] };
+  var st = { n: 20, sel: -1, f: 'all', q: '' };
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function clp(n) { return '$' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  function norm(s) { return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+  function fecha(iso) { if (!iso) return 'por definir'; var p = iso.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
+  function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function idx(n) { return SIZES.indexOf(n); }
+
+  var sizes = $('tlSizes');
+  SIZES.concat(['mas']).forEach(function (n) {
+    var b = el('button', 'tl-sz'); b.type = 'button'; b.setAttribute('data-n', n);
+    b.textContent = n === 'mas' ? 'Más de 40' : n + ' personas';
+    b.addEventListener('click', function () { st.n = n; render(); });
+    sizes.appendChild(b);
+  });
+  var fl = $('tlFl');
+  FILTERS.forEach(function (f) {
+    var b = el('button', 'tl-f', f[1]); b.type = 'button'; b.setAttribute('data-f', f[0]);
+    b.addEventListener('click', function () { st.f = f[0]; render(); });
+    fl.appendChild(b);
+  });
+  $('tlQ').addEventListener('input', function () { st.q = norm(this.value.trim()); render(); });
+  ['tlOc', 'tlFe', 'tlEn', 'tlNo2', 'tlId'].forEach(function (id) { $(id).addEventListener('input', summary); $(id).addEventListener('change', summary); });
+  $('tlFe').min = iso(new Date());
+
+  function match(row) {
+    var name = norm(row[0]);
+    if (st.q && name.indexOf(st.q) < 0) return false;
+    if (st.f === 'all') return true;
+    return KEYS[st.f].some(function (k) { return name.indexOf(norm(k)) >= 0; });
+  }
+  function render() {
+    Array.prototype.forEach.call(sizes.children, function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-n') === String(st.n))); });
+    Array.prototype.forEach.call(fl.children, function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-f') === st.f)); });
+    $('tlBig').hidden = st.n !== 'mas';
+    var grid = $('tlGrid'); grid.textContent = ''; var shown = 0;
+    DATA.forEach(function (row, i) {
+      if (!match(row)) return; shown++;
+      var b = el('button', 'tl-card'); b.type = 'button'; b.setAttribute('aria-pressed', String(i === st.sel));
+      b.appendChild(el('b', null, row[0]));
+      b.appendChild(el('span', null, st.n === 'mas' ? 'A medida' : clp(row[1 + idx(st.n)])));
+      b.appendChild(el('small', null, st.n === 'mas' ? 'Cotización personalizada' : 'para ' + st.n + ' personas'));
+      b.addEventListener('click', function () { st.sel = (st.sel === i ? -1 : i); render(); });
+      grid.appendChild(b);
+    });
+    $('tlNo').hidden = shown > 0;
+    summary();
+  }
+  function summary() {
+    var row = st.sel >= 0 ? DATA[st.sel] : null, big = st.n === 'mas';
+    var price = row && !big ? row[1 + idx(st.n)] : null;
+    $('sTorta').textContent = row ? row[0] : 'Sin elegir';
+    $('sPers').textContent = big ? 'Más de 40 personas' : st.n + ' personas';
+    $('sTot').textContent = big ? 'A medida' : (price ? clp(price) : '—');
+    var nom = $('tlNo2').value.trim() || '[tu nombre]', idea = $('tlId').value.trim();
+    var t = 'Hola Sabor Rural, soy ' + nom + '. Quiero encargar una torta:' +
+      '\n• Torta: ' + (row ? row[0] : 'por definir') +
+      '\n• Para: ' + (big ? 'más de 40 personas (necesito cotización personalizada)' : st.n + ' personas') +
+      (price ? '\n• Valor referencial: ' + clp(price) : '') +
+      '\n• Ocasión: ' + $('tlOc').value +
+      '\n• Fecha: ' + fecha($('tlFe').value) +
+      '\n• Entrega: ' + $('tlEn').value +
+      '\n• Bizcocho, relleno y decoración: ' + (idea || 'por definir') +
+      '\n¿Me confirmas disponibilidad y valor final?';
+    $('sMsg').querySelector('span').textContent = t;
+    $('sGo').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t);
+    $('sGo').textContent = big ? 'Cotizar por WhatsApp' : 'Enviar pedido por WhatsApp';
+  }
+  /* datos que llegan desde la portada ("Quiero una así", torta de novios) */
+  try {
+    var q = new URLSearchParams(window.location.search);
+    if (q.get('idea')) $('tlId').value = q.get('idea');
+    if (q.get('ocasion')) { var oc = $('tlOc'); Array.prototype.forEach.call(oc.options, function (o) { if (o.text === q.get('ocasion') || o.value === q.get('ocasion')) oc.value = o.value; }); }
+    var pn = q.get('personas'); if (pn === 'mas') st.n = 'mas'; else if (pn && idx(+pn) >= 0) st.n = +pn;
+  } catch (e) {}
+  render();
+})();
+</script>
+</div>
+{% schema %}
+{
+ "name": "Sabor Rural: tortas",
+ "settings": [
+  {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Tortas por encargo"},
+  {"type": "text", "id": "titulo_a", "label": "Título", "default": "Elige tu"},
+  {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "torta"},
+  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Elige cuántas personas, escoge el sabor y mira el valor al tiro. Envías tu pedido por WhatsApp y reservas tu fecha con un abono."},
+  {"type": "text", "id": "foto", "label": "Foto principal (archivo de Contenido > Archivos)", "default": "sr-encargo-corazon.jpg"},
+  {"type": "text", "id": "whatsapp", "label": "WhatsApp (con código de país, sin +)", "default": "56992101764"}
+ ],
+ "presets": [{"name": "Sabor Rural: tortas"}]
+}
+{% endschema %}

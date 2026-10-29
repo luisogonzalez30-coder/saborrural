@@ -1,0 +1,87 @@
+<style>
+.sr .encargo{position:relative;overflow:hidden;isolation:isolate;background:#0C0D0F}
+.sr .en-bg{position:absolute;left:0;right:0;top:0;height:min(176vw,820px);z-index:-1;-webkit-mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.35) 9%,#000 26%,#000 78%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.35) 9%,#000 26%,#000 78%,transparent 100%)}
+.sr .encargo .sec-head{margin-bottom:min(86vw,360px)}
+.sr .en-bg img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 100%;opacity:.95}
+.sr .en-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,13,15,.5) 0%,rgba(12,13,15,.74) 14%,rgba(12,13,15,.7) 38%,rgba(12,13,15,.04) 54%,rgba(12,13,15,.04) 78%,rgba(12,13,15,.4) 100%)}
+.sr .encargo .sec-head h2,.sr .encargo .sec-head p,.sr .encargo .steps strong,.sr .encargo .steps span{text-shadow:0 2px 18px rgba(0,0,0,.85),0 0 3px rgba(0,0,0,.5)}
+.sr .encargo .sec-head .eyebrow{color:var(--pink);text-shadow:0 1px 12px rgba(0,0,0,.9)}
+.sr .encargo .sec-head h2{color:#fff}
+.sr .encargo .sec-head p{color:#F3F1EA}
+.sr .encargo .steps span{color:#E3E1D8}
+/* toda la sección es un enlace: se abre la página de tortas en otra pestaña */
+.sr .en-cover{position:absolute;inset:0;z-index:5;border-radius:0;-webkit-tap-highlight-color:rgba(242,132,151,.15)}
+.sr .en-go{position:relative;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 20px;border:1px solid rgba(242,132,151,.55);border-radius:18px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;text-decoration:none;box-shadow:0 18px 36px -14px rgba(226,88,124,.9);align-self:start}
+.sr .en-go b{display:block;font:800 1.5rem/1.15 var(--font-display)}
+.sr .en-go small{display:block;margin-top:3px;font:600 14.5px/1.3 var(--font-body);color:#3A1220}
+.sr .en-go i{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#1A0A0F;color:#F7A9B8;animation:enpulse 2.4s ease-out infinite}
+.sr .en-go svg{width:22px;height:22px}
+@keyframes enpulse{0%{box-shadow:0 0 0 0 rgba(26,10,15,.55)}70%,100%{box-shadow:0 0 0 14px rgba(26,10,15,0)}}
+@media (min-width:900px){.sr .encargo .sec-head{margin-bottom:0;max-width:500px}.sr .en-go{margin-top:-170px}.sr .en-bg{left:auto;width:46%;height:100%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 34%);mask-image:linear-gradient(90deg,transparent 0,#000 34%)}.sr .en-bg::after{background:linear-gradient(180deg,#0C0D0F 0%,transparent 16%,transparent 84%,#0C0D0F 100%)}}
+@media (prefers-reduced-motion:reduce){.sr .en-go i{animation:none}}
+</style>
+<div class="sr">
+  <section id="encargos" class="encargo">
+    <a class="en-cover" href="{{ section.settings.enlace }}" target="_blank" rel="noopener" aria-label="{{ section.settings.boton }}" tabindex="-1"></a>
+    <div class="en-bg" aria-hidden="true"><img src="{{ 'sr-encargo-corazon.jpg' | file_url }}" alt="" width="1000" height="1250" loading="lazy"></div>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Tortas por encargo</p>
+        <h2>Encarga tu torta</h2>
+        <p>Cumpleaños, bautizos, aniversarios. Mira todas nuestras tortas con su valor según el tamaño, elige sabor y fecha, y envía tu pedido por WhatsApp.</p>
+      </div>
+      <div class="order-grid">
+        <div>
+          <ol class="steps">
+            <li><div><strong>Elige tamaño y sabor</strong><span>Mira las tortas con su valor para 15 a 40 personas.</span></div></li>
+            <li><div><strong>Cuéntanos tu idea</strong><span>Bizcocho, relleno, decoración y fecha.</span></div></li>
+            <li><div><strong>Reservas la fecha con abono</strong><span>Te confirmamos por WhatsApp y tu fecha queda asegurada.</span></div></li>
+            <li><div><strong>La retiras en Licantén</strong><span>Consulta por despacho a Curicó y Talca.</span></div></li>
+          </ol>
+        </div>
+        <a class="en-go" href="{{ section.settings.enlace }}" target="_blank" rel="noopener">
+          <span><b>{{ section.settings.boton }}</b><small>Elige tu torta, mira el valor y pide por WhatsApp</small></span>
+          <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i>
+        </a>
+      </div>
+    </div>
+    <div hidden aria-hidden="true"><input id="t-ocasion"><input id="t-pers"><textarea id="t-idea"></textarea></div>
+  </section>
+</div>
+<script>
+/* "Quiero una así" (Conoce nuestro trabajo) y "Encargar torta de novios" ahora abren la página de tortas con la idea ya escrita */
+(function () {
+  var url = {{ section.settings.enlace | json }};
+  function abrir(params) { window.open(url + (params ? (url.indexOf('?') < 0 ? '?' : '&') + params : ''), '_blank', 'noopener'); }
+  document.addEventListener('click', function (e) {
+    var p = e.target.closest && e.target.closest('button[data-pick]');
+    if (p) {
+      e.stopPropagation(); e.preventDefault();
+      var g = (p.closest('.dz-card') || document.body).getAttribute('data-group') || '';
+      var q = 'idea=' + encodeURIComponent(p.getAttribute('data-pick') + ' (diseño «' + p.getAttribute('data-name') + '» de la galería)');
+      if (g === 'Tortas infantiles') q += '&ocasion=' + encodeURIComponent('Cumpleaños');
+      if (g === 'Bautizo y primer año') q += '&ocasion=' + encodeURIComponent('Bautizo o comunión');
+      var c = document.getElementById('dzClose'); if (c) c.click();
+      abrir(q); return;
+    }
+    if (e.target.closest && e.target.closest('#noviosGo')) {
+      e.stopPropagation(); e.preventDefault();
+      abrir('ocasion=Matrimonio&personas=40&idea=' + encodeURIComponent('Torta de novios de dos pisos con flores de azúcar en cascada'));
+    }
+  }, true);
+})();
+</script>
+{% schema %}
+{
+ "name": "Sabor: encargar torta",
+ "settings": [
+  {"type": "text", "id": "boton", "label": "Texto del botón", "default": "Ver tortas y precios"},
+  {"type": "text", "id": "enlace", "label": "Enlace (página de tortas)", "default": "/pages/tortas"}
+ ],
+ "presets": [
+  {
+   "name": "Sabor: encargar torta"
+  }
+ ]
+}
+{% endschema %}

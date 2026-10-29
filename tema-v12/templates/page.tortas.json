@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "sr-tortas-lista",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
