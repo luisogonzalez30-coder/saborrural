@@ -154,7 +154,8 @@
     <section class="tl-insp" aria-labelledby="tl-i-{{ section.id }}">
       <h2 id="tl-i-{{ section.id }}">Inspírate con nuestro trabajo</h2>
       <div class="tl-ph">
-        {%- for f in 'sr-obra-oreo.jpg,sr-obra-lazo.jpg,sr-obra-lucuma.jpg,sr-obra-guindas.jpg' | split: ',' -%}
+        {%- assign fotos = 'sr-obra-oreo.jpg,sr-obra-lazo.jpg,sr-obra-lucuma.jpg,sr-obra-guindas.jpg' | split: ',' -%}
+        {%- for f in fotos -%}
           {%- assign pu = f | file_url -%}{%- if pu contains '?' -%}{%- assign ps = pu | append: '&width=420' -%}{%- else -%}{%- assign ps = pu | append: '?width=420' -%}{%- endif -%}
           <figure><img src="{{ ps }}" alt="Torta hecha en Sabor Rural" width="420" height="525" loading="lazy" decoding="async"></figure>
         {%- endfor -%}
