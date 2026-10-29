@@ -11,7 +11,7 @@
 - **Medios de pago:** se aceptan todos los medios de pago.
 - **Precios:** son los exactos de `carta.md`. Cítalos tal cual, sin dar rangos ni aproximaciones. Si un producto no está en la carta, no inventes precio.
 - WhatsApp: **+56 9 9210 1764** (pedidos, encargos, reservas y consultas de precio).
-- Carta completa con precios (página de la web): https://rq96ev-nk.myshopify.com/pages/carta — en DMs puedes dar este link.
+- Carta completa con precios (página de la web): https://saborruralcafeteria.myshopify.com/pages/carta — en DMs puedes dar este link.
 - Encargos y todos los enlaces: la página del link en la bio, https://luisogonzalez30-coder.github.io/saborrural/
 
 - Todo se hace **desde cero, sin premezclas ni conservantes** (el dueño autoriza decirlo).
@@ -33,7 +33,7 @@
 - Kuchen de la carta: berries, frambuesa, frutilla, manzana canela y nuez, nuez (la porción cuesta $3.000).
 - Pies y tartas: pie de limón ($3.000), pie de coco ($3.000), banoffee ($3.500), tarta Snickers ($3.000), tarta chocolate y pistacho ($3.500) y frambuesa miga. Hay más variedades: la disponibilidad se consulta por WhatsApp.
 - Los precios de la carta son por porción. Piezas enteras: los kuchen y las tartas salen $17.000 completos, y la tarta de chocolate y pistacho $19.000 completa (precio confirmado por la dueña). El tamaño de la pieza entera no está confirmado: se consulta por WhatsApp.
-- En la web hay una sección "Encarga tu kuchen": https://rq96ev-nk.myshopify.com/#kuchen
+- En la web hay una sección "Encarga tu kuchen": https://saborruralcafeteria.myshopify.com/#kuchen
 
 ## Tortas por encargo
 - Incluye tortas infantiles (tema, colores y mensaje a elección), tortas de aniversario y fechas especiales, y diseños a gusto del cliente.
