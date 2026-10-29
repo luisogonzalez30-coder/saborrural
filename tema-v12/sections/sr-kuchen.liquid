@@ -51,9 +51,6 @@
 .kc .kc-step{display:inline-flex;align-items:center;border:1.5px solid #34373E;border-radius:10px;overflow:hidden;background:#0C0D0F}
 .kc .kc-step button{width:34px;height:36px;border:0;background:transparent;color:#F3F1EA;font:700 1.15rem/1 var(--font-body);cursor:pointer}
 .kc .kc-step output{min-width:28px;text-align:center;font:800 .95rem/1 var(--font-body);color:#fff}
-.kc .kc-mode{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;border-radius:12px;background:#0C0D0F;border:1px solid #2A2D33}
-.kc .kc-mode button{min-height:40px;border:0;border-radius:9px;background:transparent;color:#C9CBC2;font:700 .9rem/1 var(--font-body);cursor:pointer}
-.kc .kc-mode button[aria-pressed="true"]{background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F}
 .kc .kc-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .kc .kc-two label{min-width:0;display:grid;gap:5px;font:700 .8rem/1.2 var(--font-body);color:#E4D6DA}
 .kc .kc-two input{min-width:0;box-sizing:border-box;width:100%;min-height:44px;padding:0 10px;border-radius:10px;border:1.5px solid #34373E;background:#0C0D0F;color:#F3F1EA;font:500 15px var(--font-body)}
@@ -112,15 +109,11 @@
               {%- render 'sr-kc-chip', n: x.title, vp: vp, ve: x -%}
             {%- endfor -%}
           </div>
-          <p class="kc-hint">Toca para agregar. Precios por porción y por pieza entera.</p>
+          <p class="kc-hint">Toca para agregar. Precios por pieza entera.</p>
 
           <div class="kc-order" id="kcOrder" hidden>
             <h3>Tu pedido</h3>
             <ul class="kc-lines" id="kcLines"></ul>
-            <div class="kc-mode" role="group" aria-label="Tamaño">
-              <button type="button" data-m="por" aria-pressed="true">Porciones</button>
-              <button type="button" data-m="ent" aria-pressed="false">Pieza entera</button>
-            </div>
             <div class="kc-two" style="grid-template-columns:1fr">
               <label>¿Qué día lo retiras?<input type="date" id="kcFe" required></label>
             </div>
@@ -143,7 +136,7 @@
 (function () {
   var root = document.querySelector('.kc'); if (!root) return;
   var WA = {{ wa | json }}, BASE = {{ section.settings.mensaje | json }}, BTN = {{ section.settings.boton | json }};
-  var items = {}, mode = 'por', order = [], ready = false;
+  var items = {}, mode = 'ent', order = [], ready = false;
   function $(id) { return document.getElementById(id); }
   function clp(n) { return '$' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
   function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
@@ -160,20 +153,13 @@
       render();
     });
   });
-  Array.prototype.forEach.call(root.querySelectorAll('.kc-mode button'), function (b) {
-    b.addEventListener('click', function () {
-      mode = b.getAttribute('data-m');
-      Array.prototype.forEach.call(root.querySelectorAll('.kc-mode button'), function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-      render();
-    });
-  });
   $('kcFe').addEventListener('input', render); $('kcFe').addEventListener('change', render);
   function render() {
     var box = $('kcOrder'), ul = $('kcLines'); box.hidden = !order.length; ul.textContent = '';
-    var total = 0, falta = [], lines = [], fe = $('kcFe').value, ent = mode === 'ent';
+    var total = 0, falta = [], lines = [], fe = $('kcFe').value;
     order.forEach(function (n) {
       var it = items[n], u = unit(it), li = el('li'), nm = el('span', 'nm', n);
-      nm.appendChild(el('small', null, u.v ? clp(u.p) + (ent ? ' c/pieza entera' : ' c/porción') : (ent ? 'sin precio de pieza entera' : 'no se vende por porción')));
+      nm.appendChild(el('small', null, u.v ? clp(u.p) + ' c/pieza entera' : 'sin precio de pieza entera'));
       var st = el('span', 'kc-step'), m = el('button', null, '−'), o = el('output', null, it.q), pl = el('button', null, '+');
       m.type = pl.type = 'button'; m.setAttribute('aria-label', 'Menos ' + n); pl.setAttribute('aria-label', 'Más ' + n);
       m.addEventListener('click', function () { if (it.q > 1) it.q--; else { delete items[n]; order = order.filter(function (x) { return x !== n; }); it.btn.setAttribute('aria-pressed', 'false'); } render(); });
@@ -181,13 +167,13 @@
       st.appendChild(m); st.appendChild(o); st.appendChild(pl);
       li.appendChild(nm); li.appendChild(st); li.appendChild(el('span', 'pr', u.v ? clp(u.p * it.q) : '—')); ul.appendChild(li);
       if (u.v) total += u.p * it.q; else falta.push(n);
-      lines.push('• ' + it.q + ' × ' + n + (ent ? ' (pieza entera)' : ' (porciones)') + (u.v ? ' — ' + clp(u.p * it.q) : ''));
+      lines.push('• ' + it.q + ' × ' + n + ' (pieza entera)' + (u.v ? ' — ' + clp(u.p * it.q) : ''));
     });
     var fechaOk = !!fe && fe >= MIN;
     $('kcTot').textContent = order.length ? clp(total) : '—';
-    $('kcTl').textContent = ent ? 'Total (piezas enteras)' : 'Total (porciones)';
+    $('kcTl').textContent = 'Total (piezas enteras)';
     $('kcNt').textContent = falta.length
-      ? falta.join(', ') + (ent ? ' no tiene precio de pieza entera: cámbialo a porciones o consúltalo por WhatsApp.' : ' no se vende por porción: cámbialo a pieza entera o consúltalo por WhatsApp.')
+      ? falta.join(', ') + ' no tiene precio de pieza entera: consúltalo por WhatsApp.'
       : (!fechaOk ? 'Elige una fecha de retiro desde mañana.' : 'Pagas en línea con Mercado Pago y lo retiras el ' + fecha(fe) + ' en el local.');
     ready = order.length > 0 && !falta.length && fechaOk;
     var go = $('kcGo');
