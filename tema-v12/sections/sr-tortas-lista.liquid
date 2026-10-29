@@ -82,6 +82,21 @@
 .tl .tl-ph img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
 .tl .tl-info{margin:0 0 46px;padding:18px;border:1px solid var(--ln);border-radius:18px;background:rgba(16,9,13,.9);text-align:center;color:#E4D6DA;font:500 .98rem/1.5 var(--font-body)}
 .tl .tl-info b{color:#fff}
+.tl .tl-esp{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 14px;align-items:center;max-width:540px;margin-top:6px;padding:16px 16px 16px;border-radius:22px;border:1.5px solid rgba(245,154,172,.7);background:linear-gradient(160deg,rgba(58,22,32,.92),rgba(18,10,14,.92));box-shadow:0 0 0 4px rgba(240,124,149,.12),0 24px 50px -26px rgba(226,88,124,.8)}
+.tl .tl-esp-ico{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F}
+.tl .tl-esp-ico svg{width:26px;height:26px}
+.tl .tl-esp-t{margin:0;display:grid;gap:3px}
+.tl .tl-esp-t b{font:800 clamp(1.05rem,3.6vw,1.3rem)/1.15 var(--font-display);color:#fff}
+.tl .tl-esp-t span{font:500 .92rem/1.35 var(--font-body);color:#E4D6DA}
+.tl .tl-esp-go{grid-column:1/-1;position:relative;display:flex;align-items:center;justify-content:center;gap:10px;min-height:58px;border-radius:16px;background:linear-gradient(135deg,#34D27A,#1FAF5B);color:#04190D;font:800 1.12rem/1 var(--font-display);text-decoration:none;box-shadow:0 16px 30px -14px rgba(31,175,91,.95)}
+.tl .tl-esp-go svg{width:26px;height:26px}
+.tl .tl-esp-go::after{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid #7CF0AB;opacity:0;pointer-events:none}
+.tl.live .tl-esp-go::after{animation:tl-ring 2.2s ease-out infinite}
+.tl .tl-esp-go:hover{filter:brightness(1.06)}
+@keyframes tl-ring{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.07,1.32);opacity:0}}
+.tl .tl-esp-2{margin:0;text-align:center;font-size:.86rem;color:#E4D6DA}
+.tl .tl-esp-2 a{color:#7CF0AB;font-weight:700}
+@media (prefers-reduced-motion:reduce){.tl.live .tl-esp-go::after{animation:none}}
 @media (max-width:760px){.tl .tl-main{grid-template-columns:1fr}.tl .tl-sum{position:static}.tl .tl-hero-img{width:100%;opacity:.45;-webkit-mask-image:none;mask-image:none}.tl .tl-ph{grid-template-columns:repeat(2,1fr)}.tl .tl-two{grid-template-columns:1fr}}
 </style>
 
@@ -93,6 +108,14 @@
       <h1 id="tl-h-{{ section.id }}">{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h1>
       <p class="tl-lead">{{ section.settings.bajada }}</p>
       <ul class="tl-chips"><li>28 sabores</li><li>De 15 a 40 personas</li><li>Reserva con abono</li></ul>
+      <div class="tl-esp">
+        <span class="tl-esp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></span>
+        <p class="tl-esp-t"><b>{{ section.settings.esp_titulo }}</b><span>{{ section.settings.esp_texto }}</span></p>
+        <a class="tl-esp-go" id="tlEsp" href="https://wa.me/{{ wa }}?text={{ section.settings.esp_mensaje | url_encode }}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.5A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.2 15l-.3-.2-3.1.9.9-3-.2-.3A8.1 8.1 0 0 1 12.04 3.8zm-3.1 4.3c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.7-.4l-1.8-.9c-.3-.1-.5-.1-.7.1l-.9 1.1c-.1.2-.3.2-.6.1-1.4-.7-2.4-1.3-3.3-2.8-.1-.3 0-.4.2-.6l.5-.6.3-.5c.1-.2 0-.4 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4z"/></svg>
+          {{ section.settings.esp_boton }}
+        </a>
+      </div>
     </div>
   </section>
 
@@ -147,6 +170,7 @@
         <div class="tl-total"><span>Valor referencial</span><strong id="sTot">—</strong></div>
         <div class="tl-msg" id="sMsg"><b>Así llegará tu mensaje</b><span></span></div>
         <a class="tl-go" id="sGo" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+        <p class="tl-esp-2">¿Diseño, fondant o algo especial? <a id="tlEsp2" href="https://wa.me/{{ wa }}?text={{ section.settings.esp_mensaje | url_encode }}" target="_blank" rel="noopener">Escríbenos</a></p>
         <p class="tl-fine">Te confirmamos disponibilidad y valor final por WhatsApp. La fecha se reserva con un abono.</p>
       </aside>
     </div>
@@ -269,7 +293,11 @@
     $('sMsg').querySelector('span').textContent = t;
     $('sGo').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t);
     $('sGo').textContent = big ? 'Cotizar por WhatsApp' : 'Enviar pedido por WhatsApp';
+    var e = 'Hola Sabor Rural, soy ' + nom + '. Mi torta lleva un diseño especial, fondant u otro requisito y quiero consultarlo.' +
+      (big ? '\nTamaño: más de 40 personas.' : '\nTamaño: ' + st.n + ' personas.') + (row ? '\nSabor que me gusta: ' + row[0] + '.' : '') + (idea ? '\nIdea: ' + idea : '');
+    $('tlEsp').href = $('tlEsp2').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(e);
   }
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { root.classList.toggle('live', es[0].isIntersecting); }).observe(document.querySelector('.tl-esp'));
   /* datos que llegan desde la portada ("Quiero una así", torta de novios) */
   try {
     var q = new URLSearchParams(window.location.search);
@@ -290,6 +318,10 @@
   {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "torta"},
   {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Elige cuántas personas, escoge el sabor y mira el valor al tiro. Envías tu pedido por WhatsApp y reservas tu fecha con un abono."},
   {"type": "text", "id": "foto", "label": "Foto principal (archivo de Contenido > Archivos)", "default": "sr-encargo-corazon.jpg"},
+  {"type": "text", "id": "esp_titulo", "label": "Aviso de diseño especial: título", "default": "¿Tu torta lleva diseño, fondant o algo especial?"},
+  {"type": "text", "id": "esp_texto", "label": "Aviso de diseño especial: texto", "default": "Cuéntanos tu idea y la cotizamos a tu medida."},
+  {"type": "text", "id": "esp_boton", "label": "Aviso de diseño especial: botón", "default": "Contáctanos por WhatsApp"},
+  {"type": "text", "id": "esp_mensaje", "label": "Aviso de diseño especial: mensaje de WhatsApp", "default": "Hola Sabor Rural, mi torta lleva un diseño especial, fondant u otro requisito y quiero consultarlo."},
   {"type": "text", "id": "whatsapp", "label": "WhatsApp (con código de país, sin +)", "default": "56992101764"}
  ],
  "presets": [{"name": "Sabor Rural: tortas"}]

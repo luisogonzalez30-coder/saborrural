@@ -79,3 +79,6 @@ html.sr-lite:not(.tf-on) .sr .ring::after{display:none!important}
 html.sr-lite:not(.tf-on) .sr .ring-rot{position:static!important;display:flex;gap:14px;width:max-content!important;height:auto!important;margin:0!important;transform:none!important;transform-style:flat!important;transition:none!important}
 html.sr-lite:not(.tf-on) .sr .rc{position:relative!important;inset:auto!important;flex:none;width:var(--cw);height:var(--ch);margin:0!important;transform:none!important;scroll-snap-align:center;-webkit-backface-visibility:visible!important;backface-visibility:visible!important}
 html.sr-lite:not(.tf-on) .sr .rc::after{display:none!important}
+
+/* 9. Botón verde de "diseño especial" en la página de tortas: pulso barato, solo mientras se ve */
+.sr-lite .tl.live .tl-esp-go::after{animation:tl-ring 2.2s ease-out infinite!important}
