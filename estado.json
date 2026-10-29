@@ -86,8 +86,8 @@
   },
   "2026-10-29-reel-r9-como-encargar-movil": {
     "error": "Meta no pudo procesar el archivo: Error: Media upload has failed with error code 2207076",
-    "intento": "2026-10-29T23:47:37.564Z",
+    "intento": "2026-10-29T23:51:45.620Z",
     "reintentable": true,
-    "intentos": 1
+    "intentos": 2
   }
 }
