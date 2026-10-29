@@ -32,7 +32,7 @@
 - Se pueden **encargar kuchen, pies y tartas, disponibles en 24 horas**: se piden con un día de anticipación por WhatsApp y se retiran al día siguiente en Licantén.
 - Kuchen de la carta: berries, frambuesa, frutilla, manzana canela y nuez, nuez (la porción cuesta $3.000).
 - Pies y tartas: pie de limón ($3.000), pie de coco ($3.000), banoffee ($3.500), tarta Snickers ($3.000), tarta chocolate y pistacho ($3.500) y frambuesa miga. Hay más variedades: la disponibilidad se consulta por WhatsApp.
-- Los precios de la carta son por porción. El valor y el tamaño de la pieza entera NO están confirmados: se cotizan por WhatsApp.
+- Los precios de la carta son por porción. Piezas enteras: los kuchen y las tartas salen $17.000 completos, y la tarta de chocolate y pistacho $19.000 completa (precio confirmado por la dueña). El tamaño de la pieza entera no está confirmado: se consulta por WhatsApp.
 - En la web hay una sección "Encarga tu kuchen": https://rq96ev-nk.myshopify.com/#kuchen
 
 ## Tortas por encargo
