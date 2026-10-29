@@ -1,0 +1,90 @@
+{%- liquid
+  assign wa = section.settings.whatsapp
+  assign wa_txt = section.settings.mensaje | url_encode
+  assign wa_var = section.settings.mensaje_variedades | url_encode
+  assign carta = section.settings.carta_url
+-%}
+<script>
+(function () {
+  var root = document.querySelector('.kc'); if (!root) return;
+  var WA = {{ wa | json }}, BASE = {{ section.settings.mensaje | json }};
+  var items = {}, mode = 'por', order = [];
+  function $(id) { return document.getElementById(id); }
+  function clp(n) { return '$' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
+  function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function fecha(v) { if (!v) return 'mañana'; var p = v.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
+  var man = new Date(); man.setDate(man.getDate() + 1); $('kcFe').min = iso(man); $('kcFe').value = iso(man);
+  Array.prototype.forEach.call(root.querySelectorAll('.kc-chip'), function (b) {
+    b.addEventListener('click', function () {
+      var n = b.getAttribute('data-n');
+      if (items[n]) { delete items[n]; order = order.filter(function (x) { return x !== n; }); b.setAttribute('aria-pressed', 'false'); }
+      else { items[n] = { q: 1, p: +b.getAttribute('data-p') || 0, btn: b }; order.push(n); b.setAttribute('aria-pressed', 'true'); }
+      render();
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll('.kc-mode button'), function (b) {
+    b.addEventListener('click', function () {
+      mode = b.getAttribute('data-m');
+      Array.prototype.forEach.call(root.querySelectorAll('.kc-mode button'), function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      render();
+    });
+  });
+  ['kcFe', 'kcNo'].forEach(function (id) { $(id).addEventListener('input', render); $(id).addEventListener('change', render); });
+  function render() {
+    var box = $('kcOrder'), ul = $('kcLines'); box.hidden = !order.length; ul.textContent = '';
+    var total = 0, unk = 0, lines = [];
+    order.forEach(function (n) {
+      var it = items[n], li = el('li'), nm = el('span', 'nm', n);
+      var sub = mode === 'por' ? (it.p ? clp(it.p) + ' c/porción' : 'precio por confirmar') : 'valor de la pieza: se cotiza';
+      nm.appendChild(el('small', null, sub));
+      var st = el('span', 'kc-step'), m = el('button', null, '−'), o = el('output', null, it.q), pl = el('button', null, '+');
+      m.type = pl.type = 'button'; m.setAttribute('aria-label', 'Menos ' + n); pl.setAttribute('aria-label', 'Más ' + n);
+      m.addEventListener('click', function () { if (it.q > 1) it.q--; else { delete items[n]; order = order.filter(function (x) { return x !== n; }); it.btn.setAttribute('aria-pressed', 'false'); } render(); });
+      pl.addEventListener('click', function () { it.q++; render(); });
+      st.appendChild(m); st.appendChild(o); st.appendChild(pl);
+      var pr = el('span', 'pr', mode === 'por' && it.p ? clp(it.p * it.q) : '—');
+      li.appendChild(nm); li.appendChild(st); li.appendChild(pr); ul.appendChild(li);
+      if (mode === 'por') { if (it.p) total += it.p * it.q; else unk++; }
+      lines.push('• ' + it.q + ' × ' + n + (mode === 'por' ? (it.p ? ' (porciones) — ' + clp(it.p * it.q) : ' (porciones) — precio por confirmar') : ' (pieza entera) — por cotizar'));
+    });
+    var ent = mode === 'ent';
+    $('kcTot').textContent = !order.length ? '—' : (ent ? 'A cotizar' : clp(total) + (unk ? ' +' : ''));
+    $('kcTl').textContent = ent ? 'Pieza entera' : 'Total referencial';
+    $('kcNt').textContent = ent ? 'El valor y el tamaño de la pieza entera se confirman por WhatsApp.' : (unk ? 'Falta confirmar el precio de algunos productos: te lo decimos por WhatsApp.' : 'Valor según la carta, por porción. Lo confirmamos por WhatsApp.');
+    var go = $('kcGo');
+    if (!order.length) { go.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(BASE); $('kcGoT').textContent = {{ section.settings.boton | json }}; return; }
+    var nom = $('kcNo').value.trim() || '[tu nombre]';
+    var t = 'Hola Sabor Rural, soy ' + nom + '. Quiero encargar para retirar el ' + fecha($('kcFe').value) + ':\n' + lines.join('\n') +
+      (ent ? '\nNecesito el valor y el tamaño de la pieza entera.' : '\nTotal referencial: ' + clp(total) + (unk ? ' (más lo que falta confirmar)' : '')) +
+      '\nRetiro en el local. ¿Me confirmas disponibilidad?';
+    go.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t);
+    $('kcGoT').textContent = 'Pedir por WhatsApp' + (!ent && total ? ' · ' + clp(total) : '');
+  }
+  render();
+})();
+</script>
+<script>(function(){var s=document.querySelector('.kc');if(!s)return;if(!('IntersectionObserver' in window)){s.classList.add('live');return}new IntersectionObserver(function(es){es.forEach(function(e){s.classList.toggle('live',e.isIntersecting)})},{rootMargin:'80px'}).observe(s)})();</script>
+{% schema %}
+{
+ "name": "Sabor Rural: kuchen",
+ "settings": [
+  {"type": "text", "id": "aviso_pre", "label": "Banner: texto pequeño", "default": "Importante antes de pedir"},
+  {"type": "text", "id": "aviso_titulo", "label": "Banner: título", "default": "Disponible en 24 horas"},
+  {"type": "text", "id": "aviso_texto", "label": "Banner: bajada", "default": "Encárgalo hoy y retíralo mañana. Pídelo con un día de anticipación."},
+  {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Kuchen, pies y tartas"},
+  {"type": "text", "id": "titulo_a", "label": "Título", "default": "Encarga tu"},
+  {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "kuchen"},
+  {"type": "text", "id": "insignia", "label": "Insignia sobre la foto", "default": "Disponible en 24 horas"},
+  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Kuchen, pies y tartas hechos desde cero, sin premezclas ni conservantes. Elige el tuyo y retíralo en 24 horas."},
+  {"type": "text", "id": "sabores", "label": "Kuchen (formato Nombre|precio por porción, separados por coma)", "default": "Berries|3000, Frambuesa|3000, Frutilla|3000, Manzana canela y nuez|3000, Nuez|3000"},
+  {"type": "text", "id": "tartas", "label": "Pies y tartas (formato Nombre|precio por porción, separados por coma; sin precio = consultar)", "default": "Pie de limón|3000, Pie de coco|3000, Banoffee|3500, Tarta Snickers|3000, Tarta chocolate y pistacho|3500, Frambuesa miga|"},
+  {"type": "text", "id": "boton", "label": "Texto del botón", "default": "Encargar ahora"},
+  {"type": "text", "id": "mensaje", "label": "Mensaje de WhatsApp (encargar)", "default": "Hola Sabor Rural, quiero encargar un kuchen o tarta para mañana."},
+  {"type": "text", "id": "mensaje_variedades", "label": "Mensaje de WhatsApp (variedades)", "default": "Hola Sabor Rural, ¿qué variedades de kuchen, pies y tartas tienen para encargar?"},
+  {"type": "text", "id": "whatsapp", "label": "WhatsApp (números, con código de país)", "default": "56992101764"},
+  {"type": "text", "id": "carta_url", "label": "Enlace de la carta", "default": "/pages/carta"}
+ ],
+ "presets": [{"name": "Sabor Rural: kuchen"}]
+}
+{% endschema %}
