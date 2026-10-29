@@ -56,7 +56,7 @@
 .tl .tl-empty[hidden]{display:none}
 .tl .tl-form{display:grid;gap:14px}
 .tl .tl-two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.tl .tl-fld{display:grid;gap:6px;min-width:0}
+.tl .tl-fld{display:grid;gap:6px;min-width:0;align-content:start}
 .tl .tl-fld label{font:700 .88rem/1.2 var(--font-body);color:#E4D6DA}
 .tl .tl-fld input,.tl .tl-fld select,.tl .tl-fld textarea{width:100%;min-height:50px;padding:10px 14px;border-radius:12px;border:1.5px solid #34373E;background:#0C0D0F;color:#F3F1EA;font:500 16px var(--font-body)}
 .tl .tl-fld textarea{min-height:104px;resize:vertical}
@@ -97,6 +97,32 @@
 .tl .tl-esp-2{margin:0;text-align:center;font-size:.86rem;color:#E4D6DA}
 .tl .tl-esp-2 a{color:#7CF0AB;font-weight:700}
 @media (prefers-reduced-motion:reduce){.tl.live .tl-esp-go::after{animation:none}}
+.tl .tl-help-pk{color:#F8B7C4;font-weight:600}
+.tl .tl-ent{display:grid;gap:10px}
+.tl .tl-opt{display:grid;gap:4px;text-align:left;padding:14px 16px 14px 52px;position:relative;border-radius:14px;border:1.5px solid #34373E;background:#15171B;color:#F3F1EA;cursor:pointer;font-family:var(--font-body)}
+.tl .tl-opt b{font:800 1.08rem/1.15 var(--font-display);color:#fff}
+.tl .tl-opt small{font:500 .86rem/1.3 var(--font-body);color:#C9CBC2}
+.tl .tl-opt::before{content:"";position:absolute;left:16px;top:50%;width:22px;height:22px;margin-top:-11px;border-radius:50%;border:2px solid #6F727A}
+.tl .tl-opt[aria-checked="true"]{border-color:#F59AAC;background:linear-gradient(160deg,#3A1620,#150B0F 75%)}
+.tl .tl-opt[aria-checked="true"]::before{border-color:#F59AAC;background:radial-gradient(circle,#F59AAC 0 45%,transparent 50%)}
+.tl .tl-zona{display:grid;gap:6px;margin-top:6px}
+.tl .tl-zona[hidden]{display:none}
+.tl .tl-zona label{font:700 .88rem/1.2 var(--font-body);color:#E4D6DA}
+.tl .tl-zona select{width:100%;min-height:50px;padding:10px 14px;border-radius:12px;border:1.5px solid #34373E;background:#0C0D0F;color:#F3F1EA;font:500 16px var(--font-body)}
+.tl .tl-write{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 14px;align-items:center;padding:18px 16px;border-radius:20px;border:1.5px solid rgba(245,154,172,.75);background:radial-gradient(90% 120% at 100% 0%,rgba(226,88,124,.35),transparent 66%),linear-gradient(160deg,#3A1620,#150B0F 80%);box-shadow:0 0 0 4px rgba(240,124,149,.12),0 22px 44px -26px rgba(226,88,124,.85)}
+.tl .tl-write-ico{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F}
+.tl .tl-write-ico svg{width:24px;height:24px}
+.tl .tl-write-t{display:grid;gap:3px}
+.tl .tl-write-t b{font:800 clamp(1.05rem,3.6vw,1.3rem)/1.15 var(--font-display);color:#fff}
+.tl .tl-write-t span{font:500 .92rem/1.35 var(--font-body);color:#F3E4E8}
+.tl .tl-write-t em{font-family:var(--font-chalk);font-style:normal;font-weight:700;font-size:1.2em;color:#F8B7C4}
+.tl .tl-write-in{grid-column:1/-1;width:100%;min-height:58px;padding:0 16px;border-radius:14px;border:2px solid #F59AAC;background:#0C0D0F;color:#fff;font:600 1.1rem var(--font-body)}
+.tl .tl-write-in::placeholder{color:#8A8D94;font-weight:500}
+.tl .tl-card.on{grid-column:1/-1;min-height:0}
+.tl .tl-det{display:grid;gap:6px;padding-top:10px;margin-top:2px;border-top:1px solid rgba(255,255,255,.14);cursor:default}
+.tl .tl-det i{font:700 .72rem/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:#F28497;font-style:normal}
+.tl .tl-det p{margin:0;font:500 .98rem/1.45 var(--font-body);color:#F3F1EA}
+.tl .tl-det a{justify-self:start;margin-top:2px;color:#7CF0AB;font:700 .9rem/1.2 var(--font-body)}
 @media (max-width:760px){.tl .tl-main{grid-template-columns:1fr}.tl .tl-sum{position:static}.tl .tl-hero-img{width:100%;opacity:.45;-webkit-mask-image:none;mask-image:none}.tl .tl-ph{grid-template-columns:repeat(2,1fr)}.tl .tl-two{grid-template-columns:1fr}}
 </style>
 
@@ -107,7 +133,7 @@
       <span class="tl-eyebrow">{{ section.settings.eyebrow }}</span>
       <h1 id="tl-h-{{ section.id }}">{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h1>
       <p class="tl-lead">{{ section.settings.bajada }}</p>
-      <ul class="tl-chips"><li>28 sabores</li><li>De 15 a 40 personas</li><li>Reserva con abono</li></ul>
+      <ul class="tl-chips"><li>28 sabores</li><li>De 15 a 40 personas</li><li>Reserva con abono</li><li>Mínimo 3 días de anticipación</li></ul>
       <div class="tl-esp">
         <span class="tl-esp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></span>
         <p class="tl-esp-t"><b>{{ section.settings.esp_titulo }}</b><span>{{ section.settings.esp_texto }}</span></p>
@@ -142,21 +168,40 @@
 
         <div class="tl-step">
           <h2><b>3</b>Cuéntanos cómo la quieres</h2>
-          <p class="tl-sub">Bizcocho, relleno, cobertura y decoración: escríbelo con tus palabras y lo conversamos por WhatsApp.</p>
+          <p class="tl-sub">Fecha, entrega y el mensaje que quieres en tu torta.</p>
           <div class="tl-form">
             <div class="tl-two">
               <div class="tl-fld"><label for="tlOc">Ocasión</label>
                 <select id="tlOc"><option>Cumpleaños</option><option>Aniversario</option><option>Bautizo o comunión</option><option>Matrimonio</option><option>Otra ocasión</option></select></div>
-              <div class="tl-fld"><label for="tlFe">Fecha que la necesitas</label><input id="tlFe" type="date"></div>
+              <div class="tl-fld"><label for="tlFe">Fecha que la necesitas</label><input id="tlFe" type="date">
+                <span class="tl-help tl-help-pk">Mínimo 3 días de anticipación para agendar y retirar tu torta.</span></div>
             </div>
+
+            <div class="tl-fld">
+              <label id="tlEnL">Entrega</label>
+              <div class="tl-ent" role="radiogroup" aria-labelledby="tlEnL">
+                <button type="button" class="tl-opt" role="radio" data-e="retiro" aria-checked="true"><b>Retiro en local</b><small>Ruta J-60, km 95, Sector Lora, Licantén</small></button>
+                <button type="button" class="tl-opt" role="radio" data-e="despacho" aria-checked="false"><b>Despacho</b><small>Licantén, Licantén zona costa, Curepto, Hualañé y Vichuquén</small></button>
+              </div>
+              <div class="tl-zona" id="tlZona" hidden>
+                <label for="tlZ">¿A qué zona?</label>
+                <select id="tlZ"><option>Licantén</option><option>Licantén zona costa</option><option>Curepto</option><option>Hualañé</option><option>Vichuquén</option></select>
+                <span class="tl-help">Coordinamos el despacho por WhatsApp.</span>
+              </div>
+            </div>
+
+            <div class="tl-write">
+              <span class="tl-write-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+              <div class="tl-write-t"><b>¿Quieres que tu torta lleve algo escrito arriba?</b><span>Déjanos aquí tu mensaje: <em>Feliz cumpleaños Sofía</em>, un nombre, una fecha…</span></div>
+              <input id="tlMs" class="tl-write-in" type="text" maxlength="60" placeholder="Escribe aquí el mensaje de tu torta" autocomplete="off" aria-label="Mensaje escrito en la torta">
+            </div>
+
             <div class="tl-two">
-              <div class="tl-fld"><label for="tlEn">Entrega</label>
-                <select id="tlEn"><option>Retiro en Licantén</option><option>Consultar despacho a Curicó o Talca</option></select></div>
               <div class="tl-fld"><label for="tlNo2">Tu nombre</label><input id="tlNo2" type="text" placeholder="Cómo te llamas" autocomplete="given-name"></div>
+              <div class="tl-fld"><label for="tlId">Decoración y otros detalles</label>
+                <textarea id="tlId" placeholder="Ej.: cobertura blanca, flores, colores, fondant, tema del cumpleaños"></textarea></div>
             </div>
-            <div class="tl-fld"><label for="tlId">Bizcocho, relleno, cobertura y decoración</label>
-              <textarea id="tlId" placeholder="Ej.: bizcocho de vainilla, relleno de manjar y frutilla, cobertura blanca, flores y el mensaje “Feliz cumple Sofía”"></textarea>
-              <span class="tl-help">Si tienes una foto de inspiración, envíala por el chat de WhatsApp después de abrirlo.</span></div>
+            <span class="tl-help">Si tienes una foto de inspiración, envíala por el chat de WhatsApp después de abrirlo.</span>
           </div>
         </div>
       </div>
@@ -171,7 +216,7 @@
         <div class="tl-msg" id="sMsg"><b>Así llegará tu mensaje</b><span></span></div>
         <a class="tl-go" id="sGo" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
         <p class="tl-esp-2">¿Diseño, fondant o algo especial? <a id="tlEsp2" href="https://wa.me/{{ wa }}?text={{ section.settings.esp_mensaje | url_encode }}" target="_blank" rel="noopener">Escríbenos</a></p>
-        <p class="tl-fine">Te confirmamos disponibilidad y valor final por WhatsApp. La fecha se reserva con un abono.</p>
+        <p class="tl-fine">Te confirmamos disponibilidad y valor final por WhatsApp. La fecha se reserva con un abono y se agenda con mínimo 3 días de anticipación.</p>
       </aside>
     </div>
 
@@ -218,21 +263,44 @@
 ["Panqueque lúcuma manjar",30000,40000,50000,60000,70000,80000],
 ["Panqueque chocolate naranja",30000,40000,50000,60000,70000,80000]
 ]</script>
+<script type="application/json" id="tlDet">{
+"durazno": "Bizcocho de vainilla, trozos de durazno, manjar y crema chantilly.",
+"pina": "Bizcocho de vainilla, trozos de piña y crema chantilly.",
+"selva negra": "Bizcocho húmedo de chocolate, mermelada de guinda ácida y crema chantilly.",
+"amapola": "Bizcocho de amapola, toque de licor, trozos de nuez, manjar casero y crema chantilly.",
+"almendra manjar": "Bizcocho de vainilla, toque de licor, trozos de almendra, manjar casero y crema chantilly.",
+"cafe nuez": "Bizcocho de vainilla, remojo de café, crema alemana de café y nueces.",
+"frambuesa": "Bizcocho de vainilla, relleno de mermelada de frambuesa, crema chantilly y frambuesas orgánicas.",
+"frutilla": "Bizcocho de vainilla, relleno de mermelada de frutilla, crema chantilly y frutillas orgánicas.",
+"praline nuez manjar": "Bizcocho de vainilla, crema de praliné de nueces, manjar, crema chantilly y praliné de nueces.",
+"lucuma manjar": "Bizcocho de vainilla, toque de licor, crema de lúcuma, manjar y crema chantilly.",
+"mocca manjar": "Bizcocho de vainilla, remojo de café, manjar y crema chantilly mocca.",
+"red velvet": "Bizcocho de chocolate rojo y queso crema aromatizado con vainilla.",
+"cinco leches": "Bizcocho de vainilla con remojo de tres leches, relleno de manjar, crema pastelera y cubierta de merengue.",
+"carrot cake": "Bizcocho de zanahoria, nueces y queso aromatizado con vainilla.",
+"amor": "Hojarasca rellena de crema chantilly, frambuesas, manjar y crema pastelera.",
+"isadora": "Hojarasca rellena de ganache de chocolate, mermelada de frambuesa, crema pastelera y manjar.",
+"pompadour": "Hojarasca rellena de crema de plátano artesanal y manjar.",
+"san jorge": "Hojarasca rellena de manjar y crema de lúcuma.",
+"premium chocolate naranja": "Bizcocho húmedo de cacao amargo, crema de naranja, ganache de chocolate y naranja confitada."
+}</script>
 <script>
 (function () {
   var root = document.getElementById('tl'); if (!root) return;
   var DATA = JSON.parse(document.getElementById('tlData').textContent);
+  var DET = JSON.parse(document.getElementById('tlDet').textContent);
   var SIZES = [15, 20, 25, 30, 35, 40], WA = root.getAttribute('data-wa') || '';
   var FILTERS = [['all', 'Todas'], ['manjar', 'Con manjar'], ['chocolate', 'Chocolate'], ['fruta', 'Frutas'], ['panqueque', 'Panqueque']];
   var KEYS = { manjar: ['manjar'], chocolate: ['chocolate'], fruta: ['durazno', 'piña', 'frambuesa', 'frutilla', 'naranja'], panqueque: ['panqueque'] };
-  var st = { n: 20, sel: -1, f: 'all', q: '' };
+  var st = { n: 20, sel: -1, f: 'all', q: '', e: 'retiro' };
   function $(id) { return document.getElementById(id); }
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
   function clp(n) { return '$' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
-  function norm(s) { return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+  function norm(s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
   function fecha(iso) { if (!iso) return 'por definir'; var p = iso.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
   function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
   function idx(n) { return SIZES.indexOf(n); }
+  function detalle(row) { return DET[norm(row[0])] || ''; }
 
   var sizes = $('tlSizes');
   SIZES.concat(['mas']).forEach(function (n) {
@@ -248,8 +316,16 @@
     fl.appendChild(b);
   });
   $('tlQ').addEventListener('input', function () { st.q = norm(this.value.trim()); render(); });
-  ['tlOc', 'tlFe', 'tlEn', 'tlNo2', 'tlId'].forEach(function (id) { $(id).addEventListener('input', summary); $(id).addEventListener('change', summary); });
-  $('tlFe').min = iso(new Date());
+  ['tlOc', 'tlFe', 'tlZ', 'tlNo2', 'tlId', 'tlMs'].forEach(function (id) { $(id).addEventListener('input', summary); $(id).addEventListener('change', summary); });
+  Array.prototype.forEach.call(root.querySelectorAll('.tl-opt'), function (b) {
+    b.addEventListener('click', function () {
+      st.e = b.getAttribute('data-e');
+      Array.prototype.forEach.call(root.querySelectorAll('.tl-opt'), function (x) { x.setAttribute('aria-checked', String(x === b)); });
+      $('tlZona').hidden = st.e !== 'despacho'; summary();
+    });
+  });
+  /* mínimo 3 días de anticipación */
+  var min = new Date(); min.setDate(min.getDate() + 3); $('tlFe').min = iso(min);
 
   function match(row) {
     var name = norm(row[0]);
@@ -264,11 +340,27 @@
     var grid = $('tlGrid'); grid.textContent = ''; var shown = 0;
     DATA.forEach(function (row, i) {
       if (!match(row)) return; shown++;
-      var b = el('button', 'tl-card'); b.type = 'button'; b.setAttribute('aria-pressed', String(i === st.sel));
+      var on = i === st.sel;
+      var b = el('div', 'tl-card' + (on ? ' on' : '')); b.setAttribute('role', 'button'); b.tabIndex = 0; b.setAttribute('aria-pressed', String(on)); b.setAttribute('aria-expanded', String(on));
       b.appendChild(el('b', null, row[0]));
       b.appendChild(el('span', null, st.n === 'mas' ? 'A medida' : clp(row[1 + idx(st.n)])));
       b.appendChild(el('small', null, st.n === 'mas' ? 'Cotización personalizada' : 'para ' + st.n + ' personas'));
-      b.addEventListener('click', function () { st.sel = (st.sel === i ? -1 : i); render(); });
+      if (on) {
+        var d = el('div', 'tl-det'); d.appendChild(el('i', null, 'Lo que trae'));
+        var t = detalle(row);
+        if (t) d.appendChild(el('p', null, t));
+        else {
+          d.appendChild(el('p', null, 'Pregúntanos por el detalle de este sabor y te lo contamos por WhatsApp.'));
+          var a = el('a', null, 'Consultar el detalle por WhatsApp'); a.target = '_blank'; a.rel = 'noopener';
+          a.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent('Hola Sabor Rural, quiero saber qué trae la torta ' + row[0] + '.');
+          a.addEventListener('click', function (e) { e.stopPropagation(); });
+          d.appendChild(a);
+        }
+        b.appendChild(d);
+      }
+      var toggle = function () { st.sel = (st.sel === i ? -1 : i); render(); };
+      b.addEventListener('click', toggle);
+      b.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
       grid.appendChild(b);
     });
     $('tlNo').hidden = shown > 0;
@@ -276,19 +368,22 @@
   }
   function summary() {
     var row = st.sel >= 0 ? DATA[st.sel] : null, big = st.n === 'mas';
-    var price = row && !big ? row[1 + idx(st.n)] : null;
+    var price = row && !big ? row[1 + idx(st.n)] : null, det = row ? detalle(row) : '';
     $('sTorta').textContent = row ? row[0] : 'Sin elegir';
     $('sPers').textContent = big ? 'Más de 40 personas' : st.n + ' personas';
     $('sTot').textContent = big ? 'A medida' : (price ? clp(price) : '—');
-    var nom = $('tlNo2').value.trim() || '[tu nombre]', idea = $('tlId').value.trim();
+    var nom = $('tlNo2').value.trim() || '[tu nombre]', idea = $('tlId').value.trim(), msj = $('tlMs').value.trim();
+    var entrega = st.e === 'despacho' ? 'Despacho a ' + $('tlZ').value : 'Retiro en local';
     var t = 'Hola Sabor Rural, soy ' + nom + '. Quiero encargar una torta:' +
       '\n• Torta: ' + (row ? row[0] : 'por definir') +
+      (det ? '\n• Lleva: ' + det : '') +
       '\n• Para: ' + (big ? 'más de 40 personas (necesito cotización personalizada)' : st.n + ' personas') +
       (price ? '\n• Valor referencial: ' + clp(price) : '') +
       '\n• Ocasión: ' + $('tlOc').value +
       '\n• Fecha: ' + fecha($('tlFe').value) +
-      '\n• Entrega: ' + $('tlEn').value +
-      '\n• Bizcocho, relleno y decoración: ' + (idea || 'por definir') +
+      '\n• Entrega: ' + entrega +
+      '\n• Mensaje escrito en la torta: ' + (msj || 'sin mensaje') +
+      '\n• Decoración y otros detalles: ' + (idea || 'por definir') +
       '\n¿Me confirmas disponibilidad y valor final?';
     $('sMsg').querySelector('span').textContent = t;
     $('sGo').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t);
