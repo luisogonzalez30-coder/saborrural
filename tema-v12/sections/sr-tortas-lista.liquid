@@ -148,7 +148,7 @@
 .tl .tl-play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;box-shadow:0 8px 26px rgba(0,0,0,.5);cursor:pointer;transition:opacity .25s}
 .tl .tl-play svg{width:30px;height:30px;margin-left:4px}
 .tl .tl-vid.is-on .tl-play{opacity:0;pointer-events:none}
-.tl .tl-snd{position:absolute;right:12px;bottom:12px;min-height:40px;padding:0 14px;border:1px solid rgba(255,255,255,.4);border-radius:99px;background:rgba(12,13,15,.8);color:#fff;font:700 .86rem/1 var(--font-body);cursor:pointer}
+.tl .tl-snd{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);min-height:44px;padding:0 18px;border:0;border-radius:99px;background:linear-gradient(135deg,#F7A9B8,#E2587C);color:#1A0A0F;font:800 .92rem/1 var(--font-body);white-space:nowrap;box-shadow:0 8px 22px rgba(0,0,0,.5);cursor:pointer}
 .tl .tl-snd[hidden]{display:none}
 @media (max-width:760px){.tl .tl-how .tl-w{grid-template-columns:1fr;gap:24px}.tl .tl-vid{aspect-ratio:9/16;max-width:320px;width:100%;margin:0 auto}.tl .tl-how-go{width:100%;justify-content:center}}
 </style>
@@ -186,7 +186,7 @@
         <picture><source media="(min-width:761px)" srcset="{{ pd }}"><img src="{{ pm }}" alt="Video: cómo encargar tu torta en Sabor Rural" width="540" height="960" loading="lazy" decoding="async"></picture>
         <video muted loop playsinline preload="none" data-m="{{ section.settings.video_movil | file_url }}" data-d="{{ section.settings.video_escritorio | file_url }}"></video>
         <button type="button" class="tl-play" aria-label="Reproducir video"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></button>
-        <button type="button" class="tl-snd"{% unless section.settings.con_audio %} hidden{% endunless %}>Activar sonido</button>
+        <button type="button" class="tl-snd"{% unless section.settings.con_audio %} hidden{% endunless %}>🔊 Activar sonido</button>
       </div>
     </div>
   </section>
@@ -497,7 +497,7 @@
     if (snd && e.target === snd) return;
     if (!v.paused) v.pause(); else go();
   });
-  if (snd) snd.addEventListener('click', function () { v.muted = !v.muted; snd.textContent = v.muted ? 'Activar sonido' : 'Silenciar'; if (!v.muted) { v.currentTime = 0; go(); } });
+  if (snd) snd.addEventListener('click', function () { v.muted = !v.muted; snd.textContent = v.muted ? '🔊 Activar sonido' : 'Silenciar'; if (!v.muted) { v.currentTime = 0; go(); } });
   if ('IntersectionObserver' in window && !lite) new IntersectionObserver(function (es) { if (es[0].isIntersecting) go(); else v.pause(); }, { threshold: .5 }).observe(box);
   if (mq.addEventListener) mq.addEventListener('change', function () { var was = !v.paused; v.classList.remove('on'); loaded = ''; v.removeAttribute('src'); if (was) go(); });
 })();
@@ -520,7 +520,7 @@
   {"type": "text", "id": "video_escritorio", "label": "Video escritorio (archivo)", "default": "sr-como-encargar-escritorio.mp4"},
   {"type": "text", "id": "poster_movil", "label": "Portada del video móvil (archivo)", "default": "sr-como-encargar-movil.jpg"},
   {"type": "text", "id": "poster_escritorio", "label": "Portada del video escritorio (archivo)", "default": "sr-como-encargar-escritorio.jpg"},
-  {"type": "checkbox", "id": "con_audio", "label": "El video trae voz (muestra el botón de sonido)", "default": false},
+  {"type": "checkbox", "id": "con_audio", "label": "El video trae voz (muestra el botón de sonido)", "default": true},
   {"type": "text", "id": "producto", "label": "Producto de tortas (handle)", "default": "torta-encargo", "info": "Opciones: Sabor y Personas. Los precios de la página salen de aquí."},
   {"type": "text", "id": "whatsapp", "label": "WhatsApp (con código de país, sin +)", "default": "56992101764"}
  ],

@@ -1,35 +1,19 @@
-# Guion de voz · "Cómo encargar tu torta" (55 s)
+# Video "Cómo encargar tu torta" — versión con la voz de Luis (55 s)
 
-Sirve para las dos versiones (móvil y escritorio): tienen exactamente los mismos tiempos.
-Habla pausado, cálido y cercano. Cada bloque cabe en su tiempo; si te sobra, deja el silencio.
+Texto grabado (transcripción):
 
-## Texto corrido (para grabar de una vez)
+> ¿Estás buscando una torta para una ocasión especial? En Sabor Rural encargarla es muy fácil y puedes hacerlo a través de nuestra página web. Primero, elige el tamaño que necesitas. Tienes opciones desde quince hasta cuarenta personas. Después, descubre nuestros veintiocho sabores. Puedes filtrar por manjar, chocolate o fruta, ver qué incluye cada torta y conocer su precio al instante. Luego, personaliza tu pedido. Selecciona la fecha y el horario que pasarás a retirarla. Si quieres, agrega un mensaje especial para tu torta y quién será el encargado de retirarla. Ya casi está. Revisa los detalles, paga de forma segura a través de nuestra plataforma y listo. Tu pedido queda agendado. Y lo mejor, puedes retirar tu torta gratis en nuestro local. Entra en nuestra web y encarga la tuya. En Sabor Rural hacemos especiales tus momentos importantes.
 
-¿Necesitas una torta para una ocasión especial? Encargarla toma menos de un minuto.
+Sincronía (el video se reajustó a la voz):
 
-Paso uno: elige para cuántas personas la quieres, de quince a cuarenta.
-
-Paso dos: elige tu sabor. Tenemos veintiocho, y el valor aparece al tiro para el tamaño que elegiste. Filtra por manjar, chocolate o fruta, y toca uno para ver qué trae.
-
-Paso tres: cuéntanos cómo la quieres. Elige la fecha, con mínimo tres días de anticipación, y el horario en que pasas a retirarla. Si quieres, escribimos un mensaje sobre tu torta: por ejemplo, "Feliz cumpleaños Sofía". Y anota tu nombre.
-
-Revisa tu pedido, paga en línea con Mercado Pago, y listo: tu torta queda agendada.
-
-La retiras gratis en Licantén. Encarga la tuya ahora.
-
-## Con tiempos
-
-| Tiempo | En pantalla | Texto |
+| Segundo | Voz | Pantalla |
 |---|---|---|
-| 0:00 – 0:05 | Portada "Elige tu torta" | ¿Necesitas una torta para una ocasión especial? Encargarla toma menos de un minuto. |
-| 0:05 – 0:10 | Paso 1: personas | Paso uno: elige para cuántas personas la quieres, de quince a cuarenta. |
-| 0:10 – 0:24 | Paso 2: filtro y sabor | Paso dos: elige tu sabor. Tenemos veintiocho… toca uno para ver qué trae. |
-| 0:24 – 0:44 | Paso 3: fecha, horario, mensaje, nombre | Paso tres: cuéntanos cómo la quieres… Y anota tu nombre. |
-| 0:44 – 0:51 | Resumen y botón de pago | Revisa tu pedido, paga en línea con Mercado Pago, y listo: tu torta queda agendada. |
-| 0:51 – 0:55 | Tarjeta final | La retiras gratis en Licantén. Encarga la tuya ahora. |
+| 0:00 | ¿Estás buscando una torta…? | Portada |
+| 0:09 | Primero, elige el tamaño | Paso 1, toca "30 personas" |
+| 0:15 | Después, descubre nuestros 28 sabores | Paso 2, filtra "Con manjar", abre "Lúcuma manjar" |
+| 0:26 | Luego, personaliza tu pedido | Paso 3, calendario, horario, mensaje y nombre |
+| 0:37 | Ya casi está. Revisa los detalles… | Resumen y botón de pago |
+| 0:49 | Entra en nuestra web y encarga la tuya | Tarjeta final |
 
-## Notas
-- Valores y sabores del video: página al 29-oct-2026 (Lúcuma manjar, 30 personas, $54.000). Si cambian, hay que regrabar.
-- El calendario y la lista de horarios son una réplica de lo que muestra el celular o el navegador al tocar esos campos.
-- Música: `*-con-musica-*.mp4` trae una base suave; bájala al grabar la voz.
-- Página: usar las versiones `*-web-*` (2 MB) con `muted playsinline preload="none"`.
+Archivos: `*-con-voz-*` (calidad completa), `*-web-*` (para la página, con voz).
+Valores del video: página al 29-oct-2026 (Lúcuma manjar, 30 personas, $54.000).
