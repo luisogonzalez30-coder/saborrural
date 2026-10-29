@@ -83,5 +83,11 @@
     "publicado": "2026-10-29T22:39:30.647Z",
     "media_id": "18184386703425098",
     "permalink": "https://www.instagram.com/reel/DfGGU_DDLeK/"
+  },
+  "2026-10-29-reel-r9-como-encargar-movil": {
+    "error": "Meta no pudo procesar el archivo: Error: Media upload has failed with error code 2207076",
+    "intento": "2026-10-29T23:47:37.564Z",
+    "reintentable": true,
+    "intentos": 1
   }
 }
