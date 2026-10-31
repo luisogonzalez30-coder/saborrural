@@ -74,6 +74,7 @@
 - bagel huevo tocino — $4.000. delicioso pan bagel relleno de huevos y tocino
 - bagel queso philadelphia rucula jamon serrano — $4.000. delicioso pan bagel  relleno de queso philadelphia, rucula y jamon serrano
 - clasico barros luco — $7.000. Pan ciabatta recién horneado con carne de vacuno de primera selección , queso fundido todo  acompañado de papas fritas
+- Carnívoro — precio por confirmar. Carne, tocino ahumado, aros de cebolla, huevo revuelto y salsa especial (según el cartel del local)
 - clasico italiano — $7.000. Pan ciabatta recién horneado con carne de vacuno de primera selección, acompañado de palta, tomate , mayo todo  acompañado de papas fritas
 - croissant jamon queso — $4.500
 - Lorino — $8.000. Pan ciabatta recién horneado con carne de vacuno de primera selección, lechuga del huerto ,queso fundido , Palta , tomate , cebolla morada ,champiñon,salsa especial todo  acompañado de papas fritas
