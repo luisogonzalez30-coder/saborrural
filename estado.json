@@ -158,5 +158,17 @@
     "publicado": "2026-11-01T22:33:14.574Z",
     "media_id": "17916504618497550",
     "permalink": "https://www.instagram.com/reel/DfN0CC8DjHW/"
+  },
+  "2026-11-02-story-s-lun-am": {
+    "error": "Meta respondió 400: The requested resource does not exist (código 24, subcódigo 2207006)",
+    "intento": "2026-11-02T10:31:56.051Z",
+    "reintentable": false,
+    "intentos": 1,
+    "aviso": "Falló al publicar: revisa Instagram a mano antes de reintentar (borra esta entrada para reintentar)"
+  },
+  "2026-11-02-story-s-lun-am-post": {
+    "publicado": "2026-11-02T10:32:16.235Z",
+    "media_id": "18438178546181453",
+    "permalink": "https://www.instagram.com/p/DfPGWsMG7Cu/"
   }
 }
