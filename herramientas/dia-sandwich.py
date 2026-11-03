@@ -7,7 +7,7 @@ def rounded(im,r):
     m=Image.new("L",im.size,0); ImageDraw.Draw(m).rounded_rectangle([0,0,im.width-1,im.height-1],radius=r,fill=255); im=im.convert("RGBA"); im.putalpha(m); return im
 def trim_black(im,th=14):
     g=im.convert("L").point(lambda v:255 if v>th else 0); return im.crop(g.getbbox())
-lor=Image.open(U+"e891bb34-image.jpg").convert("RGB")
+lor=Image.open("/home/user/saborrural/media/sandwich/originales/lorino-sin-tabla.jpg").convert("RGB").crop((0,110,1290,985))
 bl=trim_black(Image.open(U+"e6385504-image.jpg").convert("RGB"))
 def ctr(d,t,f,y,col,W): d.text((W/2,y),t,font=f,fill=col,anchor="ma")
 def chip(d,x,y,w,nom,antes,ahora,fn,fi=25):
@@ -32,22 +32,22 @@ def lorino_bloque(c,d,W,y,w,fn,msg_y,msgsz):
     ahorro(c,(W+w)//2-22,y+22)
     d.text(((W-w)//2+30,y+16),"Ejemplo:",font=F("caveat700.ttf",58),fill=PINK)
     chip(d,(W-w)//2,y+h+14,w,"Lorino","$8.000","$7.200",fn,fi=26)
-    f=F("hanken700.ttf",msgsz)
+    f=F("hanken700.ttf",msgsz); msg_y=y+h+14+128+msg_y
     ctr(d,"Todos los años celebramos el Día del Sándwich",f,msg_y,CREAM,W)
     ctr(d,"con este descuento, solo en el local.",f,msg_y+int(msgsz*1.45),CREAM,W)
-    return y+h+14+128
+    return msg_y+int(msgsz*2.5)
 def story():
-    W,H=1080,1920; c,d=base(W,H)
-    ctr(d,"Día del sándwich",F("caveat700.ttf",92),150,PINK,W)
-    ctr(d,"10% de descuento",F("bricolage800.ttf",104),265,CREAM,W)
-    ctr(d,"en todos nuestros sándwiches",F("hanken700.ttf",44),400,MUTE,W)
-    e=lorino_bloque(c,d,W,500,900,48,1475,38)
-    foot(d,W,1740); c.convert("RGB").save(O+"dia-sandwich-9x16.jpg",quality=95)
+    W,H=1080,1920; c,d=base(W,H); o=140
+    ctr(d,"Día del sándwich",F("caveat700.ttf",92),150+o,PINK,W)
+    ctr(d,"10% de descuento",F("bricolage800.ttf",104),265+o,CREAM,W)
+    ctr(d,"en todos nuestros sándwiches",F("hanken700.ttf",44),400+o,MUTE,W)
+    e=lorino_bloque(c,d,W,520+o,960,48,56,38)
+    foot(d,W,e+70); c.convert("RGB").save(O+"dia-sandwich-9x16.jpg",quality=95)
 def post():
     W,H=1080,1350; c,d=base(W,H)
     ctr(d,"Día del sándwich",F("caveat700.ttf",78),58,PINK,W)
     ctr(d,"10% de descuento",F("bricolage800.ttf",90),150,CREAM,W)
     ctr(d,"en todos nuestros sándwiches",F("hanken700.ttf",36),262,MUTE,W)
-    e=lorino_bloque(c,d,W,318,750,40,1150,27)
-    foot(d,W,1226); c.convert("RGB").save(O+"dia-sandwich-post-4x5.jpg",quality=95)
+    e=lorino_bloque(c,d,W,330,860,42,36,28)
+    foot(d,W,e+34); c.convert("RGB").save(O+"dia-sandwich-post-4x5.jpg",quality=95)
 story(); post()
