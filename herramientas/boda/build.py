@@ -22,16 +22,16 @@ def card(name, lines, y, shade=True):
         cy+=int(sz*1.25)
     im.save(T+name+".png")
 card("c1",[("TORTA DE MATRIMONIO",SN,44,GOLD),("para 45",SB,120,CREAM),("personas",SB,120,CREAM)],1180)
-card("c2",[("Elaborada en Licantén",SB,70,CREAM),("Costa Maule · Ruta J-60",SN,40,GOLD)],1330)
-card("c3",[("Reserva tu fecha",SB,92,CREAM),("escríbenos por WhatsApp",SN,42,GOLD)],1330)
+card("c2",[("Elaborada en",SB,70,CREAM),("Sabor Rural",SB,96,CREAM),("Licantén · Costa Maule",SN,40,GOLD)],1250)
+card("c3",[("Reserva directo en",SB,76,CREAM),("nuestra página web",SB,76,CREAM),("link en la bio",SN,44,GOLD)],1250)
 # end card
 im=Image.new("RGBA",(1080,1920),(24,18,16,235)); d=ImageDraw.Draw(im)
 def C(t,fp,sz,y,col):
     f=F(fp,sz); w=d.textlength(t,font=f); d.text(((1080-w)/2,y),t,font=f,fill=col)
 C("Sabor Rural",SB,120,560,CREAM); C("CAFETERÍA · PASTELERÍA",SN,38,720,GOLD)
 d.line([(340,800),(740,800)],fill=GOLD,width=3)
-C("Cotiza tu torta",SB,84,880,CREAM); C("por WhatsApp",SB,84,985,CREAM)
-d.rounded_rectangle([140,1160,940,1290],radius=65,fill=(37,211,102,255)); C("+56 9 9210 1764",SN,58,1195,(255,255,255,255))
+C("Reserva tu torta",SB,84,880,CREAM); C("en nuestra página web",SB,70,990,CREAM)
+d.rounded_rectangle([140,1160,940,1290],radius=65,fill=(222,190,120,255)); C("LINK EN LA BIO",SN,58,1195,(30,22,18,255))
 C("@sabor_rural",SN,46,1380,GOLD); C("Ruta J-60 km 95, frente a Lora · Licantén",SN,32,1460,(200,190,175,255))
 im.save(T+"end.png")
 def seg(src,ss,dur,png,idx):
