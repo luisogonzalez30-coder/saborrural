@@ -24,26 +24,30 @@ def base(W,H):
 def foot(d,W,y):
     ctr(d,"Válido solo comprando en el local",F("hanken700.ttf",32),y,CREAM,W)
     ctr(d,"Ruta J-60 km 95, Licantén · @sabor_rural",F("hanken700.ttf",30),y+48,PINK,W)
+def ahorro(c,x,y):
+    d=ImageDraw.Draw(c); t="Ahorras $800"; f=F("bricolage800.ttf",34); w=int(d.textlength(t,font=f))+44
+    d.rounded_rectangle([x-w,y,x,y+60],radius=30,fill=PINK); d.text((x-22,y+30),t,font=f,fill=BG,anchor="rm")
+def lorino_bloque(c,d,W,y,w,fn,msg_y,msgsz):
+    h=int(lor.height*w/lor.width); c.alpha_composite(rounded(lor.resize((w,h),Image.LANCZOS),30),((W-w)//2,y))
+    ahorro(c,(W+w)//2-22,y+22)
+    d.text(((W-w)//2+30,y+16),"Ejemplo:",font=F("caveat700.ttf",58),fill=PINK)
+    chip(d,(W-w)//2,y+h+14,w,"Lorino","$8.000","$7.200",fn,fi=26)
+    f=F("hanken700.ttf",msgsz)
+    ctr(d,"Todos los años celebramos el Día del Sándwich",f,msg_y,CREAM,W)
+    ctr(d,"con este descuento, solo en el local.",f,msg_y+int(msgsz*1.45),CREAM,W)
+    return y+h+14+128
 def story():
     W,H=1080,1920; c,d=base(W,H)
     ctr(d,"Día del sándwich",F("caveat700.ttf",92),150,PINK,W)
     ctr(d,"10% de descuento",F("bricolage800.ttf",104),265,CREAM,W)
-    ctr(d,"en compras presenciales",F("hanken700.ttf",44),400,MUTE,W)
-    y=470
-    for im,w,nom,a,n in ((lor,620,"Lorino","$8.000","$7.200"),(bl,620,"Clásico Barros Luco","$7.000","$6.300")):
-        h=int(im.height*w/im.width); ph=rounded(im.resize((w,h),Image.LANCZOS),28); c.alpha_composite(ph,((W-w)//2,y))
-        chip(d,(W-w)//2,y+h+14,w,nom,a,n,36); y+=h+14+128+30
-    foot(d,W,y+4); c.convert("RGB").save(O+"dia-sandwich-9x16.jpg",quality=95); print("story y",y)
+    ctr(d,"en todos nuestros sándwiches",F("hanken700.ttf",44),400,MUTE,W)
+    e=lorino_bloque(c,d,W,500,900,48,1475,38)
+    foot(d,W,1740); c.convert("RGB").save(O+"dia-sandwich-9x16.jpg",quality=95)
 def post():
     W,H=1080,1350; c,d=base(W,H)
-    ctr(d,"Día del sándwich",F("caveat700.ttf",84),70,PINK,W)
-    ctr(d,"10% de descuento",F("bricolage800.ttf",96),170,CREAM,W)
-    ctr(d,"en compras presenciales",F("hanken700.ttf",40),290,MUTE,W)
-    w=480; gx=(W-2*w-30)//2; y0=470
-    for i,(im,nom,a,n) in enumerate(((lor,"Lorino","$8.000","$7.200"),(bl,"Barros Luco","$7.000","$6.300"))):
-        h=int(im.height*w/im.width); x=gx+i*(w+30)
-        c.alpha_composite(rounded(im.resize((w,h),Image.LANCZOS),26),(x,y0+(430-h)//2 if h<430 else y0))
-        chip(d,x,y0+456,w,nom if i==0 else "Barros Luco",a,n,38,fi=22)
-    ctr(d,"Clásico Barros Luco y Lorino",F("hanken700.ttf",30),y0+450+128+30,MUTE,W) if False else None
-    foot(d,W,1190); c.convert("RGB").save(O+"dia-sandwich-post-4x5.jpg",quality=95)
+    ctr(d,"Día del sándwich",F("caveat700.ttf",78),58,PINK,W)
+    ctr(d,"10% de descuento",F("bricolage800.ttf",90),150,CREAM,W)
+    ctr(d,"en todos nuestros sándwiches",F("hanken700.ttf",36),262,MUTE,W)
+    e=lorino_bloque(c,d,W,318,750,40,1150,27)
+    foot(d,W,1226); c.convert("RGB").save(O+"dia-sandwich-post-4x5.jpg",quality=95)
 story(); post()
