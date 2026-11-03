@@ -32,7 +32,7 @@ C("Sabor Rural",SB,120,560,CREAM); C("CAFETERÍA · PASTELERÍA",SN,38,720,GOLD)
 d.line([(340,800),(740,800)],fill=GOLD,width=3)
 C("Reserva tu torta",SB,84,880,CREAM); C("en nuestra página web",SB,70,990,CREAM)
 d.rounded_rectangle([140,1160,940,1290],radius=65,fill=(222,190,120,255)); C("LINK EN LA BIO",SN,58,1195,(30,22,18,255))
-C("@sabor_rural",SN,46,1380,GOLD); C("Ruta J-60 · Licantén",SN,36,1460,(200,190,175,255))
+C("@sabor_rural",SN,46,1380,GOLD); C("Ruta J-60 km 95, Licantén",SN,36,1460,(200,190,175,255))
 im.save(T+"end.png")
 def seg(src,ss,dur,png,idx):
     # lento zoom + leve gradación cálida

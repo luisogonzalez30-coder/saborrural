@@ -86,4 +86,4 @@ El post de referencia lista 7 prompts, pero solo se capturaron los 6 anteriores.
 - Los tokens y claves solo van en GitHub Secrets, nunca en el chat ni en archivos.
 - TikTok: se publica como borrador con el conector (el usuario confirma cada publicación); Facebook usa la misma API de Meta.
 
-> REGLA: dirección en creativos y captions = solo 'Ruta J-60 · Licantén' (sin km 95, sin Lora, sin WhatsApp como CTA; la reserva va por la web).
+> REGLA: dirección en creativos y captions = siempre 'Ruta J-60 km 95, Licantén' (nunca 'frente a Lora' ni WhatsApp como CTA; la reserva va por la web).

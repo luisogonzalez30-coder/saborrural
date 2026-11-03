@@ -26,14 +26,14 @@ def cta():
     y=720
     d.text((W/2,y),'Ven a visitarnos',font=F('bricolage800.ttf',120),fill=(255,255,255),anchor='ma'); y+=140
     d.text((W/2,y),'a Licantén',font=F('bricolage800.ttf',120),fill=PINK,anchor='ma'); y+=190
-    for t in ['Ruta J-60 · Licantén','Lun a vie 9:00–21:00','Sáb y dom 14:00–21:00']:
+    for t in ['Ruta J-60 km 95, Licantén','Lun a vie 9:00–21:00','Sáb y dom 14:00–21:00']:
         d.text((W/2,y),t,font=F('hanken700.ttf',54),fill=(235,231,222),anchor='ma'); y+=82
     y+=40; d.rounded_rectangle((120,y,W-120,y+150),radius=36,fill=PINK)
     d.text((W/2,y+75),'Cómo llegar: link en la bio',font=F('hanken700.ttf',56),fill=(26,10,15),anchor='mm')
     d.text((W/2,H-190),'@sabor_rural',font=F('bricolage800.ttf',64),fill=(255,255,255),anchor='ma')
     return im
 caps=[(0.2,2.0,'Bienvenido a Sabor Rural','Café y pastelería en pleno campo'),
-      (2.1,4.1,'Ruta J-60','Licantén'),
+      (2.1,4.1,'Ruta J-60 km 95','Licantén'),
       (4.2,7.0,'Un rincón acogedor','para tu pausa de café'),
       (7.1,9.9,'Café de especialidad','preparado al momento en nuestra barra'),
       (10.1,14.0,'Tartas, kuchen y pasteles','hechos en casa, todos los días'),
