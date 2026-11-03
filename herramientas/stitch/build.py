@@ -61,8 +61,8 @@ def xy(off):
         return e
     cxe,cye=comp(1),comp(2)
     return f"max(0,min(340,({cxe})-190))", f"max(0,min(1110,({cye})-85))"
-def seg(name,key,ss,d,speed,png,blur=False):
-    vf=f"setpts=PTS/{speed},fps=30,"
+def seg(name,key,ss,d,speed,png,blur=False,hold=0):
+    vf=f"setpts=PTS/{speed},fps=30,"+(f"tpad=stop_mode=clone:stop_duration={hold}," if hold else "")
     if blur:
         X,Y=xy(ss)
         vf="[0:v]split[a][b];[b]boxblur=28:4,crop=w=380:h=170:x='"+X+"':y='"+Y+"'[bl];[a][bl]overlay=x='"+X+"':y='"+Y+"',setpts=PTS/"+str(speed)+",fps=30,"
@@ -71,10 +71,10 @@ def seg(name,key,ss,d,speed,png,blur=False):
         vf="[0:v]"+vf
     fc=vf+f"scale={W}:{H}:flags=lanczos,eq=contrast=1.05:saturation=1.1[v];[v][1:v]overlay=0:0,format=yuv420p[o]"
     subprocess.run(["ffmpeg","-v","error","-y","-ss",str(ss),"-t",str(d),"-i",V[key],"-i",T+png+".png","-filter_complex",fc,"-map","[o]","-an","-c:v","libx264","-preset","slow","-crf","16",T+name+".mp4"],check=True)
-segs=[("s0","A",3.4,2.9,1,"h",True),("s1","D",0,20,4,"p1",False),("s2","E",0,9.7,2.2,"p2",False),
-      ("s3a","C",0,9.7,2.2,"p3",False),("s3b","B",0,7.7,2.2,"p3",False),("s4","A",0,3.2,1,"p4",False)]
+segs=[("s0","A",3.4,2.9,1,"h",False),("s1","D",0,20,4,"p1",False),("s2","E",0,9.7,2.2,"p2",False),
+      ("s3a","C",0,9.7,2.2,"p3",False),("s3b","B",0,7.7,2.2,"p3",False),("s4","A",0,6.4,1,"p4",False,1.6)]
 durs=[]
-for n,k,ss,d,sp,png,b in segs: seg(n,k,ss,d,sp,png,b); durs.append(d/sp)
+for n,k,ss,d,sp,png,b,*h in segs: seg(n,k,ss,d,sp,png,b,*(h or [0])); durs.append(d/sp+(h[0] if h else 0))
 # tarjeta final: foto de la torta terminada al fondo no; fondo sólido de marca (estático) 4.2 s
 subprocess.run(["ffmpeg","-v","error","-y","-loop","1","-t","4.2","-i",T+"end.png","-vf","fps=30,format=yuv420p","-c:v","libx264","-crf","16",T+"s5.mp4"],check=True); durs.append(4.2)
 names=["s0","s1","s2","s3a","s3b","s4","s5"]; xf=0.25
