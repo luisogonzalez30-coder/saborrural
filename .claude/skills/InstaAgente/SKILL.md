@@ -87,3 +87,5 @@ El post de referencia lista 7 prompts, pero solo se capturaron los 6 anteriores.
 - TikTok: se publica como borrador con el conector (el usuario confirma cada publicación); Facebook usa la misma API de Meta.
 
 > REGLA: dirección en creativos y captions = siempre 'Ruta J-60 km 95, Licantén' (nunca 'frente a Lora' ni WhatsApp como CTA; la reserva va por la web).
+
+> ESTILO: ver CONTEXTO.md (tipografía Bricolage 800 + Hanken 700 + Caveat; fondo #0C0D0F, crema #F3F1EA, rosa #F59AAC; marco rosa redondeado y logo arriba a la izquierda; fotos completas sin zoom).

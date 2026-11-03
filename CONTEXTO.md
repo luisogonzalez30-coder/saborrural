@@ -13,6 +13,13 @@ Léelo entero antes de trabajar. Es la memoria común entre conversaciones: lo q
 - En reels, fotos, historias y captions escribir **siempre "Ruta J-60 km 95, Licantén"**. NO poner "frente a Lora", "sector Lora" ni "Costa Maule" como referencia: confunde a la gente. Tampoco WhatsApp como llamado a la acción: **la reserva y el pedido van por la página web (link en la bio)**.
 - Los creativos ya publicados no se pueden editar desde la API; los programados pendientes del calendario ya se corrigieron.
 
+## ESTILO VISUAL DE LAS PIEZAS (aprobado por el usuario el 3-nov-2026; no cambiarlo)
+- **Tipografía de marca (archivos en `enlaces-assets/`)**: títulos Bricolage Grotesque 800 (`bricolage800.ttf`), texto Hanken Grotesk 700 (`hanken700.ttf`), acento manuscrito Caveat 700 (`caveat700.ttf`) para una palabra o frase corta. **No usar DejaVu ni serifas.**
+- **Colores**: fondo oscuro `#0C0D0F`, crema `#F3F1EA`, rosa `#F59AAC` (acento principal; `#E2587C` para énfasis), gris `#A9ABA3`, tarjetas `#1A1C21`. El acento es **rosa siempre** (no dorado).
+- **Marco y logo**: marco fino rosa con esquinas redondeadas (inset 22 px, 3 px) y logo circular arriba a la izquierda (`enlaces-assets/logo.png`, ~11% del ancho). Referencia: post "Encarga tu torta". En reels, el mismo marco y logo sobre el video.
+- **Fotos**: mostrarlas completas y a escala natural, con esquinas redondeadas. No hacer zoom ni recortes que las agranden (se ven falsas/pixeladas).
+- Mejor referencia de código: `herramientas/dia-sandwich.py`.
+
 ## Cómo quiere el usuario que se trabaje
 - Español, directo, sin saludos ni relleno. Tablas y viñetas, no bloques largos.
 - **No inventar datos** (precios, sabores, horarios). Los hechos están en `conocimiento.md` y `carta.md`.
