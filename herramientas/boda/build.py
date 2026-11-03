@@ -22,7 +22,7 @@ def card(name, lines, y, shade=True):
         cy+=int(sz*1.25)
     im.save(T+name+".png")
 card("c1",[("TORTA DE MATRIMONIO",SN,44,GOLD),("para 45",SB,120,CREAM),("personas",SB,120,CREAM)],1180)
-card("c2",[("Elaborada en",SB,70,CREAM),("Sabor Rural",SB,96,CREAM),("Licantén · Costa Maule",SN,40,GOLD)],1250)
+card("c2",[("Elaborada en",SB,70,CREAM),("Sabor Rural",SB,96,CREAM),("Licantén",SN,40,GOLD)],1250)
 card("c3",[("Reserva directo en",SB,76,CREAM),("nuestra página web",SB,76,CREAM),("link en la bio",SN,44,GOLD)],1250)
 # end card
 im=Image.new("RGBA",(1080,1920),(24,18,16,235)); d=ImageDraw.Draw(im)
@@ -32,7 +32,7 @@ C("Sabor Rural",SB,120,560,CREAM); C("CAFETERÍA · PASTELERÍA",SN,38,720,GOLD)
 d.line([(340,800),(740,800)],fill=GOLD,width=3)
 C("Reserva tu torta",SB,84,880,CREAM); C("en nuestra página web",SB,70,990,CREAM)
 d.rounded_rectangle([140,1160,940,1290],radius=65,fill=(222,190,120,255)); C("LINK EN LA BIO",SN,58,1195,(30,22,18,255))
-C("@sabor_rural",SN,46,1380,GOLD); C("Ruta J-60 km 95, frente a Lora · Licantén",SN,32,1460,(200,190,175,255))
+C("@sabor_rural",SN,46,1380,GOLD); C("Ruta J-60 · Licantén",SN,36,1460,(200,190,175,255))
 im.save(T+"end.png")
 def seg(src,ss,dur,png,idx):
     # lento zoom + leve gradación cálida

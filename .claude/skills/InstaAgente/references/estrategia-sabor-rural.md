@@ -11,7 +11,7 @@ Base: plan propuesto por el usuario, corregido con los datos reales (sin trufas 
   📍 Ruta J-60 km 95, Lora · Licantén ⬇️
   ```
 - **Link:** página de enlaces (carta, encargos, cajas box, horario y cómo llegar).
-- **Destacadas:** Vitrina (lo que hay hoy) · Encargos (tortas y cajas box) · Cómo llegar (9 km desde Licantén, a mano derecha, frente a Lora) · Clientes (solo con permiso) · Detrás de cámaras (cocina, café, sin mostrar premezclas porque no se usan).
+- **Destacadas:** Vitrina (lo que hay hoy) · Encargos (tortas y cajas box) · Cómo llegar (9 km desde Licantén, a mano derecha, en la Ruta J-60) · Clientes (solo con permiso) · Detrás de cámaras (cocina, café, sin mostrar premezclas porque no se usan).
 - **Post fijado:** "Ven a visitarnos" (horario, dirección, medios de pago).
 
 ## 2. Palabras clave por pilar
@@ -35,7 +35,7 @@ Base: plan propuesto por el usuario, corregido con los datos reales (sin trufas 
 ## 5. Ganchos validados (sin afirmar nada falso)
 1. "Si vas pasando por Licantén esta semana, no sigas de largo sin probar esto."
 2. "Hecho desde cero, sin premezclas ni conservantes: así se nota."
-3. "A 9 km de Licantén, frente a Lora: la parada que buscabas."
+3. "A 9 km de Licantén, en la Ruta J-60: la parada que buscabas."
 4. "¿Qué llevas para la once de hoy?"
 5. "Si tienes un cumpleaños, olvídate del regalo típico."
 6. "Cortamos esta torta por la mitad para que veas el relleno."
@@ -53,7 +53,7 @@ Base: plan propuesto por el usuario, corregido con los datos reales (sin trufas 
 
 ## 7. Guiones de Reels (menos de 40 s), versión validada
 - **"Desde cero"** — Gancho: corte limpio de una torta mostrando el relleno. Texto: "Hecho desde cero 🎂". Tomas: corte (3 s) → relleno en primer plano (10 s) → porción servida (10 s) → vitrina. Diálogo/texto: sin premezclas ni conservantes; en cada bocado hay masa y relleno de verdad. CTA: guardar y mirar la carta en la web. Pregunta: ¿chocolate o frutas?
-- **"Parada en la ruta"** — Gancho: llegada al local frente a Lora. Texto: "A 9 km de Licantén, a mano derecha 📍". Tomas: acceso, café sirviéndose, vitrina, terraza. CTA: guardar la ubicación; cómo llegar en la bio. Pregunta: ¿café caliente o helado?
+- **"Parada en la ruta"** — Gancho: llegada al local en la Ruta J-60. Texto: "A 9 km de Licantén, a mano derecha 📍". Tomas: acceso, café sirviéndose, vitrina, terraza. CTA: guardar la ubicación; cómo llegar en la bio. Pregunta: ¿café caliente o helado?
 - **"La once en Lora"** — Gancho: café con brownie en la mesa. Texto: "Tu once, hecha desde cero". Tomas: latte, tarta, pie, terraza. CTA: carta en la web. Pregunta: ¿a qué hora se toma la once en tu casa?
 - **"Tu torta, a tu estilo"** — Gancho: torta terminada con lazo. Texto: "Tú eliges el tema". Tomas: galería de diseños (corazón, mariposas, infantiles). CTA: encargar con anticipación en la web. Pregunta: ¿para qué fecha la necesitas?
 - **"Cajas box de regalo"** — Gancho: caja cerrándose. **Requiere fotos o video reales de las cajas box; no se produce hasta tenerlos.** CTA: escribir "CAJA" al WhatsApp.
@@ -65,7 +65,7 @@ Portada → 1 miga húmeda → 2 relleno generoso → 3 sabor sin atajos (sin pr
 | Día | Idea | Sticker (se agrega a mano en la app) |
 |---|---|---|
 | Lun | Lunes de café: origen Nicaragua | Encuesta: ¿café caliente o helado? |
-| Mar | Cómo llegar: 9 km, frente a Lora | Pregunta: ¿de dónde nos visitas? |
+| Mar | Cómo llegar: 9 km, en la Ruta J-60 | Pregunta: ¿de dónde nos visitas? |
 | Mié | Hecho desde cero | Barra deslizable: antojo |
 | Jue | Tortas por encargo: dinos la fecha | Caja de preguntas: ¿para qué celebración? |
 | Vie | Cookies de viernes | Encuesta: ¿limón u Oreo? |

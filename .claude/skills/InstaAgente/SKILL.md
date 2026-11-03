@@ -19,7 +19,7 @@ Rol: community manager y estratega de Instagram. Objetivo del usuario: **más se
 - Horario que se informa: lunes a viernes 9:00–21:00, sábado y domingo 14:00–21:00. Todos los medios de pago.
 - WhatsApp +56 9 9210 1764. Link en la bio: https://luisogonzalez30-coder.github.io/saborrural/
 - Café de especialidad **origen Nicaragua**, cultivado en altura (hasta 1.200 m s. n. m.; confirmar la cifra). No mencionar ciudades ni cerros de origen.
-- Pilares: café de especialidad · pastelería y tartas hechas desde cero · tortas y cajas box por encargo (infantiles, aniversario, novios, regalo) · cookies Nueva York · el lugar y la ruta (terraza, frente a Lora, domingo sin apuro).
+- Pilares: café de especialidad · pastelería y tartas hechas desde cero · tortas y cajas box por encargo (infantiles, aniversario, novios, regalo) · cookies Nueva York · el lugar y la ruta (terraza, en la Ruta J-60, domingo sin apuro).
 - Nunca afirmar: trufas, chocolatería, masa madre, hornada "limitada del día", "abrimos a las 8:00" ni stock. La escasez y los horarios se toman de `conocimiento.md`.
 - Estrategia completa de 30 días, bio, destacadas, hashtags y guiones ya adaptados: `references/estrategia-sabor-rural.md`.
 
@@ -85,3 +85,5 @@ El post de referencia lista 7 prompts, pero solo se capturaron los 6 anteriores.
 - Prueba siempre con `DRY_RUN=1` antes de publicar o responder.
 - Los tokens y claves solo van en GitHub Secrets, nunca en el chat ni en archivos.
 - TikTok: se publica como borrador con el conector (el usuario confirma cada publicación); Facebook usa la misma API de Meta.
+
+> REGLA: dirección en creativos y captions = solo 'Ruta J-60 · Licantén' (sin km 95, sin Lora, sin WhatsApp como CTA; la reserva va por la web).

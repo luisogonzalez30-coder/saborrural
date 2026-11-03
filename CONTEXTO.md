@@ -9,6 +9,10 @@ Léelo entero antes de trabajar. Es la memoria común entre conversaciones: lo q
 - Página de enlaces (la de la bio): https://luisogonzalez30-coder.github.io/saborrural/ (`index.html`).
 - Horario: lunes a viernes 9:00–21:00, sábado y domingo 14:00–21:00.
 
+## REGLA DE DIRECCIÓN EN CREATIVOS (fijada por el usuario el 3-nov-2026)
+- En reels, fotos, historias y captions escribir **solo "Ruta J-60 · Licantén"**. NO poner "km 95", "frente a Lora", "sector Lora", "Costa Maule" ni "Lora" como referencia: confunde a la gente. Tampoco WhatsApp como llamado a la acción: **la reserva y el pedido van por la página web (link en la bio)**.
+- Los creativos ya publicados no se pueden editar desde la API; los programados pendientes del calendario ya se corrigieron.
+
 ## Cómo quiere el usuario que se trabaje
 - Español, directo, sin saludos ni relleno. Tablas y viñetas, no bloques largos.
 - **No inventar datos** (precios, sabores, horarios). Los hechos están en `conocimiento.md` y `carta.md`.
