@@ -21,6 +21,7 @@ Léelo entero antes de trabajar. Es la memoria común entre conversaciones: lo q
 - Mejor referencia de código: `herramientas/dia-sandwich.py`.
 
 ## Estrategia de Instagram (7-nov-2026) — ver `PLAN-INSTAGRAM.md`
+- (v2, 7-nov) Los reels de video van **limpios**: sin marco, degradado, logo ni botón falso; texto de 5 palabras o menos, y audio. En prueba A/B 14 días. Plan completo y guiones: `PLAN-INSTAGRAM.md`.
 - El contenido real (foto/video del producto) rinde ~4,4 veces más que las plantillas de texto (≈1.550 vs ≈350 vistas). Regla: ≥70% de las piezas con producto real; texto máximo 6 palabras; sin botones falsos; gancho en el primer segundo; reels siempre con audio; una sola acción por pieza.
 - Perfil: nombre `Sabor Rural | Cafetería y Pastelería`, bio y links nuevos, fijados y destacadas (portadas en `media/perfil/`). Detalle en el plan.
 
