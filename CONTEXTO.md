@@ -122,3 +122,6 @@ Léelo entero antes de trabajar. Es la memoria común entre conversaciones: lo q
 - **Google Calendar** y **Drive** conectados. **Google Compute Engine** e **imagen** piden reconectar.
 - La conexión de Shopify cambió varias veces de tienda ("LOG-In Spa", "Págacuandollegue" y por último Sabor Rural). Verificar siempre con `get-shop-info`.
 - Sandbox de la nube: no alcanza el dominio de la tienda ni claude.ai; GitHub raw sí.
+
+## Calendario pausado (7-nov-2026)
+- Por orden del usuario se pausó toda la publicación automática: las 17 piezas pendientes pasaron de `calendario.json` a `calendario-pausado.json` (los ids ya publicados siguen en `calendario.json` y `estado.json`). Para reactivar una pieza, devolver su entrada a `calendario.json` con fecha nueva. No agregar nada a `calendario.json` hasta que el usuario lo autorice.
