@@ -20,6 +20,10 @@ Léelo entero antes de trabajar. Es la memoria común entre conversaciones: lo q
 - **Fotos**: mostrarlas completas y a escala natural, con esquinas redondeadas. No hacer zoom ni recortes que las agranden (se ven falsas/pixeladas).
 - Mejor referencia de código: `herramientas/dia-sandwich.py`.
 
+## Estrategia de Instagram (7-nov-2026) — ver `PLAN-INSTAGRAM.md`
+- El contenido real (foto/video del producto) rinde ~4,4 veces más que las plantillas de texto (≈1.550 vs ≈350 vistas). Regla: ≥70% de las piezas con producto real; texto máximo 6 palabras; sin botones falsos; gancho en el primer segundo; reels siempre con audio; una sola acción por pieza.
+- Perfil: nombre `Sabor Rural | Cafetería y Pastelería`, bio y links nuevos, fijados y destacadas (portadas en `media/perfil/`). Detalle en el plan.
+
 ## Cómo quiere el usuario que se trabaje
 - Español, directo, sin saludos ni relleno. Tablas y viñetas, no bloques largos.
 - **No inventar datos** (precios, sabores, horarios). Los hechos están en `conocimiento.md` y `carta.md`.
