@@ -125,3 +125,6 @@ Léelo entero antes de trabajar. Es la memoria común entre conversaciones: lo q
 
 ## Calendario pausado (7-nov-2026)
 - Por orden del usuario se pausó toda la publicación automática: las 17 piezas pendientes pasaron de `calendario.json` a `calendario-pausado.json` (los ids ya publicados siguen en `calendario.json` y `estado.json`). Para reactivar una pieza, devolver su entrada a `calendario.json` con fecha nueva. No agregar nada a `calendario.json` hasta que el usuario lo autorice.
+
+## Zona segura en reels e historias (8-nov-2026)
+- El logo NO va pegado al borde superior: Instagram pone ahí el nombre de la cuenta y el audio, y lo tapa. En 1080×1920, el **logo blanco (con sombra suave, ~120 px) va en x=40, y≈310**, y todo el texto fuera de los primeros 250 px y de los últimos 400 px. El texto no debe cruzarse con el logo. Referencia: `herramientas/rosa/build.py`.

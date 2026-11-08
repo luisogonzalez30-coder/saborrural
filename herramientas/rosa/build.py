@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFilter
 U="/root/.claude/uploads/3bdc22a0-44b6-5463-a581-9b7d84b08b80/"
 PHOTO=U+"5448afe2-image.png"; SCREEN="/home/user/saborrural/media/como-encargar-torta/movil-con-voz-1080x1920.mp4"
 T=B.T; OUT="/home/user/saborrural/media/rosa/"; W,H=1080,1920; F=B.F
-LOGO=T.replace("mario2","gem")+"white.png"
+LOGO=T.replace("mario2","gem")+"white120.png"
 DARK=(32,22,26); PINKD=(214,76,116); WHITE=(255,255,255); PINK=B.PINK
 img=Image.open(PHOTO).convert("RGB"); print(img.size)
 crop=img.crop((80,0,944,1536)); crop.resize((1728,3072),Image.LANCZOS).save(T+"rosa-big.png")
@@ -24,7 +24,7 @@ def text_png(name,lines,col_main,col_acc,y=250,size=84,shadow=False,extra=None):
 def scene_photo(name,dur,png,z0,z1,fx,fy,fx2=None,fy2=None):
     N=int(dur*30); fx2=fx if fx2 is None else fx2; fy2=fy if fy2 is None else fy2
     z=f"{z0}+({z1}-{z0})*on/{N}"; cx=f"({fx}+({fx2}-{fx})*on/{N})"; cy=f"({fy}+({fy2}-{fy})*on/{N})"
-    fc=(f"[0:v]zoompan=z='{z}':x='iw*{cx}-(iw/zoom*{cx})':y='ih*{cy}-(ih/zoom*{cy})':d={N}:s={W}x{H}:fps=30,eq=saturation=1.06[v];[v][1:v]overlay=0:0[a];[a][2:v]overlay=30:40,format=yuv420p[o]")
+    fc=(f"[0:v]zoompan=z='{z}':x='iw*{cx}-(iw/zoom*{cx})':y='ih*{cy}-(ih/zoom*{cy})':d={N}:s={W}x{H}:fps=30,eq=saturation=1.06[v];[v][1:v]overlay=0:0[a];[a][2:v]overlay=10:280,format=yuv420p[o]")
     subprocess.run(["ffmpeg","-v","error","-y","-loop","1","-i",T+"rosa-big.png","-i",T+png+".png","-i",LOGO,"-filter_complex",fc,"-map","[o]","-t",str(dur),"-an","-c:v","libx264","-preset","slow","-crf","17",T+name+".mp4"],check=True)
 PW,PH=756,1344; PX,PY=(W-PW)//2,420
 mask=Image.new("L",(PW,PH),0); ImageDraw.Draw(mask).rounded_rectangle([0,0,PW-1,PH-1],radius=46,fill=255); mask.save(T+"rosa-mask.png")
@@ -32,7 +32,7 @@ def phone_frame(im):
     ImageDraw.Draw(im).rounded_rectangle([PX-3,PY-3,PX+PW+3,PY+PH+3],radius=49,outline=PINK+(255,),width=5)
 def scene_phone(name,ss,dur,png):
     fc=(f"[0:v]scale={PW}:{PH}:flags=lanczos,format=yuva420p[s];[3:v]format=gray[m];[s][m]alphamerge[ph];"
-        f"[1:v]fps=30[b];[b][ph]overlay={PX}:{PY}[c];[c][2:v]overlay=0:0[d];[d][4:v]overlay=30:40,format=yuv420p[o]")
+        f"[1:v]fps=30[b];[b][ph]overlay={PX}:{PY}[c];[c][2:v]overlay=0:0[d];[d][4:v]overlay=10:280,format=yuv420p[o]")
     subprocess.run(["ffmpeg","-v","error","-y","-ss",str(ss),"-t",str(dur),"-i",SCREEN,"-loop","1","-t",str(dur),"-i",T+"rosa-bg.png","-loop","1","-t",str(dur),"-i",T+png+".png",
         "-loop","1","-t",str(dur),"-i",T+"rosa-mask.png","-i",LOGO,"-filter_complex",fc,"-map","[o]","-t",str(dur),"-an","-c:v","libx264","-preset","slow","-crf","17",T+name+".mp4"],check=True)
 def build():
