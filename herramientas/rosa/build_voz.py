@@ -3,7 +3,11 @@ import sys, subprocess, importlib.util
 spec=importlib.util.spec_from_file_location("rosa_build","/home/user/saborrural/herramientas/rosa/build.py"); R=importlib.util.module_from_spec(spec); spec.loader.exec_module(R)
 from PIL import Image, ImageDraw
 B=R.B; T=R.T; F=R.F; W,H=R.W,R.H; OUT=R.OUT
-VOZ="/home/user/saborrural/media/como-encargar-torta/voz-original.opus"
+VOZ_ORIG="/home/user/saborrural/media/como-encargar-torta/voz-original.opus"
+VOZ=T+"voz-declip.wav"
+# La grabación original está recortada (saturada) en la frase final "Entra en nuestra web...": 3% de muestras al tope.
+# Se repara con adeclip, se baja el nivel y se comprime suave antes de normalizar.
+subprocess.run(["ffmpeg","-v","error","-y","-i",VOZ_ORIG,"-af","adeclip=w=55:o=75:a=8:t=10:n=1000,volume=0.6,acompressor=threshold=0.12:ratio=2.5:attack=5:release=80:makeup=1","-c:a","pcm_f32le","-ar","48000",VOZ],check=True)
 def sub_extra(txt):
     def f(im):
         d=ImageDraw.Draw(im); font=F("hanken700.ttf",46); w=int(d.textlength(txt,font=font))+60
