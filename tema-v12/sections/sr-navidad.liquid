@@ -66,8 +66,8 @@ html.sr-lite .nv .nv-rail{overflow-x:auto}
 <path d="M-10 14 Q300 78 600 24 T1210 14" fill="none" stroke="#2E8B57" stroke-width="6" stroke-dasharray="3 7" stroke-linecap="round"/>
 <g>
 {%- assign cs = '#FFD66B,#FF5A5F,#7CE3A0,#FFF2C2' | split: ',' -%}
-{%- for p in (0..13) -%}{%- assign t = p | times: 86 | plus: 30 -%}
-<circle class="lt" cx="{{ t }}" cy="{{ 30 | plus: 28 | times: 1 }}" r="5" fill="{{ cs[p | modulo: 4] }}"></circle>
+{%- for p in (0..13) -%}{%- assign t = p | times: 86 | plus: 30 -%}{%- assign ci = p | modulo: 4 -%}
+<circle class="lt" cx="{{ t }}" cy="58" r="5" fill="{{ cs[ci] }}"></circle>
 {%- endfor -%}
 </g>
 <g><circle cx="150" cy="62" r="15" fill="#B02A43"/><circle cx="144" cy="56" r="4" fill="#fff" opacity=".5"/><circle cx="420" cy="70" r="12" fill="#E8C778"/><circle cx="600" cy="38" r="17" fill="#B02A43"/><circle cx="594" cy="32" r="4" fill="#fff" opacity=".5"/><circle cx="800" cy="62" r="12" fill="#E8C778"/><circle cx="1040" cy="56" r="15" fill="#B02A43"/></g>
