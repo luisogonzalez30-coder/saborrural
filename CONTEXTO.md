@@ -128,3 +128,9 @@ Léelo entero antes de trabajar. Es la memoria común entre conversaciones: lo q
 
 ## Zona segura en reels e historias (8-nov-2026)
 - El logo NO va pegado al borde superior: Instagram pone ahí el nombre de la cuenta y el audio, y lo tapa. En 1080×1920, el **logo blanco (con sombra suave, ~120 px) va en x=40, y≈310**, y todo el texto fuera de los primeros 250 px y de los últimos 400 px. El texto no debe cruzarse con el logo. Referencia: `herramientas/rosa/build.py`.
+
+## Navidad en la web (pedido del 9-nov-2026) — pendiente
+- El usuario quiere transformar la página web con un banner/ambiente navideño para que la gente reserve **torta navideña, kuchen y más**. Va a enviar una **imagen de referencia** que debe ir en el banner. Esperar esa imagen antes de diseñar.
+- Plan: sección nueva `sr-navidad-banner.liquid` (banner superior + hero con cuenta regresiva y botones a tortas y kuchen) en `tema-v12/sections/`, probada en un tema **no publicado** (borrador v32); el usuario publica. Estilo de marca (Bricolage/Hanken/Caveat, `#0C0D0F`, crema, rosa) con acentos navideños discretos.
+- Datos por confirmar con el usuario antes de escribir: fecha límite de pedidos, productos y precios navideños (solo los de `carta.md` o los que él entregue), horarios del 24, 25 y 31 de diciembre y 1 de enero, y si hay despacho.
+- Bloqueo al 9-nov: el conector de Shopify de esta sesión apunta a otra tienda (Pokeworld, www.maulestore.com), no a Sabor Rural. No escribir en ella.
