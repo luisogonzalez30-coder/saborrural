@@ -1,0 +1,77 @@
+{%- liquid
+  assign foto = section.settings.foto | default: 'sr-navidad-torta.jpg'
+  assign fu = foto | file_url
+  if fu contains '?'
+    assign src = fu | append: '&width=1000'
+  else
+    assign src = fu | append: '?width=1000'
+  endif
+-%}
+<div class="sr nv" id="nv" data-fecha="{{ section.settings.fecha_navidad }}">
+<style>
+.nv{--pk:#F59AAC;--pk2:#E2587C;--gd:#E8C778;--gr:#1F5A3B;background:#0C0D0F;color:#F3F1EA;overflow-x:clip}
+.nv *{box-sizing:border-box}
+.nv .nv-bar{background:linear-gradient(90deg,#7C1D2E,#B02A43 50%,#7C1D2E);color:#fff;text-align:center;padding:10px 14px;font:700 .9rem/1.3 var(--font-body)}
+.nv .nv-bar a{color:var(--gd);text-decoration:underline;text-underline-offset:3px;margin-left:6px;white-space:nowrap}
+.nv .nv-hero{position:relative;overflow:hidden;isolation:isolate;background:radial-gradient(90% 100% at 90% 0%,rgba(176,42,67,.5),transparent 65%),#0C0D0F}
+.nv .nv-img{position:absolute;top:0;right:0;bottom:0;width:min(50%,620px);z-index:-1;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40%);mask-image:linear-gradient(90deg,transparent 0,#000 40%)}
+.nv .nv-img img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 78%}
+.nv .nv-w{max-width:1120px;margin:0 auto;padding:44px max(16px,env(safe-area-inset-left,0px)) 52px;min-height:460px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.nv .nv-tag{align-self:flex-start;font:700 12.5px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;color:#1A0A0F;background:linear-gradient(135deg,var(--gd),#C99A3C);padding:8px 14px;border-radius:99px}
+.nv h2{margin:0;font:800 clamp(2.3rem,8.6vw,4.4rem)/1 var(--font-display);letter-spacing:-.03em;color:#fff;max-width:9em;text-shadow:0 2px 18px rgba(0,0,0,.75)}
+.nv h2 em{font-family:var(--font-chalk);font-style:normal;font-weight:700;color:var(--pk);font-size:1.18em;letter-spacing:0}
+.nv .nv-lead{margin:0;font-family:var(--font-body);max-width:29em;color:#F3F1EA;font-size:clamp(1rem,2.9vw,1.15rem);line-height:1.5;text-shadow:0 2px 14px rgba(0,0,0,.8)}
+.nv .nv-count{display:flex;gap:10px;align-items:center;font:700 .98rem/1 var(--font-body);color:#E4D6DA}
+.nv .nv-count b{font:800 2rem/1 var(--font-display);color:var(--gd);margin-right:2px}
+.nv .nv-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.nv .nv-btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:99px;font:800 1rem/1 var(--font-display);text-decoration:none;letter-spacing:-.005em}
+.nv .nv-btn.p{background:linear-gradient(135deg,#F7A9B8,var(--pk2));color:#1A0A0F}
+.nv .nv-btn.s{border:1.5px solid var(--gd);color:var(--gd);background:rgba(10,8,10,.55)}
+.nv .nv-chips{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 0;padding:0;list-style:none}
+.nv .nv-chips li{padding:9px 14px;border:1px solid rgba(232,199,120,.4);border-radius:99px;background:rgba(10,8,10,.6);font:600 .88rem/1 var(--font-body)}
+@media (max-width:760px){.nv .nv-img{position:relative;width:100%;height:360px;z-index:0;-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}.nv .nv-img img{object-position:50% 80%}.nv .nv-w{min-height:0;padding-top:6px;padding-bottom:40px}.nv .nv-cta .nv-btn{flex:1 1 100%}}
+</style>
+{%- if section.settings.mostrar_barra -%}
+<div class="nv-bar">🎄 {{ section.settings.barra }}<a href="{{ section.settings.url_tortas }}">Reservar</a></div>
+{%- endif -%}
+<section class="nv-hero">
+  <div class="nv-img"><img src="{{ src }}" alt="Torta roja de corazón de Sabor Rural" width="1000" height="1333" loading="eager" fetchpriority="high"></div>
+  <div class="nv-w">
+    <span class="nv-tag">{{ section.settings.etiqueta }}</span>
+    <h2>{{ section.settings.titulo_a }} <em>{{ section.settings.titulo_b }}</em></h2>
+    <p class="nv-lead">{{ section.settings.bajada }}</p>
+    <div class="nv-count" aria-live="polite"><b id="nv-dias">–</b><span id="nv-txt">días para Navidad</span></div>
+    <div class="nv-cta">
+      <a class="nv-btn p" href="{{ section.settings.url_tortas }}">{{ section.settings.boton_1 }}</a>
+      <a class="nv-btn s" href="{{ section.settings.url_kuchen }}">{{ section.settings.boton_2 }}</a>
+    </div>
+    <ul class="nv-chips"><li>Hecho desde cero</li><li>Pagas en línea</li><li>Retiro gratis en el local</li></ul>
+  </div>
+</section>
+<script>
+(function(){var r=document.getElementById('nv');if(!r)return;var f=(r.getAttribute('data-fecha')||'').split('-');
+var n=new Date();var y=+f[0]||n.getFullYear(),m=(+f[1]||12)-1,d=+f[2]||25;var t=new Date(y,m,d);var h=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+var dias=Math.round((t-h)/864e5);var b=document.getElementById('nv-dias'),x=document.getElementById('nv-txt');
+if(dias>1){b.textContent=dias;x.textContent='días para Navidad';}else if(dias===1){b.textContent='1';x.textContent='día para Navidad';}else if(dias===0){b.textContent='¡Hoy!';x.textContent='es Navidad';}else{r.querySelector('.nv-count').style.display='none';}})();
+</script>
+</div>
+{% schema %}
+{
+ "name": "Sabor Rural: Navidad",
+ "settings": [
+  {"type": "checkbox", "id": "mostrar_barra", "label": "Mostrar barra superior", "default": true},
+  {"type": "text", "id": "barra", "label": "Texto de la barra", "default": "Navidad en Sabor Rural: reserva tu torta y tus kuchen."},
+  {"type": "text", "id": "etiqueta", "label": "Etiqueta", "default": "Navidad 2026"},
+  {"type": "text", "id": "titulo_a", "label": "Título", "default": "Reserva tu"},
+  {"type": "text", "id": "titulo_b", "label": "Título (destacado)", "default": "torta navideña"},
+  {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Tortas y kuchen por encargo para tu mesa de Navidad. Elige con tiempo y paga en línea."},
+  {"type": "text", "id": "fecha_navidad", "label": "Fecha de Navidad (AAAA-MM-DD)", "default": "2026-12-25"},
+  {"type": "text", "id": "boton_1", "label": "Botón 1", "default": "Reservar mi torta"},
+  {"type": "url", "id": "url_tortas", "label": "Enlace botón 1", "default": "/pages/tortas"},
+  {"type": "text", "id": "boton_2", "label": "Botón 2", "default": "Ver kuchen"},
+  {"type": "url", "id": "url_kuchen", "label": "Enlace botón 2", "default": "/products/kuchen-tarta-entera"},
+  {"type": "text", "id": "foto", "label": "Foto (archivo de Contenido > Archivos)", "default": "sr-navidad-torta.jpg"}
+ ],
+ "presets": [{"name": "Sabor Rural: Navidad"}]
+}
+{% endschema %}

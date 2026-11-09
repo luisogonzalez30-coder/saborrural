@@ -9,6 +9,9 @@
  */
 {
   "sections": {
+    "navidad": {
+      "type": "sr-navidad"
+    },
     "hero": {
       "type": "sr-hero"
     },
@@ -393,6 +396,7 @@
     }
   },
   "order": [
+    "navidad",
     "hero",
     "carta_top",
     "kuchen",
