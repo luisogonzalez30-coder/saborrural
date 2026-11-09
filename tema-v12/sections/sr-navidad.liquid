@@ -6,6 +6,8 @@
   else
     assign src = fu | append: '?width=1000'
   endif
+  assign u1 = section.settings.url_tortas | default: '/pages/tortas'
+  assign u2 = section.settings.url_kuchen | default: '/products/kuchen-tarta-entera'
 -%}
 <div class="sr nv" id="nv" data-fecha="{{ section.settings.fecha_navidad }}">
 <style>
@@ -32,7 +34,7 @@
 @media (max-width:760px){.nv .nv-img{position:relative;width:100%;height:360px;z-index:0;-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}.nv .nv-img img{object-position:50% 80%}.nv .nv-w{min-height:0;padding-top:6px;padding-bottom:40px}.nv .nv-cta .nv-btn{flex:1 1 100%}}
 </style>
 {%- if section.settings.mostrar_barra -%}
-<div class="nv-bar">🎄 {{ section.settings.barra }}<a href="{{ section.settings.url_tortas }}">Reservar</a></div>
+<div class="nv-bar">🎄 {{ section.settings.barra }}<a href="{{ u1 }}">Reservar</a></div>
 {%- endif -%}
 <section class="nv-hero">
   <div class="nv-img"><img src="{{ src }}" alt="Torta roja de corazón de Sabor Rural" width="1000" height="1333" loading="eager" fetchpriority="high"></div>
@@ -42,8 +44,8 @@
     <p class="nv-lead">{{ section.settings.bajada }}</p>
     <div class="nv-count" aria-live="polite"><b id="nv-dias">–</b><span id="nv-txt">días para Navidad</span></div>
     <div class="nv-cta">
-      <a class="nv-btn p" href="{{ section.settings.url_tortas }}">{{ section.settings.boton_1 }}</a>
-      <a class="nv-btn s" href="{{ section.settings.url_kuchen }}">{{ section.settings.boton_2 }}</a>
+      <a class="nv-btn p" href="{{ u1 }}">{{ section.settings.boton_1 }}</a>
+      <a class="nv-btn s" href="{{ u2 }}">{{ section.settings.boton_2 }}</a>
     </div>
     <ul class="nv-chips"><li>Hecho desde cero</li><li>Pagas en línea</li><li>Retiro gratis en el local</li></ul>
   </div>
@@ -67,9 +69,9 @@ if(dias>1){b.textContent=dias;x.textContent='días para Navidad';}else if(dias==
   {"type": "textarea", "id": "bajada", "label": "Bajada", "default": "Tortas y kuchen por encargo para tu mesa de Navidad. Elige con tiempo y paga en línea."},
   {"type": "text", "id": "fecha_navidad", "label": "Fecha de Navidad (AAAA-MM-DD)", "default": "2026-12-25"},
   {"type": "text", "id": "boton_1", "label": "Botón 1", "default": "Reservar mi torta"},
-  {"type": "url", "id": "url_tortas", "label": "Enlace botón 1", "default": "/pages/tortas"},
+  {"type": "url", "id": "url_tortas", "label": "Enlace botón 1"},
   {"type": "text", "id": "boton_2", "label": "Botón 2", "default": "Ver kuchen"},
-  {"type": "url", "id": "url_kuchen", "label": "Enlace botón 2", "default": "/products/kuchen-tarta-entera"},
+  {"type": "url", "id": "url_kuchen", "label": "Enlace botón 2"},
   {"type": "text", "id": "foto", "label": "Foto (archivo de Contenido > Archivos)", "default": "sr-navidad-torta.jpg"}
  ],
  "presets": [{"name": "Sabor Rural: Navidad"}]
