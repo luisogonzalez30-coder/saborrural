@@ -9,6 +9,7 @@ fs.rmSync(OUT, { recursive: true, force: true }); fs.mkdirSync(OUT, { recursive:
 const OV_JS = `
 (function(){
   var DESK = ${DESK};
+  window.__sc = function(){ var c = document.querySelector('.page-wrapper'); return (c && c.scrollHeight > c.clientHeight + 10) ? c : null; };
   var css = document.createElement('style');
   css.textContent = [
   '.ov{position:fixed;z-index:2147483000;pointer-events:none;font-family:var(--font-body)}',
@@ -53,7 +54,7 @@ const OV_JS = `
   var eo = function(x){ x = Math.max(0, Math.min(1, x)); return 1 - Math.pow(1 - x, 3); };
   var capKey = '', sheetKey = '';
   window.OV = { render: function(s, t) {
-    if (s.scroll != null) window.scrollTo({ top: s.scroll, left: 0, behavior: 'instant' });
+    if (s.scroll != null) { var c0 = window.__sc(); if (c0) c0.scrollTo({ top: s.scroll, left: 0, behavior: 'instant' }); else window.scrollTo({ top: s.scroll, left: 0, behavior: 'instant' }); }
     var fe = document.getElementById('tlFe') || document.createElement('input'), ft = $('ovFe'), fr = fe.getBoundingClientRect(), fs = getComputedStyle(fe);
     ft.style.left = (fr.left + 1) + 'px'; ft.style.top = (fr.top + 1) + 'px'; ft.style.width = (fr.width - 44) + 'px'; ft.style.height = (fr.height - 2) + 'px';
     ft.style.font = fs.font; ft.style.lineHeight = (fr.height - 2) + 'px'; ft.style.paddingLeft = fs.paddingLeft; ft.style.boxSizing = 'border-box'; ft.style.background = fs.backgroundColor === 'rgba(0, 0, 0, 0)' ? '#17191C' : fs.backgroundColor; ft.style.borderRadius = '12px 0 0 12px';
@@ -125,13 +126,13 @@ const OV_JS = `
   async function until(t) { const n = Math.round((t - T) * FPS); if (n > 0) await hold(n / FPS); else if (n < -2) console.log('ATRASO', (T - t).toFixed(2), 'en', t); }
   async function hold(sec) { for (let n = Math.round(sec * FPS); n > 0; n--) await frame(); }
   async function scrollTo(y, sec) {
-    const max = await page.evaluate(() => document.documentElement.scrollHeight - innerHeight);
+    const max = await page.evaluate(() => { const c = window.__sc(); return c ? c.scrollHeight - c.clientHeight : document.documentElement.scrollHeight - innerHeight; });
     y = Math.max(0, Math.min(max, y)); const y0 = scroll, n = Math.max(1, Math.round(sec * FPS));
     for (let i = 1; i <= n; i++) { scroll = y0 + (y - y0) * ease(i / n); await frame(); }
   }
   // desplaza para que el elemento quede a `top` px del borde superior de la pantalla
   async function showEl(sel, top, sec) {
-    const y = await page.evaluate(([s]) => document.querySelector(s).getBoundingClientRect().top + window.scrollY, [sel]);
+    const y = await page.evaluate(([s]) => document.querySelector(s).getBoundingClientRect().top + (window.__sc() ? window.__sc().scrollTop : window.scrollY), [sel]);
     await scrollTo(y - top, sec);
   }
   const caption = (chip, title) => { S.cap = { chip, title, t0: T }; };
@@ -163,7 +164,7 @@ const OV_JS = `
   mark('gancho');
   caption('Cómo encargar', 'Tu torta en 1 minuto');
   { // arranca en movimiento desde el primer cuadro: la página baja sola y, en celular, un dedo la arrastra
-    const y1 = await page.evaluate(() => document.querySelector('.tl-step:nth-child(1) h2').getBoundingClientRect().top + window.scrollY);
+    const y1 = await page.evaluate(() => document.querySelector('.tl-step:nth-child(1) h2').getBoundingClientRect().top + (window.__sc() ? window.__sc().scrollTop : window.scrollY));
     const yEnd = Math.max(0, y1 - (DESK ? 240 : 200)), n = Math.round(7.8 * FPS);
     if (!DESK) { S.ptr.x = 180; S.ptr.y = 540; S.ptr.vis = 1; }
     for (let i = 1; i <= n; i++) {
