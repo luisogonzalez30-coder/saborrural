@@ -1,0 +1,35 @@
+{
+ "fps": 30,
+ "frames": 990,
+ "dur": 33,
+ "marks": [
+  {
+   "t": 0,
+   "name": "inicio"
+  },
+  {
+   "t": 5.7,
+   "name": "paso1"
+  },
+  {
+   "t": 9,
+   "name": "paso2"
+  },
+  {
+   "t": 14.4,
+   "name": "paso3"
+  },
+  {
+   "t": 24.5,
+   "name": "resumen"
+  },
+  {
+   "t": 29.7,
+   "name": "cierre"
+  },
+  {
+   "t": 33,
+   "name": "fin"
+  }
+ ]
+}
