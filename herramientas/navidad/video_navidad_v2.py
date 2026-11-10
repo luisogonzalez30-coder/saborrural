@@ -83,7 +83,7 @@ def animar(total):
         p.stdin.write(fr.tobytes())
     p.stdin.close(); p.wait()
 # ---------- escenas ----------
-PW,PH=640,1138; PX,PY=(W-PW)//2,430
+PW,PH=620,1102; PX,PY=(W-PW)//2,560
 m=Image.new("L",(PW,PH),0); ImageDraw.Draw(m).rounded_rectangle([0,0,PW-1,PH-1],radius=46,fill=255); m.save(T+"nv2-mask.png")
 def marco(name):
     im=Image.new("RGBA",(W,H),(0,0,0,0)); d=ImageDraw.Draw(im); d.rounded_rectangle([PX-4,PY-4,PX+PW+4,PY+PH+4],radius=50,outline=GOLD+(255,),width=6); im.save(T+name+".png")
@@ -103,7 +103,9 @@ def photo(name,dur,idx):
     subprocess.run(["ffmpeg","-v","error","-y","-f","concat","-safe","0","-i",T+f"{name}_l.txt","-c","copy",T+name+".mp4"],check=True)
 # ---------- títulos (gráficos, no subtítulos) ----------
 def titulo(name,lines,y,sizes,cols):
-    im=Image.new("RGBA",(W,H),(0,0,0,0)); d=ImageDraw.Draw(im)
+    im=Image.new("RGBA",(W,H),(0,0,0,0)); g=Image.new("RGBA",(W,760),(0,0,0,0)); gd=ImageDraw.Draw(g)
+    for i in range(760): gd.line([(0,i),(W,i)],fill=(10,4,8,int(215*max(0,1-i/760)**1.1)))
+    im.alpha_composite(g,(0,260)); d=ImageDraw.Draw(im)
     yy=y
     for t,sz,c,fnt in lines:
         f=F(fnt,sz); d.text((W/2+3,yy+4),t,font=f,fill=(0,0,0,170),anchor="ma"); d.text((W/2,yy),t,font=f,fill=c+(255,),anchor="ma"); yy+=int(sz*1.12)
@@ -112,10 +114,10 @@ IDX={"a":[0,1,2,3],"f":[6,4,5,9]}
 SC=[("a","photo",4.5,None),("b","phone",4.2,9.0),("c","phone",4.6,15.1),("d","phone",5.0,33.5),("e","phone",4.6,44.5),("f","photo",4.0,None)]
 def build():
     fondo(); marco("nv2-marco")
-    titulo("t_a",[("Feliz Navidad",118,GOLD,"caveat700.ttf"),("Agenda tu torta",84,CRE,"bricolage800.ttf"),("navideña",84,PINK,"bricolage800.ttf")],430,0,0)
+    titulo("t_a",[("Feliz Navidad",118,GOLD,"caveat700.ttf"),("Agenda tu torta",84,CRE,"bricolage800.ttf"),("navideña",84,PINK,"bricolage800.ttf")],470,0,0)
     stp=[("PASO 1","¿Para cuántas personas?"),("PASO 2","Elige tu sabor"),("PASO 3","Fecha y mensaje"),("PASO 4","Paga en línea")]
-    for (k,(a,b)) in zip("bcde",stp): titulo("t_"+k,[(a,64,GOLD,"caveat700.ttf"),(b,60,CRE,"bricolage800.ttf")],360,0,0)
-    titulo("t_f",[("Reserva con tiempo",84,CRE,"bricolage800.ttf"),("en nuestra web",84,PINK,"bricolage800.ttf"),("Feliz Navidad",110,GOLD,"caveat700.ttf")],430,0,0)
+    for (k,(a,b)) in zip("bcde",stp): titulo("t_"+k,[(b,58,CRE,"bricolage800.ttf")],470,0,0)
+    titulo("t_f",[("Reserva con tiempo",84,CRE,"bricolage800.ttf"),("en nuestra web",84,PINK,"bricolage800.ttf"),("Feliz Navidad",110,GOLD,"caveat700.ttf")],470,0,0)
     names=[];durs=[]
     for k,typ,d,ss in SC:
         (photo(k+"_v2",d,IDX[k]) if typ=="photo" else phone(k+"_v2",ss,d)); names.append(k+"_v2"); durs.append(d)
