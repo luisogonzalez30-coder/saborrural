@@ -1,0 +1,70 @@
+<div class="sr">
+  <div class="sr-footer">
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <a class="brand" href="{{ routes.root_url }}" aria-label="Sabor Rural, cafetería"><img class="logo" src="{{ 'sr-logo-blanco.png' | file_url }}" alt="Sabor Rural, Licantén" style="height:132px" width="132" height="132" loading="lazy"></a>
+          <p style="margin-top:12px;max-width:34ch">Cafetería familiar en Licantén, Región del Maule. Café de especialidad, pastelería artesanal, sándwiches y tablas.</p>
+        </div>
+        <div>
+          <h4>Visítanos</h4>
+          <ul>
+            <li>{{ section.settings.address }}</li>
+            <li>Licantén, Región del Maule</li>
+            {%- if section.settings.hours != blank -%}<li>{{ section.settings.hours }}</li>{%- endif -%}
+          </ul>
+        </div>
+        <div>
+          <h4>Escríbenos</h4>
+          <ul>
+            <li>WhatsApp: <a href="https://wa.me/{{ section.settings.whatsapp }}" target="_blank" rel="noopener">{{ section.settings.whatsapp_text }}</a></li>
+            <li><a href="{{ section.settings.instagram }}" target="_blank" rel="noopener">Instagram @sabor_rural</a></li>
+            <li>Facebook: Sabor Rural</li>
+          </ul>
+        </div>
+      </div>
+      <p class="legal">© {{ 'now' | date: '%Y' }} Sabor Rural · Licantén, Maule</p>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+ "name": "Sabor Rural: pie",
+ "settings": [
+  {
+   "type": "text",
+   "id": "address",
+   "label": "Dirección",
+   "default": "Ruta J-60 km 95"
+  },
+  {
+   "type": "text",
+   "id": "hours",
+   "label": "Horario (déjalo vacío para ocultarlo)"
+  },
+  {
+   "type": "text",
+   "id": "whatsapp",
+   "label": "WhatsApp (con código de país, sin +)",
+   "default": "56992101764"
+  },
+  {
+   "type": "text",
+   "id": "whatsapp_text",
+   "label": "WhatsApp visible",
+   "default": "+56 9 9210 1764"
+  },
+  {
+   "type": "text",
+   "id": "instagram",
+   "label": "Instagram",
+   "default": "https://www.instagram.com/sabor_rural/"
+  }
+ ],
+ "presets": [
+  {
+   "name": "Sabor Rural: pie"
+  }
+ ]
+}
+{% endschema %}
