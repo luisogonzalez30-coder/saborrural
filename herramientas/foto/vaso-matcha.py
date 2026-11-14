@@ -17,6 +17,27 @@ for S in (35,16,8):
     f,d=nf(S); w=np.clip(d/0.25,0,1); fill=fill*(1-w)+f*w
 fill=fill+np.random.default_rng(3).normal(0,3,(H,W))[...,None]
 a=np.clip(mk*1.8,0,1)[...,None]; B=A*(1-a)+fill*a
+# 1b) sabor cereza: el verde pasa a rojo cereza (se excluye el mango, abajo a la izquierda)
+import colorsys
+hsv=np.asarray(Image.fromarray(np.clip(B,0,255).astype(np.uint8)).convert("HSV")).astype(np.float32)
+h=hsv[...,0]/255*360; sat=hsv[...,1]/255; val=hsv[...,2]/255
+wg0=np.clip((h-56)/8,0,1)*np.clip((195-h)/14,0,1)*np.clip((sat-0.10)/0.15,0,1)
+wg1=np.clip((h-39)/5,0,1)*np.clip((200-h)/14,0,1)*np.clip((sat-0.05)/0.1,0,1)
+
+yy0,xx0=np.mgrid[0:H,0:W].astype(np.float32)
+Lc=np.where(yy0<590,380,380+(yy0-590)*0.135); Rc=np.where(yy0<590,857,857-(yy0-590)*0.104)
+cup=((xx0>Lc-6)&(xx0<Rc+6)&(yy0>480)&(yy0<1345)).astype(np.float32)
+excl=((xx0<462)&(yy0>815)).astype(np.float32)*(1-cup)
+excl=np.asarray(Image.fromarray((excl*255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(2))).astype(np.float32)/255
+cupb=np.asarray(Image.fromarray((cup*255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(2))).astype(np.float32)/255
+wg=(wg0*(1-cupb)+wg1*cupb)*(1-excl)
+nh=356/360*255   # tono cereza ~352 grados
+hsv2=hsv.copy(); hsv2[...,0]=nh
+hsv2[...,1]=np.clip(sat*1.25+0.18,0,0.95)*255
+hsv2[...,2]=np.clip(val*1.12+0.06,0,1)*255
+Cf=np.asarray(Image.fromarray(hsv2.astype(np.uint8),"HSV").convert("RGB")).astype(np.float32)
+wgs=np.asarray(Image.fromarray((np.clip(wg,0,1)*255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.8))).astype(np.float32)[...,None]/255
+B=B*(1-wgs)+Cf*wgs
 # 2) logo envuelto
 LOGO="/home/user/saborrural/enlaces-assets/logo.png"
 lg=Image.open(LOGO).convert("RGBA"); la=np.asarray(lg.getchannel("A")).astype(np.float32)/255
@@ -44,5 +65,5 @@ out=Image.fromarray(np.clip(C,0,255).astype(np.uint8))
 cx,cy,r=1160,1525,48; box=(cx-r-8,cy-r-8,cx+r+8,cy+r+8); w=box[2]-box[0]
 from PIL import ImageDraw
 src=out.crop((box[0]-6,box[1]-100,box[2]-6,box[3]-100)); mm=Image.new("L",(w,w),0); ImageDraw.Draw(mm).ellipse([8,8,w-8,w-8],fill=255); mm=mm.filter(ImageFilter.GaussianBlur(5)); out.paste(src,(box[0],box[1]),mm)
-out.save(OUT+"vaso-matcha-logo-v2.jpg",quality=95)
+out.save(OUT+"vaso-cereza-logo.jpg",quality=95)
 out.crop((380,560,880,1360)).save("/tmp/cupv2.png")
